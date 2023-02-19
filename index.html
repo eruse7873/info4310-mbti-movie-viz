@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+    <title>MBTI Compatibility</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+<body>
+    
+<script>
+    let str = "INFJ";
+    let str2 = "INSP";
+    x = 0;
+    for (let i = 0; i < str.length; i++) {
+        if (str.charAt(i) === str2.charAt(i)) {
+            console.log(str.charAt(i));
+            x += 1;
+        }
+    }
+    console.log(x);
+
+
+    const getCompatibility = async function() {
+        let data = await d3.csv("mbti.csv");
+        console.log(data);
+    }
+
+    getCompatibility();
+
+
+</script>
+</body>
+</html>
