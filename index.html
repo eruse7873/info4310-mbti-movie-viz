@@ -1,31 +1,115 @@
 <html lang="en">
+
 <head>
-    <title>MBTI Compatibility</title>
+    <title>MBTI</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
 </head>
+
 <body>
-    
-<script>
-    let str = "INFJ";
-    let str2 = "INSP";
-    x = 0;
-    for (let i = 0; i < str.length; i++) {
-        if (str.charAt(i) === str2.charAt(i)) {
-            console.log(str.charAt(i));
-            x += 1;
+
+    <svg id="barchart" height="800" width="800" style="margin:20px"></svg>
+    <script>
+
+        const svg = d3.select("svg#barchart");
+        const width = svg.attr("width");
+        const height = svg.attr("height");
+        const margin = { top: 10, right: 10, bottom: 50, left: 50 };
+        const chartWidth = width - margin.left - margin.right;
+        const chartHeight = height - margin.top - margin.bottom;
+
+        const getCompatibility = async function () {
+            let data = await d3.csv("mbti_clean.csv");
+            console.log(data);
+            console.log(data[1]['mbti'].charAt(1));
+
+            // change this variable later
+            let input_mbti = "ESFP";
+
+            // new object array
+            var compat = [];
+
+            // loop through each character
+            for (let x = 0; x < data.length; x++) {
+
+                // reset compatibility count to 0 for each new character
+                count = 0;
+
+                // loop through mbti of each character
+                for (let i = 0; i < 4; i++) {
+
+                    // get a count for compatibility
+                    if (input_mbti.charAt(i) === data[x]['mbti'].charAt(i)) {
+                        count += 1;
+                    }
+                }
+
+                // create array of character name, movie title, and compatibility
+                // push to object array
+                let info = [data[x]['role'], data[x]['movie'], count];
+                compat.push(info);
+
+            }
+            console.log(compat);
+
+
+            // get all characters with the same mbti
+            topCompat = [];
+            
+            for (let x = 0; x < compat.length; x++) {
+                if (compat[x]['2'] === 4) {
+                    topCompat.push([compat[x]['0'], compat[x]['1'], compat[x]['2']]);
+                }
+            }
+            console.log('top compat')
+            console.log(topCompat);
+
+
+            // get all characters with the opposite mbti
+            var bottomCompat = [];
+            
+            for (let x = 0; x < compat.length; x++) {
+                if (compat[x]['2'] === 0) {
+                    bottomCompat.push([compat[x]['0'], compat[x]['1'], compat[x]['2']]);
+                }
+            }
+            console.log('bottom compat')
+            console.log(bottomCompat);
+
+            // get random 20 characters
+
+            console.log(topCompat[5]);
+
+            function getRandomCharacters(arr) {
+                const randomIndices = Math.floor(Math.random())
+            }
+
+
+            // making bar chart
+            let annotations = svg.append("g").attr("id", "annotations");
+            let chartArea = svg.append("g").attr("id", "points")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            const characterScale = d3.scaleBand().domain(topCompat).range([0, chartWidth])
+                .padding(0.05);
+
+            let leftAxis = d3.axisLeft(percentScale).tickFormat(d3.format('.0%'));
+            let leftGridlines = d3.axisLeft(percentScale)
+                .tickSize(-chartWidth - 10)
+                .tickFormat("")
+            annotations.append("g")
+                .attr("class", "y axis")
+                .attr("transform", `translate(${margin.left - 10},${margin.top})`)
+                .call(leftAxis)
+            annotations.append("g")
+                .attr("class", "y gridlines")
+                .attr("transform", `translate(${margin.left - 10},${margin.top})`)
+                .call(leftGridlines);
         }
-    }
-    console.log(x);
+
+        getCompatibility();
 
 
-    const getCompatibility = async function() {
-        let data = await d3.csv("mbti.csv");
-        console.log(data);
-    }
-
-    getCompatibility();
-
-
-</script>
+    </script>
 </body>
+
 </html>
