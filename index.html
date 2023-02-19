@@ -1,14 +1,235 @@
 <html lang="en">
 
 <head>
-    <title>MBTI Compatibility</title>
+    <title>MBTI</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style>
+        .display {
+            display: flex;
+            justify-content: space-between;
+            height: 300px;
+            width: 500;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+
+        .individual {
+            align-self: center;
+        }
+
+        .individual:first-child {
+            margin-left: 25;
+        }
+
+        .individual:last-child {
+            margin-right: 100;
+        }
+
+        .avatar_selector {
+            height: 300px;
+            width: 550px;
+        }
+
+
+        .hidden {
+            display:none;
+        }
+    </style>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <div class="active analysts display">
+        <div class="individual">
+            <h6 style = "text-align: center">Architect</h6>
+            <img class="analyst avatars" src="avatars/architect.png">
+            <h6 style = "text-align: center">INTJ-A/INTJ-T</h6>
+        </div>
+        <div class="individual">
+            <h6 style = "text-align: center">Logician</h6>
+            <img class="analyst avatars" src="avatars/logician.png">
+            <h6 style = "text-align: center">INTP-A/INTP-T</h6>
+        </div>
+        <div class="individual">
+            <h6 style = "text-align: center">Commander</h6>
+            <img class="analyst avatars" src="avatars/commander.png">
+            <h6 style = "text-align: center">ENTJ-A/ENTJ-T</h6>
+        </div>
+        <div class="individual">
+            <h6 style = "text-align: center">Debater</h6>
+            <img class="analyst avatars" src="avatars/debater.png">
+            <h6 style = "text-align: center">ENTP-A/ENTP-T</h6>
+        </div>
+    </div>
+
+    <div class="hidden diplomats display">
+        <div class="individual">
+        <h6 style = "text-align: center">Advocate</h6>
+        <img class="diplomats avatars" src="avatars/advocate.png">
+        <h6 style = "text-align: center">INFJ-A/INFJ-T</h6>
+        </div>
+        <div class="individual">
+        <h6 style = "text-align: center">Mediator</h6>
+        <img class="diplomats avatars" src="avatars/mediator.png">
+        <h6 style = "text-align: center">INFP-A/INFP-T</h6>
+        </div>
+        <div class="individual">
+        <h6 style = "text-align: center">Protagonist</h6>
+        <img class="diplomats avatars" src="avatars/protagonist.png">
+        <h6 style = "text-align: center">ENFJ-A/ENFJ-T</h6>
+        </div>
+        <div class="individual">
+        <h6 style = "text-align: center">Campaigner</h6>
+        <img class="diplomats avatars" src="avatars/campaigner.png">
+        <h6 style = "text-align: center">ENFP-A/ENFP-T</h6>
+        </div>
+    </div>
+
+    <div class="hidden sentinels display">
+        <div class="individual">
+        <h6 style = "text-align: center">Logistician</h6>
+        <img class="sentinels avatars" src="avatars/logistician.png">
+        <h6 style = "text-align: center">ENFP-A/ENFP-T</h6>
+        </div>
+        <div class="individual">
+        <h6 style = "text-align: center">Defender</h6>
+        <img class="sentinels avatars" src="avatars/defender.png">
+        <h6 style = "text-align: center">ISFJ-A/ISFJ-T</h6>
+        </div>
+        <div class="individual">
+        <h6 style = "text-align: center">Executive</h6>
+        <img class="sentinels avatars" src="avatars/executive.png">
+        <h6 style = "text-align: center">ESTJ-A/ESTJ-T</h6>
+        </div>
+        <div class="individual">
+        <h6 style = "text-align: center">Consul</h6>
+        <img class="sentinels avatars" src="avatars/consul.png">
+        <h6 style = "text-align: center">ESFJ-A/ESFJ-T</h6>
+        </div>
+    </div>
+
+    <div class="hidden explorers display">
+        <div class="individual">
+        <h6 style = "text-align: center">Virtuoso</h6>
+        <img class="explorers avatars" src="avatars/virtuoso.png">
+        <h6 style = "text-align: center">ISTP-A/ISTP-T</h6>
+        </div>
+        <div class="individual">
+        <h6 style = "text-align: center">Adventurer</h6>
+        <img class="explorers avatars" src="avatars/adventurer.png">
+        <h6 style = "text-align: center">ISFP-A/ISFP-T</h6>
+        </div>
+        <div class="individual">
+        <h6 style = "text-align: center">Entrepreneur</h6>
+        <img class="explorers avatars" src="avatars/entrepreneur.png">
+        <h6 style = "text-align: center">ESTP-A/ESTP-T</h6>
+        </div>
+        <div class="individual">
+        <h6 style = "text-align: center">Entrepreneur</h6>
+        <img class="explorers avatars" src="avatars/entertainer.png">
+        <h6 style = "text-align: center">ESFP-A/ESFP-T</h6>
+        </div>
+    </div>
+
+    <div class = "avatar_selector">
+        <svg id="avatar_display" height="300" width="550"></svg>
+    </div>
+    <!-- <svg id="avatar_display" height="300" width="550">
+        <polygon class="right triangle" points="515,135 515,165 540,150" style="fill:lime;stroke:purple;stroke-width:1">
+        </polygon>
+        <polygon class="left triangle" points="10,150 35,135 35,165" style="fill:lime;stroke:purple;stroke-width:1">
+        </polygon>
+    </svg> -->
+
     <svg id="enneagramSelector" height="600" width="600"></svg>
+    <svg id="barchart" height="800" width="800" style="margin:50px"></svg>
     <script>
+        
+
+        const avatar_displaysvg = d3.select("svg#avatar_display");
+        
+        avatar_displaysvg.append("polygon")
+                         .attr("class", "right triangle")
+                         .attr("points", "515,135 515,165 540,150")
+                         .style("fill", "lime")
+                         .style("stroke", "purple")
+                         .style("stroke-width", 1)
+                         .on('click', changeAvatars);
+        // avatar_displaysvg.append("polygon")
+        //                  .attr("class", "left triangle")
+        //                  .attr("points", "10,150 35,135 35,165")
+        //                  .style("fill", "lime")
+        //                  .style("stroke", "purple")
+        //                  .style("stroke-width", 1);
+                        //  .on('click', changeAvatars);
+        
+        function changeAvatars() {
+            if (d3.selectAll(".analysts").classed("active")) {
+                
+                d3.selectAll(".analysts")
+                    .classed("active", false);
+                d3.selectAll(".analysts")
+                    .classed("hidden", true);
+                
+                d3.selectAll(".diplomats")
+                    .classed("active", true);
+                d3.selectAll(".diplomats")
+                    .classed("hidden", false);
+            }
+
+
+            else if (d3.selectAll(".diplomats").classed("active")) {
+                
+                d3.selectAll(".diplomats")
+                    .classed("active", false);
+                d3.selectAll(".diplomats")
+                    .classed("hidden", true);
+                
+                d3.selectAll(".sentinels")
+                    .classed("active", true);
+                d3.selectAll(".sentinels")
+                    .classed("hidden", false);
+            }
+
+            else if (d3.selectAll(".sentinels").classed("active")) {
+                
+                d3.selectAll(".sentinels")
+                    .classed("active", false);
+                d3.selectAll(".sentinels")
+                    .classed("hidden", true);
+                
+                d3.selectAll(".explorers")
+                    .classed("active", true);
+                d3.selectAll(".explorers")
+                    .classed("hidden", false);
+            }
+
+            else if (d3.selectAll(".explorers").classed("active")) {
+                
+                d3.selectAll(".explorers")
+                    .classed("active", false);
+                d3.selectAll(".explorers")
+                    .classed("hidden", true);
+                
+                d3.selectAll(".analysts")
+                    .classed("active", true);
+                d3.selectAll(".analysts")
+                    .classed("hidden", false);
+            }
+
+
+            //find group with active
+            //remove group with active
+            //add hidden to group
+            //add active to next group
+        }
+
+        
+        
+        // avatar_displaysvg.append("div")
+    
         let origin = 300;
         let radius = 150;
         const enneagramSelector = d3.select("svg#enneagramSelector");
@@ -86,22 +307,172 @@
             //     return clicked;
             // })
 
-        let str = "INFJ";
-        let str2 = "INSP";
-        x = 0;
-        for (let i = 0; i < str.length; i++) {
-            if (str.charAt(i) === str2.charAt(i)) {
-                console.log(str.charAt(i));
-                x += 1;
-            }
-        }
-        console.log(x);
 
+        const svg = d3.select("svg#barchart");
+        const width = svg.attr("width");
+        const height = svg.attr("height");
+        const margin = { top: 10, right: 10, bottom: 50, left: 150 };
+        const chartWidth = width - margin.left - margin.right;
+        const chartHeight = height - margin.top - margin.bottom;
 
         const getCompatibility = async function () {
             let data = await d3.csv("mbti_clean.csv");
             console.log(data);
+            console.log(data[1]['mbti'].charAt(1));
+
+            // change this variable later
+            let input_mbti = "ESFP";
+
+            // new object array
+            var compat = [];
+
+            // loop through each character
+            for (let x = 0; x < data.length; x++) {
+
+                // reset compatibility count to 0 for each new character
+                count = 0;
+
+                // loop through mbti of each character
+                for (let i = 0; i < 4; i++) {
+
+                    // get a count for compatibility
+                    if (input_mbti.charAt(i) === data[x]['mbti'].charAt(i)) {
+                        count += 1;
+                    }
+                }
+
+                // create array of character name, movie title, and compatibility
+                // push to object array
+                let info = [data[x]['role'], data[x]['movie'], count];
+                compat.push(info);
+
+            }
+            console.log(compat);
+
+
+            // get all characters with the same mbti
+            topCompat = [];
+
+            for (let x = 0; x < compat.length; x++) {
+                if (compat[x]['2'] === 4) {
+                    topCompat.push([compat[x]['0'], compat[x]['1'], compat[x]['2']]);
+                }
+            }
+            console.log('top compat')
+            console.log(topCompat);
+
+
+            // get all characters with the opposite mbti
+            var bottomCompat = [];
+
+            for (let x = 0; x < compat.length; x++) {
+                if (compat[x]['2'] === 0) {
+                    bottomCompat.push([compat[x]['0'], compat[x]['1'], compat[x]['2']]);
+                }
+            }
+            console.log('bottom compat')
+            console.log(bottomCompat);
+
+            // get random 20 characters
+
+            console.log(topCompat[5]);
+
+            function getRandomCharacters(arr) {
+                let randomChar = [];
+                let characters = [];
+                for (let x = 0; x < 20; x++) {
+                    const randomIndex = Math.floor(Math.random() * arr.length);
+                    characters.push(arr[randomIndex]);
+                    randomChar.push(randomIndex);
+                }
+                return characters;
+            }
+
+            var topRandomCharacters = getRandomCharacters(topCompat);
+            var bottomRandomCharacters = getRandomCharacters(bottomCompat);
+
+            topRandomCharactersNames = [];
+            topRandomCharacters.forEach(d =>
+                topRandomCharactersNames.push([d['0'], d['1']])
+            );
+
+            bottomRandomCharactersNames = [];
+            bottomRandomCharacters.forEach(d =>
+                bottomRandomCharactersNames.push([d['0'], d['1']])
+            );
+
+            console.log(topRandomCharactersNames);
+
+            // making bar chart
+            let annotations = svg.append("g").attr("id", "annotations");
+            let chartArea = svg.append("g").attr("id", "points")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+
+            // intial left axis and gridlines
+            let leftAxis = d3.axisLeft();
+            let leftGridlinesG = annotations.append("g").attr("class", "y axis")
+
+            // initial bottom axis and gridlines
+
+            const rankScale = d3.scaleOrdinal().domain(["0", "25", "50", "75", "100"]).range([0, chartWidth]); 
+
+            let bottomAxis = d3.axisBottom(rankScale).tickFormat(d3.format('.0%'));
+            let bottomAxisG = d3.axisBottom(rankScale).tickSize(-chartHeight-10)
+            
+            
+                .append("g")
+                .attr("class", "x axis")
+                .attr("transform", `translate(${margin.left},${chartHeight + margin.top + 10})`);
+
+
+            function updateBarsAnimated(yearKey) {
+
+                const data = yearData[yearKey]
+
+                console.log(data)
+                const characterScale = d3.scaleBand().domain(topRandomCharactersNames).range([chartHeight, 0])
+                    .padding(0.05);
+
+
+
+                // Update and animate axes
+
+                annotations.append("g")
+                    .attr("class", "y axis")
+                    .attr("transform", `translate(${margin.left - 10},${margin.top})`)
+                    .call(leftAxis)
+                annotations.append("g")
+                    .attr("class", "y gridlines")
+                    .attr("transform", `translate(${margin.left - 10},${margin.top})`)
+                    .call(leftGridlines);
+
+
+                chartArea.selectAll('rect.bar').data(data, d => d['genre'])
+                    .join(enter => enter.append('rect')
+                        .attr('class', 'bar')
+                        .attr("fill", "steelblue")
+                        .attr("x", d => genreScale(d.genre))
+                        .attr("y", d => percentScale(d.percentpass))
+                        .attr("height", d => percentScale(0) - percentScale(d.percentpass))
+                        .attr("width", genreScale.bandwidth())
+                        .attr("opacity", 0) // Set opacity low, then animate to 1 to make them fade in
+                        .call(enter => enter.transition()
+                            .attr('opacity', 1)),
+                        update => update.call(update => update.transition()  // Animate resizing and movement
+                            .attr("fill", "steelblue")
+                            .attr("x", d => genreScale(d.genre))
+                            .attr("y", d => percentScale(d.percentpass))
+                            .attr("height", d => percentScale(0) - percentScale(d.percentpass))
+                            .attr("width", genreScale.bandwidth())),
+                        exit => exit.call(exit => exit.transition().attr('opacity', 0).remove())); // Animate opacity to fade out
+
+
+            }
+
+
         }
+
 
         getCompatibility();
 
