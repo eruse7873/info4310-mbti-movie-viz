@@ -1,31 +1,251 @@
 <html lang="en">
+
 <head>
     <title>MBTI Compatibility</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
-</head>
-<body>
-    
-<script>
-    let str = "INFJ";
-    let str2 = "INSP";
-    x = 0;
-    for (let i = 0; i < str.length; i++) {
-        if (str.charAt(i) === str2.charAt(i)) {
-            console.log(str.charAt(i));
-            x += 1;
+    <style>
+        .display {
+            display: flex;
+            justify-content: space-between;
+            height: 300px;
+            width: 500;
+            margin-left: 10px;
+            margin-right: 10px;
         }
-    }
-    console.log(x);
 
 
-    const getCompatibility = async function() {
-        let data = await d3.csv("mbti.csv");
-        console.log(data);
-    }
+        .individual {
+            align-self: center;
+        }
 
-    getCompatibility();
+        .individual:first-child {
+            margin-left: 25;
+        }
+
+        .individual:last-child {
+            margin-right: 100;
+        }
+
+        .avatar_selector {
+            height: 300px;
+            width: 550px;
+        }
 
 
-</script>
+        .hidden {
+            display:none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class = "avatar_selector">
+        <svg id="avatar_display" height="300" width="550"></svg>
+    </div>
+    <!-- <svg id="avatar_display" height="300" width="550">
+        <polygon class="right triangle" points="515,135 515,165 540,150" style="fill:lime;stroke:purple;stroke-width:1">
+        </polygon>
+        <polygon class="left triangle" points="10,150 35,135 35,165" style="fill:lime;stroke:purple;stroke-width:1">
+        </polygon>
+    </svg> -->
+
+    <div class="active analysts display">
+        <div class="individual">
+            <h6 style = "text-align: center">Architect</h6>
+            <img class="analyst avatars" src="avatars/architect.png">
+            <h6 style = "text-align: center">INTJ-A/INTJ-T</h6>
+        </div>
+        <div class="individual">
+            <h6 style = "text-align: center">Logician</h6>
+            <img class="analyst avatars" src="avatars/logician.png">
+            <h6 style = "text-align: center">INTP-A/INTP-T</h6>
+        </div>
+        <div class="individual">
+            <h6 style = "text-align: center">Commander</h6>
+            <img class="analyst avatars" src="avatars/commander.png">
+            <h6 style = "text-align: center">ENTJ-A/ENTJ-T</h6>
+        </div>
+        <div class="individual">
+            <h6 style = "text-align: center">Debater</h6>
+            <img class="analyst avatars" src="avatars/debater.png">
+            <h6 style = "text-align: center">ENTP-A/ENTP-T</h6>
+        </div>
+    </div>
+
+    <div class="hidden diplomats display">
+        <div class="individual">
+        <h6 style = "text-align: center">Advocate</h6>
+        <img class="diplomats avatars" src="avatars/advocate.png">
+        <h6 style = "text-align: center">INFJ-A/INFJ-T</h6>
+        </div>
+        <div class="individual">
+        <h6 style = "text-align: center">Mediator</h6>
+        <img class="diplomats avatars" src="avatars/mediator.png">
+        <h6 style = "text-align: center">INFP-A/INFP-T</h6>
+        </div>
+        <div class="individual">
+        <h6 style = "text-align: center">Protagonist</h6>
+        <img class="diplomats avatars" src="avatars/protagonist.png">
+        <h6 style = "text-align: center">ENFJ-A/ENFJ-T</h6>
+        </div>
+        <div class="individual">
+        <h6 style = "text-align: center">Campaigner</h6>
+        <img class="diplomats avatars" src="avatars/campaigner.png">
+        <h6 style = "text-align: center">ENFP-A/ENFP-T</h6>
+        </div>
+    </div>
+
+    <div class="hidden sentinels display">
+        <div class="individual">
+        <h6 style = "text-align: center">Logistician</h6>
+        <img class="sentinels avatars" src="avatars/logistician.png">
+        <h6 style = "text-align: center">ENFP-A/ENFP-T</h6>
+        </div>
+        <div class="individual">
+        <h6 style = "text-align: center">Defender</h6>
+        <img class="sentinels avatars" src="avatars/defender.png">
+        <h6 style = "text-align: center">ISFJ-A/ISFJ-T</h6>
+        </div>
+        <div class="individual">
+        <h6 style = "text-align: center">Executive</h6>
+        <img class="sentinels avatars" src="avatars/executive.png">
+        <h6 style = "text-align: center">ESTJ-A/ESTJ-T</h6>
+        </div>
+        <div class="individual">
+        <h6 style = "text-align: center">Consul</h6>
+        <img class="sentinels avatars" src="avatars/consul.png">
+        <h6 style = "text-align: center">ESFJ-A/ESFJ-T</h6>
+        </div>
+    </div>
+
+    <div class="hidden explorers display">
+        <div class="individual">
+        <h6 style = "text-align: center">Virtuoso</h6>
+        <img class="explorers avatars" src="avatars/virtuoso.png">
+        <h6 style = "text-align: center">ISTP-A/ISTP-T</h6>
+        </div>
+        <div class="individual">
+        <h6 style = "text-align: center">Adventurer</h6>
+        <img class="explorers avatars" src="avatars/adventurer.png">
+        <h6 style = "text-align: center">ISFP-A/ISFP-T</h6>
+        </div>
+        <div class="individual">
+        <h6 style = "text-align: center">Entrepreneur</h6>
+        <img class="explorers avatars" src="avatars/entrepreneur.png">
+        <h6 style = "text-align: center">ESTP-A/ESTP-T</h6>
+        </div>
+        <div class="individual">
+        <h6 style = "text-align: center">Entrepreneur</h6>
+        <img class="explorers avatars" src="avatars/entertainer.png">
+        <h6 style = "text-align: center">ESFP-A/ESFP-T</h6>
+        </div>
+    </div>
+    <script>
+
+        const avatar_displaysvg = d3.select("svg#avatar_display");
+        
+        avatar_displaysvg.append("polygon")
+                         .attr("class", "right triangle")
+                         .attr("points", "515,135 515,165 540,150")
+                         .style("fill", "lime")
+                         .style("stroke", "purple")
+                         .style("stroke-width", 1)
+                         .on('click', changeAvatars);
+        // avatar_displaysvg.append("polygon")
+        //                  .attr("class", "left triangle")
+        //                  .attr("points", "10,150 35,135 35,165")
+        //                  .style("fill", "lime")
+        //                  .style("stroke", "purple")
+        //                  .style("stroke-width", 1);
+                        //  .on('click', changeAvatars);
+        
+        function changeAvatars() {
+            if (d3.selectAll(".analysts").classed("active")) {
+                
+                d3.selectAll(".analysts")
+                    .classed("active", false);
+                d3.selectAll(".analysts")
+                    .classed("hidden", true);
+                
+                d3.selectAll(".diplomats")
+                    .classed("active", true);
+                d3.selectAll(".diplomats")
+                    .classed("hidden", false);
+            }
+
+
+            else if (d3.selectAll(".diplomats").classed("active")) {
+                
+                d3.selectAll(".diplomats")
+                    .classed("active", false);
+                d3.selectAll(".diplomats")
+                    .classed("hidden", true);
+                
+                d3.selectAll(".sentinels")
+                    .classed("active", true);
+                d3.selectAll(".sentinels")
+                    .classed("hidden", false);
+            }
+
+            else if (d3.selectAll(".sentinels").classed("active")) {
+                
+                d3.selectAll(".sentinels")
+                    .classed("active", false);
+                d3.selectAll(".sentinels")
+                    .classed("hidden", true);
+                
+                d3.selectAll(".explorers")
+                    .classed("active", true);
+                d3.selectAll(".explorers")
+                    .classed("hidden", false);
+            }
+
+            else if (d3.selectAll(".explorers").classed("active")) {
+                
+                d3.selectAll(".explorers")
+                    .classed("active", false);
+                d3.selectAll(".explorers")
+                    .classed("hidden", true);
+                
+                d3.selectAll(".analysts")
+                    .classed("active", true);
+                d3.selectAll(".analysts")
+                    .classed("hidden", false);
+            }
+
+
+            //find group with active
+            //remove group with active
+            //add hidden to group
+            //add active to next group
+        }
+
+        
+        
+        // avatar_displaysvg.append("div")
+        // const margin = { top: 10, right: 310, bottom: 50, left: 310 }; //right is 310 with legend
+        let str = "INFJ";
+        let str2 = "INSP";
+        x = 0;
+        for (let i = 0; i < str.length; i++) {
+            if (str.charAt(i) === str2.charAt(i)) {
+                console.log(str.charAt(i));
+                x += 1;
+            }
+        }
+        console.log(x);
+
+
+        const getCompatibility = async function () {
+            let data = await d3.csv("mbti.csv");
+            console.log(data);
+        }
+
+        getCompatibility();
+
+
+    </script>
 </body>
+
 </html>
