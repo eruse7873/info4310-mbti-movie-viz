@@ -9,6 +9,7 @@
 
 <body>
     <svg id="enneagramSelector" height="600" width="600"></svg>
+    <svg id="barchart" height="800" width="800" style="margin:20px"></svg>
     <script>
         let origin = 300;
         let radius = 150;
@@ -53,26 +54,7 @@
             // .style('font-size', 10)
             // .attr('fill', 'white')
             .text(d => d.nodeId)
-
-        let str = "INFJ";
-        let str2 = "INSP";
-        x = 0;
-        for (let i = 0; i < str.length; i++) {
-            if (str.charAt(i) === str2.charAt(i)) {
-                console.log(str.charAt(i));
-                x += 1;
-            }
-        }
-        console.log(x);
-
-
-        const getCompatibility = async function () {
-            let data = await d3.csv("mbti_clean.csv");
-            console.log(data);
-        }
-
-    <svg id="barchart" height="800" width="800" style="margin:20px"></svg>
-    <script>
+    
 
         const svg = d3.select("svg#barchart");
         const width = svg.attr("width");
