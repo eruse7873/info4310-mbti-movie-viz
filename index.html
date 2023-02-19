@@ -3,6 +3,7 @@
 <head>
     <title>MBTI Compatibility</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -10,47 +11,80 @@
     <script>
         let origin = 300;
         let radius = 150;
-        enneagramSelector = d3.select("svg#enneagramSelector");
+        const enneagramSelector = d3.select("svg#enneagramSelector");
         enneagramSelector.append("circle")
             .attr("cx", origin)
             .attr('cy', origin)
             .attr('r', radius)
-            .attr('stroke', 'black')
+            .attr('stroke', 'none')
             .attr('fill', 'none');
         // let nodes = {"1":0, "2":40, "3":80, "4":120, "5":160, "6":200, "7":240, "8":280, "9":320}
 
-        let nodeID = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        let nodeIDs = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         let nodeDegree = [0, 40, 80, 120, 160, 200, 240, 280, 320];
         let nodeColor = ['#27749C', '#2FB478', '#6DCD38', '#E6C742', '#FF4C58', '#F856BD', '#D460F1', '#886AEA', '#7399E4', '#7CD4DD']
         // nodes = nodes.map(x=>{node:x})
         // const nodes = nodeID.map((x, i)=> ({}))
         nodes = []
-        for (let i = 0; i < nodeID.length; i++) {
-            dict = { nodeId: nodeID[i], degree: nodeDegree[i], color: nodeColor[i] };
+        for (let i = 0; i < nodeIDs.length; i++) {
+            dict = { nodeID: nodeIDs[i], degree: nodeDegree[i], color: nodeColor[i] };
             nodes.push(dict);
         }
 
         console.log(nodes);
 
-        var enneagramSelectorAnnotations = enneagramSelector.append('g');
+        // var enneagramSelectorAnnotations = enneagramSelector.append('g');
 
-        let circles = enneagramSelector.selectAll('circles.nodes').data(nodes)
-        // SOURCE: drawing circles around a circle
-        // https://spin.atomicobject.com/2015/06/12/objects-around-svg-circle-d3-js/
-            .attr('class', 'node')
+        let circles = enneagramSelector.selectAll('g.circleNodes').data(nodes)
+            .join('g')
+            .attr('class', 'circleNode')
+            .attr('transform', d => `rotate(${d.degree},${origin},${origin})`)
+
+        nodeCircles = circles.append('circle')
+            // SOURCE: drawing circles around a circle
+            // https://spin.atomicobject.com/2015/06/12/objects-around-svg-circle-d3-js/
+            .attr('class', 'circle.node')
             .join('circle')
             .attr('r', 20)
             .attr('fill', d => d.color)
             .attr('cx', origin + (radius * Math.sin(0)))
             .attr('cy', origin - (radius * Math.cos(0)))
-            .attr('transform', d => `rotate(${d.degree},${origin},${origin})`);
-       
-        circleLabels = circles.append('text')
-            // .attr('text-anchor', 'middle')
-            // .attr('alignment-baseline', 'middle')
-            // .style('font-size', 10)
-            // .attr('fill', 'white')
-            .text(d => d.nodeId)
+        // .attr('transform', d => `rotate(${d.degree},${origin},${origin})`);
+
+        nodeLabels = circles.append('text')
+            .text(d => d.nodeID)
+            .attr('text-anchor', 'middle')
+            .attr('alignment-baseline', 'middle')
+            .style('font-size', '20px')
+            .attr('fill', 'white')
+            .attr('x', origin + (radius * Math.sin(0)))
+            .attr('y', origin - (radius * Math.cos(0)))
+
+        nodeCircles
+            .on('mouseover', function () {
+                let enn = d3.select(this);
+                console.log(enn);
+                enn.transition().duration(100)
+                    .attr("stroke-width", 4)
+                    .style("stroke-opacity", .8)
+                    .style("stroke", 'black')
+            })
+            .on('mouseout', function () {
+                // if (clicked != true) {
+                    let enn = d3.select(this);
+                    console.log(enn);
+                    enn.transition().duration(200)
+                        .attr("stroke-width", 0)
+                // }
+
+            })
+            // .on('click', function () {
+            //     let enn = d3.select(this);
+            //     console.log(enn);
+            //     enn.attr('stroke', 'black')
+            //     enn.attr('stroke-width', 3);
+            //     return clicked;
+            // })
 
         let str = "INFJ";
         let str2 = "INSP";
