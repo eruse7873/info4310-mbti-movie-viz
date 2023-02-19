@@ -9,7 +9,7 @@
 
 <body>
     <svg id="enneagramSelector" height="600" width="600"></svg>
-    <svg id="barchart" height="800" width="800" style="margin:20px"></svg>
+    <svg id="barchart" height="800" width="800" style="margin:50px"></svg>
     <script>
         let origin = 300;
         let radius = 150;
@@ -38,8 +38,8 @@
         var enneagramSelectorAnnotations = enneagramSelector.append('g');
 
         let circles = enneagramSelector.selectAll('circles.nodes').data(nodes)
-        // SOURCE: drawing circles around a circle
-        // https://spin.atomicobject.com/2015/06/12/objects-around-svg-circle-d3-js/
+            // SOURCE: drawing circles around a circle
+            // https://spin.atomicobject.com/2015/06/12/objects-around-svg-circle-d3-js/
             .attr('class', 'node')
             .join('circle')
             .attr('r', 20)
@@ -47,19 +47,19 @@
             .attr('cx', origin + (radius * Math.sin(0)))
             .attr('cy', origin - (radius * Math.cos(0)))
             .attr('transform', d => `rotate(${d.degree},${origin},${origin})`);
-       
+
         circleLabels = circles.append('text')
             // .attr('text-anchor', 'middle')
             // .attr('alignment-baseline', 'middle')
             // .style('font-size', 10)
             // .attr('fill', 'white')
             .text(d => d.nodeId)
-    
+
 
         const svg = d3.select("svg#barchart");
         const width = svg.attr("width");
         const height = svg.attr("height");
-        const margin = { top: 10, right: 10, bottom: 50, left: 50 };
+        const margin = { top: 10, right: 10, bottom: 50, left: 150 };
         const chartWidth = width - margin.left - margin.right;
         const chartHeight = height - margin.top - margin.bottom;
 
@@ -100,7 +100,7 @@
 
             // get all characters with the same mbti
             topCompat = [];
-            
+
             for (let x = 0; x < compat.length; x++) {
                 if (compat[x]['2'] === 4) {
                     topCompat.push([compat[x]['0'], compat[x]['1'], compat[x]['2']]);
@@ -112,7 +112,7 @@
 
             // get all characters with the opposite mbti
             var bottomCompat = [];
-            
+
             for (let x = 0; x < compat.length; x++) {
                 if (compat[x]['2'] === 0) {
                     bottomCompat.push([compat[x]['0'], compat[x]['1'], compat[x]['2']]);
@@ -126,30 +126,99 @@
             console.log(topCompat[5]);
 
             function getRandomCharacters(arr) {
-                const randomIndices = Math.floor(Math.random())
+                let randomChar = [];
+                let characters = [];
+                for (let x = 0; x < 20; x++) {
+                    const randomIndex = Math.floor(Math.random() * arr.length);
+                    characters.push(arr[randomIndex]);
+                    randomChar.push(randomIndex);
+                }
+                return characters;
             }
 
+            var topRandomCharacters = getRandomCharacters(topCompat);
+            var bottomRandomCharacters = getRandomCharacters(bottomCompat);
+
+            topRandomCharactersNames = [];
+            topRandomCharacters.forEach(d =>
+                topRandomCharactersNames.push([d['0'], d['1']])
+            );
+
+            bottomRandomCharactersNames = [];
+            bottomRandomCharacters.forEach(d =>
+                bottomRandomCharactersNames.push([d['0'], d['1']])
+            );
+
+            console.log(topRandomCharactersNames);
 
             // making bar chart
             let annotations = svg.append("g").attr("id", "annotations");
             let chartArea = svg.append("g").attr("id", "points")
                 .attr("transform", `translate(${margin.left},${margin.top})`);
 
-            const characterScale = d3.scaleBand().domain(topCompat).range([0, chartWidth])
-                .padding(0.05);
 
-            let leftAxis = d3.axisLeft(percentScale).tickFormat(d3.format('.0%'));
-            let leftGridlines = d3.axisLeft(percentScale)
-                .tickSize(-chartWidth - 10)
-                .tickFormat("")
-            annotations.append("g")
-                .attr("class", "y axis")
-                .attr("transform", `translate(${margin.left - 10},${margin.top})`)
-                .call(leftAxis)
-            annotations.append("g")
-                .attr("class", "y gridlines")
-                .attr("transform", `translate(${margin.left - 10},${margin.top})`)
-                .call(leftGridlines);
+            // intial left axis and gridlines
+            let leftAxis = d3.axisLeft();
+            let leftGridlinesG = annotations.append("g").attr("class", "y axis")
+
+            // initial bottom axis and gridlines
+
+            const rankScale = d3.scaleOrdinal().domain(["0", "25", "50", "75", "100"]).range([0, chartWidth]); 
+
+            let bottomAxis = d3.axisBottom(rankScale).tickFormat(d3.format('.0%'));
+            let bottomAxisG = d3.axisBottom(rankScale).tickSize(-chartHeight-10)
+            
+            
+                .append("g")
+                .attr("class", "x axis")
+                .attr("transform", `translate(${margin.left},${chartHeight + margin.top + 10})`);
+
+
+            function updateBarsAnimated(yearKey) {
+
+                const data = yearData[yearKey]
+
+                console.log(data)
+                const characterScale = d3.scaleBand().domain(topRandomCharactersNames).range([chartHeight, 0])
+                    .padding(0.05);
+
+
+
+                // Update and animate axes
+
+                annotations.append("g")
+                    .attr("class", "y axis")
+                    .attr("transform", `translate(${margin.left - 10},${margin.top})`)
+                    .call(leftAxis)
+                annotations.append("g")
+                    .attr("class", "y gridlines")
+                    .attr("transform", `translate(${margin.left - 10},${margin.top})`)
+                    .call(leftGridlines);
+
+
+                chartArea.selectAll('rect.bar').data(data, d => d['genre'])
+                    .join(enter => enter.append('rect')
+                        .attr('class', 'bar')
+                        .attr("fill", "steelblue")
+                        .attr("x", d => genreScale(d.genre))
+                        .attr("y", d => percentScale(d.percentpass))
+                        .attr("height", d => percentScale(0) - percentScale(d.percentpass))
+                        .attr("width", genreScale.bandwidth())
+                        .attr("opacity", 0) // Set opacity low, then animate to 1 to make them fade in
+                        .call(enter => enter.transition()
+                            .attr('opacity', 1)),
+                        update => update.call(update => update.transition()  // Animate resizing and movement
+                            .attr("fill", "steelblue")
+                            .attr("x", d => genreScale(d.genre))
+                            .attr("y", d => percentScale(d.percentpass))
+                            .attr("height", d => percentScale(0) - percentScale(d.percentpass))
+                            .attr("width", genreScale.bandwidth())),
+                        exit => exit.call(exit => exit.transition().attr('opacity', 0).remove())); // Animate opacity to fade out
+
+
+            }
+
+
         }
 
         getCompatibility();
