@@ -161,6 +161,7 @@
 
     <svg id="enneagramSelector" height="600" width="600"></svg>
     <svg id="barchart" height="800" width="800" style="margin:50px"></svg>
+    <svg id = "bubbles" height = "600" width = "1000"></svg>
     <script>
         
         d3.select(".triangle")
@@ -250,7 +251,7 @@
             nodes.push(dict);
         }
 
-        console.log(nodes);
+        // console.log(nodes);
 
         // var enneagramSelectorAnnotations = enneagramSelector.append('g');
 
@@ -282,7 +283,7 @@
         nodeCircles
             .on('mouseover', function () {
                 let enn = d3.select(this);
-                console.log(enn);
+                // console.log(enn);
                 enn.transition().duration(100)
                     .attr("stroke-width", 4)
                     .style("stroke-opacity", .8)
@@ -291,7 +292,7 @@
             .on('mouseout', function () {
                 // if (clicked != true) {
                 let enn = d3.select(this);
-                console.log(enn);
+                // console.log(enn);
                 enn.transition().duration(200)
                     .attr("stroke-width", 0)
                 // }
@@ -313,13 +314,28 @@
         const chartWidth = width - margin.left - margin.right;
         const chartHeight = height - margin.top - margin.bottom;
 
+        const bubblessvg = d3.select("svg#bubbles");
+        
+
         const getCompatibility = async function () {
-            let data = await d3.csv("mbti_clean.csv");
+            let data = await d3.csv("mbti_clean.csv", d3.autotype);
+            let mbti_counts = await d3.csv("mbti_counts.csv", d3.autotype);
+
+            console.log(mbti_counts)
             console.log(data);
             console.log(data[1]['mbti'].charAt(1));
 
+
+            //make scale for mbti counts
+            const counts = []
+            mbti_counts.forEach((d)=> {
+                counts.push(parseInt(d.count));
+            })
+            console.log(counts);
+
+
             // change this variable later
-            let input_mbti = "ESFP";
+            // let input_mbti = "ESFP";
 
             // new object array
             var compat = [];
@@ -414,9 +430,7 @@
 
             // initial bottom axis and gridlines because these don't change
 
-            const rankScale = d3.scaleLinear().domain([0, 25, 50, 75, 100]).range([0, chartWidth]);
-
-          
+            const rankScale = d3.scaleLinear().domain([0, 1, 2, 3, 4]).range([0, chartWidth]);
 
             let bottomAxis = d3.axisBottom(rankScale);
             let bottomAxisG = d3.axisBottom(rankScale).tickSize(-chartHeight - 10).tickFormat("");
