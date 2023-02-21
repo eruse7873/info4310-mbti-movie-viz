@@ -392,7 +392,8 @@
             function chooseMBTI() {
 
                 //estelle is trying to change the border on click d3.select(this).node().attr('border','2px solid rgb(107, 107, 107);');
-                input_mbti = d3.select(this).selectAll("h6:last-child").text()
+
+                input_mbti = d3.select(this).select(".individual h6").text();
 
                 console.log(getCharacterInfo(input_mbti));
                 // mbtiBars(input_mbti);
