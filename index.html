@@ -17,11 +17,11 @@
         .individual {
             align-self: center;
             padding: 3px;
-            border: 2px solid transparent;
+            border: 3px solid transparent;
         }
 
         .individual:hover {
-            border: 2px solid rgb(190, 190, 190)
+            border: 3px solid rgb(190, 190, 190)
         }
 
         .individual img {
@@ -331,31 +331,31 @@
                 .on("click", chooseMBTI)
                 .on("mouseover", function () {
                     let border = d3.select(this)
-                    border.style('border', '2px solid rgb(190, 190, 190)')
+                    border.style('border', '3px solid rgb(190, 190, 190)')
                 })
                 .on("mouseout", function () {
                     let border = d3.select(this)
                     let borderClass = border.classed('border')
-                    console.log(borderClass)
+                    // console.log(borderClass)
                     if (!borderClass) {
-                        border.style('border', '2px solid transparent')
+                        border.style('border', '3px solid transparent')
                     }
                 })
 
             function chooseMBTI() {
 
                 //estelle is trying to change the border on click 
-                d3.selectAll(".individual").style('border', '2px solid transparent').classed('border', false);
+                d3.selectAll(".individual").style('border', '3px solid transparent').classed('border', false);
 
                 // d3.selectAll(".individual:hover").style('border','rgb(190, 190, 190)');
-                let border = d3.select(this)
-                    ; border.style('border', '2px solid rgb(190, 190, 190)');
+                let border = d3.select(this);
+                border.style('border', '3px solid rgb(190, 190, 190)');
                 let borderClass = border.classed('border', true)
 
 
                 running_mbti = d3.select(this).select(".individual h6").text();
 
-                
+
 
                 mbtiBars(getCharacterInfo(running_mbti, false));
             }
@@ -392,7 +392,7 @@
 
                 }
 
-                
+
 
                 // console.log(compat);
 
@@ -545,7 +545,7 @@
                 chartArea.selectAll('rect.bar').data(graphNames)
                     .join(enter => enter.append('rect')
                         .attr('class', 'bar')
-                        .attr("fill", "steelblue")
+                        .attr("fill", "darkseagreen")
                         .attr("x", d => histScale(0))
                         .attr("y", d => leftAxisScale(d[0]))
                         .attr("height", leftAxisScale.bandwidth())
@@ -554,7 +554,7 @@
                         .call(enter => enter.transition()
                             .attr('opacity', 1)),
                         update => update.call(update => update.transition()  // Animate resizing and movement
-                            .attr("fill", "steelblue")
+                            .attr("fill", "darkseagreen")
                             .attr("x", d => histScale(0))
                             .attr("y", d => leftAxisScale(d[0]))
                             .attr("height", leftAxisScale.bandwidth())
@@ -590,11 +590,29 @@
             links = []
             sources = [9, 9, 3, 1, 1, 2, 2, 5, 5]
             targets = [3, 6, 6, 4, 7, 8, 4, 8, 7]
+            // labels = ['Peacemaker','Reformer','Helper','Achiever','Individualist','Investigator','Loyalist','Enthusiast','Challenger','Peacemaker']
 
             for (let i = 0; i < sources.length; i++) {
-                dict = { source: sources[i], target: targets[i] };
+                dict = { source: sources[i], target: targets[i]};
                 links.push(dict);
             }
+
+            console.log('nodes',nodes)
+            console.log('links',links)
+
+            nodes.forEach(d=>{
+                d.x = origin + (radius * Math.sin(0));
+                d.y = origin - (radius * Math.cos(0));
+
+            })
+
+            var sim = d3.forceSimulation()
+                .nodes(nodes)
+                .force("links", d3.forceLink()
+                    .links(links)
+                    .id(d => d['nodeID']))
+                .stop()
+              
 
             // var linkGen = d3.linkHorizontal()
             //                 .source(function(d){
@@ -613,10 +631,10 @@
                 // https://spin.atomicobject.com/2015/06/12/objects-around-svg-circle-d3-js/
                 .attr('class', 'circle.node')
                 .join('circle')
-                .attr('r', 20)
+                .attr('r', 25)
                 .attr('fill', d => d.color)
-                .attr('cx', origin + (radius * Math.sin(0)))
-                .attr('cy', origin - (radius * Math.cos(0)))
+                .attr('cx', d=> d.x)
+                .attr('cy', d=>d.y)
                 .attr('id', d => d.nodeID);
             // .attr('transform', d => `rotate(${d.degree},${origin},${origin})`);
 
@@ -625,37 +643,44 @@
                 .text(d => d.nodeID)
                 .attr('text-anchor', 'middle')
                 .attr('alignment-baseline', 'middle')
-                .style('font-size', '20px')
+                .style('font-size', '25px')
                 .attr('fill', 'white')
                 .attr('x', origin + (radius * Math.sin(0)))
                 .attr('y', origin - (radius * Math.cos(0)))
 
             nodeCircles
+                .classed('outline', false)
                 .on('mouseover', function () {
                     let enn = d3.select(this);
                     // console.log(enn);
                     enn.transition().duration(100)
-                        .attr("stroke-width", 4)
-                        .style("stroke-opacity", .8)
+                        .attr("stroke-width", 7)
+                        .style("stroke-opacity", .6)
                         .style("stroke", 'black')
                 })
                 .on('mouseout', function () {
-                    // if (clicked != true) {
                     let enn = d3.select(this);
-                    // console.log(enn);
-                    enn.transition().duration(200)
-                        .attr("stroke-width", 0)
-                    // }
+                    let ennOutline = enn.classed('outline');
+                    if (!ennOutline) {
+                        // console.log(enn);
+                        enn.transition().duration(200)
+                            .attr("stroke-width", 0)
+                    }
 
                 })
                 .on('click', function () {
+                    nodeCircles.attr('stroke-width', 0).classed('outline', false);
                     let enn = d3.select(this);
-                    let ennID = enn.node().id
+                    enn.attr('stroke-width', 7).style('stroke-opacity', .6)
+                    let ennID = enn.node().id;
+
                     console.log(ennID);
                     enn.attr('stroke', 'black')
-                    enn.attr('stroke-width', 3);
 
                     console.log(running_mbti);
+
+                    enn.classed('outline', true);
+
 
                     //if the second parameter to getCharacterInfo is true, we use running compat in the getcharacterinfo function
                     // mbti_bars(getCharacterInfo(running_mbti,true))
@@ -664,14 +689,7 @@
 
             // console.log(links);
 
-            // var sim = d3.forceSimulation()
-            //     .nodes(nodes)
-            //     .force("links", d3.forceLink()
-            //         .links(links)
-            //         .id(d => d['source']))
-            //     .force('repulse'.d3.forceManyBody().strength(-50))
-            //     .force("center", d3.forceCenter(origin, origin)
-            //     )
+
 
             // const link = d3.linkHorizontal()({
             //     source: nodes[0],
