@@ -88,23 +88,24 @@
 
         <div class="hidden diplomats display">
             <div class="individual">
+                <h5>Diplomats</h5>
                 <h6 style="text-align: center">Advocate</h6>
-                <img class="diplomats avatars" src="avatars/advocate.png">
+                <img class="diplomats avatars" src="avatars/advocate.png" width="150" height="150">
                 <h6 style="text-align: center">INFJ</h6>
             </div>
             <div class="individual">
                 <h6 style="text-align: center">Mediator</h6>
-                <img class="diplomats avatars" src="avatars/mediator.png">
+                <img class="diplomats avatars" src="avatars/mediator.png" width="150" height="150">
                 <h6 style="text-align: center">INFP</h6>
             </div>
             <div class="individual">
                 <h6 style="text-align: center">Protagonist</h6>
-                <img class="diplomats avatars" src="avatars/protagonist.png">
+                <img class="diplomats avatars" src="avatars/protagonist.png" width="150" height="150">
                 <h6 style="text-align: center">ENFJ</h6>
             </div>
             <div class="individual">
                 <h6 style="text-align: center">Campaigner</h6>
-                <img class="diplomats avatars" src="avatars/campaigner.png">
+                <img class="diplomats avatars" src="avatars/campaigner.png" width="150" height="150">
                 <h6 style="text-align: center">ENFP</h6>
             </div>
         </div>
@@ -161,7 +162,7 @@
 
     <svg id="enneagramSelector" height="600" width="600"></svg>
     <svg id="barchart" height="800" width="800" style="margin:50px"></svg>
-    <svg id = "bubbles" height = "600" width = "1000"></svg>
+    <svg id="bubbles" height="600" width="1000"></svg>
     <script>
 
 
@@ -176,7 +177,7 @@
             .attr('fill', 'none');
         // let nodes = {"1":0, "2":40, "3":80, "4":120, "5":160, "6":200, "7":240, "8":280, "9":320}
 
-        let nodeIDs = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        let nodeIDs = [9, 1, 2, 3, 4, 5, 6, 7, 8];
         let nodeDegree = [0, 40, 80, 120, 160, 200, 240, 280, 320];
         let nodeColor = ['#27749C', '#2FB478', '#6DCD38', '#E6C742', '#FF4C58', '#F856BD', '#D460F1', '#886AEA', '#7399E4', '#7CD4DD']
         // nodes = nodes.map(x=>{node:x})
@@ -187,7 +188,19 @@
             nodes.push(dict);
         }
 
-        // console.log(nodes);
+        links = []
+        sources = [9, 9, 3, 1, 1, 2, 2, 5, 5]
+        targets = [3, 6, 6, 4, 7, 8, 4, 8, 7]
+
+        for (let i = 0; i < sources.length; i++) {
+            dict = { source: sources[i], target: targets[i] };
+            links.push(dict);
+        }
+
+        // var linkGen = d3.linkHorizontal()
+        //                 .source(function(d){
+        //                     return(d.source)
+        //                 })
 
         // var enneagramSelectorAnnotations = enneagramSelector.append('g');
 
@@ -205,9 +218,11 @@
             .attr('fill', d => d.color)
             .attr('cx', origin + (radius * Math.sin(0)))
             .attr('cy', origin - (radius * Math.cos(0)))
+            .attr('id',d=> d.nodeID);
         // .attr('transform', d => `rotate(${d.degree},${origin},${origin})`);
 
-        nodeLabels = circles.append('text')
+        nodeLabels = circles
+            .append('text')
             .text(d => d.nodeID)
             .attr('text-anchor', 'middle')
             .attr('alignment-baseline', 'middle')
@@ -234,14 +249,33 @@
                 // }
 
             })
-        // .on('click', function () {
-        //     let enn = d3.select(this);
-        //     console.log(enn);
-        //     enn.attr('stroke', 'black')
-        //     enn.attr('stroke-width', 3);
-        //     return clicked;
-        // })
+            .on('click', function () {
+                let enn = d3.select(this);
+                console.log(enn.node().id);
+                enn.attr('stroke', 'black')
+                enn.attr('stroke-width', 3);
+                ;
+            })
 
+        console.log(links);
+
+        // var sim = d3.forceSimulation()
+        //     .nodes(nodes)
+        //     .force("links", d3.forceLink()
+        //         .links(links)
+        //         .id(d => d['source']))
+        //     .force('repulse'.d3.forceManyBody().strength(-50))
+        //     .force("center", d3.forceCenter(origin, origin)
+        //     )
+
+        // const link = d3.linkHorizontal()({
+        //     source: nodes[0],
+        //     target: nodes[1]
+        // });
+
+
+        // linksG = enneagramSelector.append('path')
+        //     .attr('d', links[0])
 
         const svg = d3.select("svg#barchart");
         const width = svg.attr("width");
@@ -251,7 +285,7 @@
         const chartHeight = height - margin.top - margin.bottom;
 
         const bubblessvg = d3.select("svg#bubbles");
-        
+
 
         const getCompatibility = async function () {
             let data = await d3.csv("mbti_clean.csv", d3.autotype);
@@ -262,7 +296,7 @@
 
             //make scale for mbti counts
             const counts = []
-            mbti_counts.forEach((d)=> {
+            mbti_counts.forEach((d) => {
                 counts.push(parseInt(d.count));
             })
             console.log(counts);
@@ -332,7 +366,7 @@
                 input_mbti = d3.select(this).selectAll("h6:last-child").text()
 
                 getCharacterInfo(input_mbti)
-               // mbtiBars(input_mbti);
+                // mbtiBars(input_mbti);
             }
 
 
