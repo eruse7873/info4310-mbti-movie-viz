@@ -270,13 +270,13 @@
             .on('click', function () {
                 let enn = d3.select(this);
                 let ennID = enn.node().id
-                console.log(ennID);
+                // console.log(ennID);
                 enn.attr('stroke', 'black')
                 enn.attr('stroke-width', 3);
                 ;
             })
 
-        console.log(links);
+        // console.log(links);
 
         // var sim = d3.forceSimulation()
         //     .nodes(nodes)
@@ -310,15 +310,15 @@
             let data = await d3.csv("mbti_clean.csv", d3.autotype);
             let mbti_counts = await d3.csv("mbti_counts.csv", d3.autotype);
 
-            console.log(mbti_counts)
-            console.log(data);
+            // console.log(mbti_counts)
+            // console.log(data);
 
             //make scale for mbti counts
             const counts = []
             mbti_counts.forEach((d) => {
                 counts.push(parseInt(d.count));
             })
-            console.log(counts);
+            // console.log(counts);
 
             d3.select(".triangle")
                 .on('click', changeAvatars);
@@ -384,7 +384,7 @@
             function chooseMBTI() {
                 input_mbti = d3.select(this).selectAll("h6:last-child").text()
 
-                getCharacterInfo(input_mbti)
+                console.log(getCharacterInfo(input_mbti));
                 // mbtiBars(input_mbti);
             }
 
@@ -418,7 +418,7 @@
 
                 }
 
-                console.log(compat);
+                // console.log(compat);
 
                 function getRandomCharacter(arr) {
                     const randomIndex = Math.floor(Math.random() * arr.length);
@@ -453,8 +453,8 @@
                     }
                 }
 
-                console.log('compat0')
-                console.log(compat0);
+                // console.log('compat0')
+                // console.log(compat0);
 
 
                 // graphNames contains one random character from each mbti compat
@@ -466,7 +466,7 @@
                 graphNames.push(getRandomCharacter(compat75));
                 graphNames.push(getRandomCharacter(compat100));
 
-                console.log(graphNames);
+                // console.log(graphNames);
 
                 return graphNames;
             }
