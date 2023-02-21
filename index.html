@@ -186,7 +186,7 @@
         </div>
     </div>
 
-    <svg id="enneagramSelector" height="600" width="600"></svg>
+    <!-- <svg id="enneagramSelector" height="600" width="600"></svg> -->
     <svg id="barchart" height="800" width="800" style="margin:50px"></svg>
     <script>
 
@@ -527,6 +527,18 @@
                         compat100.push(compat[x]);
                     }
                 }
+                console.log(compat100.length);
+
+                const hist_counts =[]
+
+                hist_counts.push(['100%', compat100.length]);
+                hist_counts.push(['75%', compat75.length]);
+                hist_counts.push(['50%', compat50.length]);
+                hist_counts.push(['25%', compat25.length]);
+                hist_counts.push(['0%', compat0.length]);
+
+
+                // const hist_counts = [['100%', compat100.length],['75%', compat75.length]['75%', compat75.length]['25%', compat25.length]['0%', compat0.length]];
 
                 // console.log('compat0')
                 // console.log(compat0);
@@ -543,7 +555,10 @@
 
                 // console.log(graphNames);
 
-                return graphNames;
+                // return graphNames;
+                return hist_counts
+
+                
             }
 
 
@@ -565,16 +580,22 @@
                 .attr("transform", `translate(${margin.left}, ${margin.top + 10})`);
 
             // initial bottom axis and gridlines because these don't change           
-            const rankScale = d3.scaleLinear().domain([0, 4]).range([0, chartWidth]);
+            // const rankScale = d3.scaleLinear().domain([0, 4]).range([0, chartWidth]);
 
-            let bottomAxis = d3.axisBottom(rankScale).ticks(4);
-            // maybe get rid of this laters
-            let bottomAxisG = d3.axisBottom(rankScale).tickSize(-chartHeight - 10).tickFormat("").ticks(4);
-
-            annotations.append("g")
+            // let bottomAxis = d3.axisBottom(rankScale).ticks(4);
+            // // maybe get rid of this laters
+            // let bottomAxisG = d3.axisBottom(rankScale).tickSize(-chartHeight - 10).tickFormat("").ticks(4);
+            
+            let bottomAxis = d3.axisBottom();
+            let bottomAxisG = annotations.append("g")
                 .attr("class", "x axis")
                 .attr("transform", `translate(${margin.left},${chartHeight + margin.top + 10})`)
-                .call(bottomAxis);
+
+            
+            // annotations.append("g")
+            //     .attr("class", "x axis")
+            //     .attr("transform", `translate(${margin.left},${chartHeight + margin.top + 10})`)
+            //     .call(bottomAxis);
 
             // annotations.append("g")
             //     .attr("class", "x gridlines")
@@ -587,36 +608,57 @@
                 // const characterScale = d3.scaleBand().domain(topRandomCharactersNames).range([chartHeight, 0])
                 //     .padding(0.05);
 
-                console.log(graphNames);
-                chartArea.selectAll('rect.bar').data(graphNames)
-                    .join('rect')
-                    .attr('class', 'bar')
-                    .attr("fill", "steelblue")
-                    .attr("x", d => rankScale(0))
-                    .attr("y", d => leftAxisScale(d[5]))
-                    .attr("height", leftAxisScale.bandwidth())
-                    .attr("width", d => rankScale(d[4])-rankScale(0))
-                    .attr("opacity", 0.9);
-
-
+                // console.log(graphNames);
                 // chartArea.selectAll('rect.bar').data(graphNames)
-                //     .join(enter => enter.append('rect')
-                //         .attr('class', 'bar')
-                //         .attr("fill", "steelblue")
-                //         .attr("x", d => rankScale(d[4]))
-                //         .attr("y", d => leftAxisScale(d[4]))
-                //         .attr("height", d => percentScale(0) - percentScale(d.percentpass))
-                //         .attr("width", genreScale.bandwidth())
-                //         .attr("opacity", 0) // Set opacity low, then animate to 1 to make them fade in
-                //         .call(enter => enter.transition()
-                //             .attr('opacity', 1)),
-                //         update => update.call(update => update.transition()  // Animate resizing and movement
-                //             .attr("fill", "steelblue")
-                //             .attr("x", d => genreScale(d.genre))
-                //             .attr("y", d => percentScale(d.percentpass))
-                //             .attr("height", d => percentScale(0) - percentScale(d.percentpass))
-                //             .attr("width", genreScale.bandwidth())),
-                //         exit => exit.call(exit => exit.transition().attr('opacity', 0).remove())); // Animate opacity to fade out
+                //     .join('rect')
+                //     .attr('class', 'bar')
+                //     .attr("fill", "steelblue")
+                //     .attr("x", d => rankScale(0))
+                //     .attr("y", d => leftAxisScale(d[5]))
+                //     .attr("height", leftAxisScale.bandwidth())
+                //     .attr("width", d => rankScale(d[4])-rankScale(0))
+                //     .attr("opacity", 0.9);
+                
+                console.log('graphNames');
+                console.log(graphNames);
+
+                const values =[]
+                graphNames.forEach((d)=> {
+                    values.push(d[1])
+                })
+                
+                const histExtent = d3.extent(values)
+                console.log(histExtent);
+                const histScale = d3.scaleLinear().domain([0,histExtent[1]]).range([0, chartWidth]);
+
+                bottomAxis.scale(histScale)
+                bottomAxisG.transition().call(bottomAxis);
+                    // .selectAll("text")
+                    // .style("text-anchor", "end")
+                    // .attr("font-size", 11)
+                    // .attr("dx", "-.9em")
+                    // .attr("dy", ".7em")
+                    // .attr("transform", "rotate(-45)");
+
+
+                chartArea.selectAll('rect.bar').data(graphNames)
+                    .join(enter => enter.append('rect')
+                        .attr('class', 'bar')
+                        .attr("fill", "steelblue")
+                        .attr("x", d => histScale(0))
+                        .attr("y", d => leftAxisScale(d[0]))
+                        .attr("height", leftAxisScale.bandwidth())
+                        .attr("width", d => histScale(d[1])-histScale(0))
+                        .attr("opacity", 0) // Set opacity low, then animate to 1 to make them fade in
+                        .call(enter => enter.transition()
+                            .attr('opacity', 1)),
+                        update => update.call(update => update.transition()  // Animate resizing and movement
+                            .attr("fill", "steelblue")
+                            .attr("x", d => histScale(0))
+                            .attr("y", d => leftAxisScale(d[0]))
+                            .attr("height", leftAxisScale.bandwidth())
+                            .attr("width", d => histScale(d[1])-histScale(0))),
+                        exit => exit.call(exit => exit.transition().attr('opacity', 0).remove())); // Animate opacity to fade out
 
 
             }
