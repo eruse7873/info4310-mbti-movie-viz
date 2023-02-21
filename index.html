@@ -374,7 +374,7 @@
             function getCharacterInfo(input_mbti) {
                 // let input_mbti = input_mbti;
 
-                // new object array compat contains role, movie and a compat score (0-4) based on mbti similarity
+                // new object array compat contains mbti, role, movie and a compat score (0-4) based on mbti similarity
                 var compat = [];
 
                 // loop through each character
@@ -394,7 +394,7 @@
 
                     // create array of character name, movie title, and compatibility
                     // push to object array
-                    let info = [data[x]['role'], data[x]['movie'], count];
+                    let info = [data[x]['mbti'], data[x]['enneagram'], data[x]['role'], data[x]['movie'], count];
                     compat.push(info);
 
                 }
@@ -417,23 +417,24 @@
                 compat100 = [];
 
                 for (let x = 0; x < compat.length; x++) {
-                    if (compat[x]['2'] === 0) {
-                        compat0.push([compat[x]['0'], compat[x]['1'], compat[x]['2']]);
+                    if (compat[x]['4'] === 0) {
+                        compat0.push(compat[x]);
                     }
-                    else if (compat[x]['2'] === 1) {
-                        compat25.push([compat[x]['0'], compat[x]['1'], compat[x]['2']]);
+                    else if (compat[x]['4'] === 1) {
+                        compat25.push(compat[x]);
                     }
-                    else if (compat[x]['2'] === 2) {
-                        compat50.push([compat[x]['0'], compat[x]['1'], compat[x]['2']]);
+                    else if (compat[x]['4'] === 2) {
+                        compat50.push(compat[x]);
                     }
-                    else if (compat[x]['2'] === 3) {
-                        compat75.push([compat[x]['0'], compat[x]['1'], compat[x]['2']]);
+                    else if (compat[x]['4'] === 3) {
+                        compat75.push(compat[x]);
                     }
-                    else if (compat[x]['2'] === 4) {
-                        compat100.push([compat[x]['0'], compat[x]['1'], compat[x]['2']]);
+                    else if (compat[x]['4'] === 4) {
+                        compat100.push(compat[x]);
                     }
                 }
 
+                console.log('compat0')
                 console.log(compat0);
 
 
