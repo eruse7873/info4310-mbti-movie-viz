@@ -20,14 +20,12 @@
             border: 2px solid transparent;
         }
 
-        .individual img {
-            cursor: pointer;
+        .individual:hover{
+            border: 2px solid rgb(190, 190, 190)
         }
 
-        .individual:hover {
-            border: 2px solid rgb(107, 107, 107);
-
-
+        .individual img {
+            cursor: pointer;
         }
 
         .individual:last-child {
@@ -427,12 +425,33 @@
                 }
             }
 
-            d3.selectAll(".individual")
-                .on("click", chooseMBTI);
+
+            d3.selectAll(".individual").classed('border',false)
+                .on("click", chooseMBTI)
+                .on("mouseover", function(){
+                    let border = d3.select(this)
+                    border.style('border','2px solid rgb(190, 190, 190)')
+                })
+                .on("mouseout", function(){
+                    let border = d3.select(this)
+                    let borderClass = border.classed('border')
+                    console.log(borderClass)
+                    if(!borderClass) {
+                    border.style('border','2px solid transparent')
+                    }
+                })
 
             function chooseMBTI() {
 
-                //estelle is trying to change the border on click d3.select(this).node().attr('border','2px solid rgb(107, 107, 107);');
+                //estelle is trying to change the border on click 
+                d3.selectAll(".individual").style('border','2px solid transparent').classed('border',false);
+
+                // d3.selectAll(".individual:hover").style('border','rgb(190, 190, 190)');
+                let border = d3.select(this)
+                ; border.style('border','2px solid rgb(190, 190, 190)');
+                let borderClass = border.classed('border',true)
+                
+
                 input_mbti = d3.select(this).select(".individual h6").text();
 
 
