@@ -16,16 +16,17 @@
 
         .individual {
             align-self: center;
-            padding:3px;
+            padding: 3px;
             border: 2px solid transparent;
         }
 
         .individual img {
             cursor: pointer;
         }
-        .individual:hover{
+
+        .individual:hover {
             border: 2px solid rgb(107, 107, 107);
-        
+
 
         }
 
@@ -54,7 +55,7 @@
 
         .triangle {
             cursor: pointer;
-            padding-left:50px;
+            padding-left: 50px;
         }
     </style>
 
@@ -89,7 +90,7 @@
 
             </div>
             <div class="individual">
-                <img class="analyst avatars" src="avatars/debater.png"  width="150" height="150">
+                <img class="analyst avatars" src="avatars/debater.png" width="150" height="150">
                 <h6 style="text-align: center">ENTP</h6>
                 <h6 style="text-align: center">Debater</h6>
 
@@ -101,7 +102,7 @@
             <!-- <h5>Diplomats</h5> -->
             <div class="individual">
 
-                <img class="diplomats avatars" src="avatars/advocate.png" width="150" height="150" >
+                <img class="diplomats avatars" src="avatars/advocate.png" width="150" height="150">
                 <h6 style="text-align: center">INFJ</h6>
                 <h6 style="text-align: center">Advocate</h6>
 
@@ -312,20 +313,60 @@
         const chartHeight = height - margin.top - margin.bottom;
 
         const bubblessvg = d3.select("svg#bubbles");
+        const bubbleswidth = bubblessvg.attr("width");
+        const bubblesheight = bubblessvg.attr("height");
+        const bubblesmargin = { top: 10, right: 20, bottom: 10, left: 20 };
+        const bubblesWidth = width - bubblesmargin.left - bubblesmargin.right;
+        const bubblesHeight = height - bubblesmargin.top - bubblesmargin.bottom;
+
+
+        let bubbleLayer = d3.select("#by-class").append("g");
 
 
         const getCompatibility = async function () {
             let data = await d3.csv("mbti_clean.csv", d3.autotype);
             let mbti_counts = await d3.csv("mbti_counts.csv", d3.autotype);
 
-            // console.log(mbti_counts)
-            // console.log(data);
-
-            //make scale for mbti counts
             const counts = []
+            const mbtis = []
             mbti_counts.forEach((d) => {
                 counts.push(parseInt(d.count));
+                mbtis.push(d.mbti);
             })
+
+            const bubbleExtent = d3.extent(counts);
+            const bubbleScale = d3.scaleLinear().domain(bubbleExtent).range([7, 55]);
+
+            const mbtiScale = d3.scalePoint().domain(mbtis).range([50, 300]);
+
+            var bubblecolorScale = d3.scaleOrdinal()
+                .domain(mbtis)
+                .range(d3.schemeSet1);
+
+                
+            var bubblenode = bubblessvg.append("g").selectAll("circle")
+                .data(mbti_counts)
+                .join("circle")
+                .attr('cx', bubblesWidth / 2)
+                .attr('cy', bubblesHeight / 2)
+                .attr("fill", d => bubblecolorScale(d.mbti))
+                .attr("stroke", "black")
+                .style("stroke-width", 1)
+                .attr('r', d => bubbleScale(d.count));                
+
+            var simulation = d3.forceSimulation()
+                .force("center", d3.forceCenter().x(bubblesWidth / 2).y(bubblesHeight / 2)) // Attraction to the center of the svg area
+                .force("charge", d3.forceManyBody().strength(.1)) // Nodes are attracted one each other of value is > 0
+                .force("collide", d3.forceCollide().strength(.2).radius(function (d) { return (bubbleScale(d.count) + 3) }).iterations(1)) // Force that avoids circle overlapping
+
+            simulation
+                .nodes(mbti_counts)
+                .on("tick", function (d) {
+                    bubblenode
+                        .attr("cx", function (d) { return d.x; })
+                        .attr("cy", function (d) { return d.y; })
+                });
+
             // console.log(counts);
 
             d3.select(".triangle")
@@ -392,11 +433,10 @@
             function chooseMBTI() {
 
                 //estelle is trying to change the border on click d3.select(this).node().attr('border','2px solid rgb(107, 107, 107);');
-
                 input_mbti = d3.select(this).select(".individual h6").text();
 
-                console.log(getCharacterInfo(input_mbti));
-                // mbtiBars(input_mbti);
+
+                mbtiBars(getCharacterInfo(input_mbti));
             }
 
 
@@ -518,51 +558,42 @@
             //     .call(bottomAxisG);
 
 
-            // function mbtiBars(mbti) {
+            function mbtiBars(graphNames) {
+
+                // const characterScale = d3.scaleBand().domain(topRandomCharactersNames).range([chartHeight, 0])
+                //     .padding(0.05);
+
+                console.log(graphNames);
+                chartArea.selectAll('rect.bar').data(graphNames)
+                    .attr('class', 'bar')
+                    .attr("fill", "steelblue")
+                    .attr("x", d => rankScale(d[4]))
+                    .attr("y", d => leftAxisScale(d[4]))
+                    .attr("height", d => rankScale(0) - rankScale(d[4]))
+                    .attr("width", leftAxisScale.bandwidth());
 
 
-
-            //     const data =
-
-            //         console.log(data)
-            //     const characterScale = d3.scaleBand().domain(topRandomCharactersNames).range([chartHeight, 0])
-            //         .padding(0.05);
-
-
-
-            //     // Update and animate axes
-
-            //     annotations.append("g")
-            //         .attr("class", "y axis")
-            //         .attr("transform", `translate(${margin.left - 10},${margin.top})`)
-            //         .call(leftAxis)
-            //     annotations.append("g")
-            //         .attr("class", "y gridlines")
-            //         .attr("transform", `translate(${margin.left - 10},${margin.top})`)
-            //         .call(leftGridlines);
-
-
-            //     chartArea.selectAll('rect.bar').data(data, d => d['genre'])
-            //         .join(enter => enter.append('rect')
-            //             .attr('class', 'bar')
-            //             .attr("fill", "steelblue")
-            //             .attr("x", d => genreScale(d.genre))
-            //             .attr("y", d => percentScale(d.percentpass))
-            //             .attr("height", d => percentScale(0) - percentScale(d.percentpass))
-            //             .attr("width", genreScale.bandwidth())
-            //             .attr("opacity", 0) // Set opacity low, then animate to 1 to make them fade in
-            //             .call(enter => enter.transition()
-            //                 .attr('opacity', 1)),
-            //             update => update.call(update => update.transition()  // Animate resizing and movement
-            //                 .attr("fill", "steelblue")
-            //                 .attr("x", d => genreScale(d.genre))
-            //                 .attr("y", d => percentScale(d.percentpass))
-            //                 .attr("height", d => percentScale(0) - percentScale(d.percentpass))
-            //                 .attr("width", genreScale.bandwidth())),
-            //             exit => exit.call(exit => exit.transition().attr('opacity', 0).remove())); // Animate opacity to fade out
+                // chartArea.selectAll('rect.bar').data(graphNames)
+                //     .join(enter => enter.append('rect')
+                //         .attr('class', 'bar')
+                //         .attr("fill", "steelblue")
+                //         .attr("x", d => rankScale(d[4]))
+                //         .attr("y", d => leftAxisScale(d[4]))
+                //         .attr("height", d => percentScale(0) - percentScale(d.percentpass))
+                //         .attr("width", genreScale.bandwidth())
+                //         .attr("opacity", 0) // Set opacity low, then animate to 1 to make them fade in
+                //         .call(enter => enter.transition()
+                //             .attr('opacity', 1)),
+                //         update => update.call(update => update.transition()  // Animate resizing and movement
+                //             .attr("fill", "steelblue")
+                //             .attr("x", d => genreScale(d.genre))
+                //             .attr("y", d => percentScale(d.percentpass))
+                //             .attr("height", d => percentScale(0) - percentScale(d.percentpass))
+                //             .attr("width", genreScale.bandwidth())),
+                //         exit => exit.call(exit => exit.transition().attr('opacity', 0).remove())); // Animate opacity to fade out
 
 
-            // }
+            }
 
 
         }
