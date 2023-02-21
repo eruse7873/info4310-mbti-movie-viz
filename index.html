@@ -187,7 +187,14 @@
     </div>
 
     <svg id="enneagramSelector" height="600" width="600"></svg>
-    <svg id="barchart" height="800" width="800" style="margin:50px"></svg>
+
+    <div>
+        <svg id="barchart" height="800" width="800" style="margin:50px"></svg>
+        <svg id="cards" height="400" width="800" style="margin:50px">
+
+        </svg>
+    </div>
+
     <script>
 
         const svg = d3.select("svg#barchart");
@@ -433,16 +440,21 @@
                         compat100.push(compat[x]);
                     }
                 }
-                console.log(compat100.length);
+
+                console.log('compat');
+                console.log(compat);
+
+
+                //console.log(compat100.length);
 
                 //hist_counts contains counts the number of characters in each compatability bracket. To be used in the histogram.
                 const hist_counts = []
 
-                hist_counts.push(['100%', compat100.length]);
-                hist_counts.push(['75%', compat75.length]);
-                hist_counts.push(['50%', compat50.length]);
-                hist_counts.push(['25%', compat25.length]);
-                hist_counts.push(['0%', compat0.length]);
+                hist_counts.push(['all letters in common', compat100.length]);
+                hist_counts.push(['3 letters in common', compat75.length]);
+                hist_counts.push(['2 letters in common', compat50.length]);
+                hist_counts.push(['1 letter in common', compat25.length]);
+                hist_counts.push(['no letters in common', compat0.length]);
 
                 // graphNames contains one random character from each mbti compat
 
@@ -471,14 +483,18 @@
 
             // intial left axis and gridlines, leave it to update later
 
-            leftAxisScale = d3.scaleBand().domain(["0%", "25%", "50%", "75%", "100%"]).range([chartHeight, 0]).padding(0.05);
+            leftAxisScale = d3.scaleBand().domain(["no letters in common",
+                "1 letter in common",
+                "2 letters in common",
+                "3 letters in common",
+                "all letters in common"]).range([chartHeight, 0]).padding(0.05);
 
 
             let leftAxis = d3.axisLeft(leftAxisScale);
             annotations.append("g")
                 .attr("class", "y axis")
                 .call(leftAxis)
-                .attr("transform", `translate(${margin.left}, ${margin.top + 10})`);
+                .attr("transform", `translate(${margin.left - 1}, ${margin.top})`);
 
             // initial bottom axis and gridlines because these don't change           
             // const rankScale = d3.scaleLinear().domain([0, 4]).range([0, chartWidth]);
@@ -490,7 +506,7 @@
             let bottomAxis = d3.axisBottom();
             let bottomAxisG = annotations.append("g")
                 .attr("class", "x axis")
-                .attr("transform", `translate(${margin.left},${chartHeight + margin.top + 10})`)
+                .attr("transform", `translate(${margin.left - 1},${chartHeight + margin.top})`)
 
 
             // annotations.append("g")
@@ -528,18 +544,17 @@
                     values.push(d[1])
                 })
 
+                console.log('values');
+                console.log(values);
+
                 const histExtent = d3.extent(values)
+
+                console.log('hist extent');
                 console.log(histExtent);
                 const histScale = d3.scaleLinear().domain([0, histExtent[1]]).range([0, chartWidth]);
 
                 bottomAxis.scale(histScale)
                 bottomAxisG.transition().call(bottomAxis);
-                // .selectAll("text")
-                // .style("text-anchor", "end")
-                // .attr("font-size", 11)
-                // .attr("dx", "-.9em")
-                // .attr("dy", ".7em")
-                // .attr("transform", "rotate(-45)");
 
 
                 chartArea.selectAll('rect.bar').data(graphNames)
@@ -550,20 +565,42 @@
                         .attr("y", d => leftAxisScale(d[0]))
                         .attr("height", leftAxisScale.bandwidth())
                         .attr("width", d => histScale(d[1]) - histScale(0))
-                        .attr("opacity", 0) // Set opacity low, then animate to 1 to make them fade in
+                        .attr("opacity", 0)
                         .call(enter => enter.transition()
                             .attr('opacity', 1)),
-                        update => update.call(update => update.transition()  // Animate resizing and movement
+                        update => update.call(update => update.transition()
                             .attr("fill", "darkseagreen")
                             .attr("x", d => histScale(0))
                             .attr("y", d => leftAxisScale(d[0]))
                             .attr("height", leftAxisScale.bandwidth())
                             .attr("width", d => histScale(d[1]) - histScale(0))),
-                        exit => exit.call(exit => exit.transition().attr('opacity', 0).remove())); // Animate opacity to fade out
+                        exit => exit.call(exit => exit.transition().attr('opacity', 0).remove()));
+
+
+                // creating the character cards
+
+                // card svg has a width of 800, each card should be 140px with 25px margins between each card
+                const card = d3.select("svg#cards");
+
+                var fo = card.append('foreignObject')
+                    .attr("width", 140)
+                    .attr("height", 300)
+                    .attr("x", 0)
+                    .attr("y", 0);
+
+
+
+                var div = fo.append('xhtml:div')
+                .attr("transform", `translate(${margin.left},${margin.top})`)
+                .attr("class", "divcard");
+
+                div.append("img").attr("src", "triangle.png").attr("width", "50%");
+                div.append("h4").html("Jeff");
+                div.append("p").html("INFP");
+
 
 
             }
-
 
             let origin = 300;
             let radius = 150;
@@ -593,14 +630,14 @@
             // labels = ['Peacemaker','Reformer','Helper','Achiever','Individualist','Investigator','Loyalist','Enthusiast','Challenger','Peacemaker']
 
             for (let i = 0; i < sources.length; i++) {
-                dict = { source: sources[i], target: targets[i]};
+                dict = { source: sources[i], target: targets[i] };
                 links.push(dict);
             }
 
-            console.log('nodes',nodes)
-            console.log('links',links)
+            console.log('nodes', nodes)
+            console.log('links', links)
 
-            nodes.forEach(d=>{
+            nodes.forEach(d => {
                 d.x = origin + (radius * Math.sin(0));
                 d.y = origin - (radius * Math.cos(0));
 
@@ -612,7 +649,7 @@
                     .links(links)
                     .id(d => d['nodeID']))
                 .stop()
-              
+
 
             // var linkGen = d3.linkHorizontal()
             //                 .source(function(d){
@@ -633,8 +670,8 @@
                 .join('circle')
                 .attr('r', 25)
                 .attr('fill', d => d.color)
-                .attr('cx', d=> d.x)
-                .attr('cy', d=>d.y)
+                .attr('cx', d => d.x)
+                .attr('cy', d => d.y)
                 .attr('id', d => d.nodeID);
             // .attr('transform', d => `rotate(${d.degree},${origin},${origin})`);
 
