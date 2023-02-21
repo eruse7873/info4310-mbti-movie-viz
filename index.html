@@ -560,7 +560,7 @@
                 chartArea.selectAll('rect.bar').data(graphNames)
                     .join(enter => enter.append('rect')
                         .attr('class', 'bar')
-                        .attr("fill", "darkseagreen")
+                        .attr("fill", barChartColor(running_mbti))
                         .attr("x", d => histScale(0))
                         .attr("y", d => leftAxisScale(d[0]))
                         .attr("height", leftAxisScale.bandwidth())
@@ -568,8 +568,8 @@
                         .attr("opacity", 0)
                         .call(enter => enter.transition()
                             .attr('opacity', 1)),
-                        update => update.call(update => update.transition()
-                            .attr("fill", "darkseagreen")
+                        update => update.call(update => update.transition()  // Animate resizing and movement
+                            .attr("fill", barChartColor(running_mbti))
                             .attr("x", d => histScale(0))
                             .attr("y", d => leftAxisScale(d[0]))
                             .attr("height", leftAxisScale.bandwidth())
@@ -602,9 +602,30 @@
 
             }
 
+            function barChartColor(mbti) {
+                analysts = ["INTJ", "INTP", "ENTJ", "ENTP"]
+                diplomats = ["INFJ", "INFP", "ENFJ", "ENFP"]
+                sentinels = ["ISTJ", "ISFJ", "ESTJ", "ESFJ"]
+                explorers = ["ISTP", "ISFP", "ESTP", "ESFP"]
+                if (analysts.includes(mbti)) {
+                    return "rgb(149,98,123)"
+                }
+                if (diplomats.includes(mbti)) {
+                    return "rgb(153,194,108)"
+                }
+                if (sentinels.includes(mbti)) {
+                    return "rgb(139,223,220)"
+                }
+                if (explorers.includes(mbti)) {
+                    return "rgb(228,199,40)"
+                }
+
+            }
+
+
             let origin = 300;
             let radius = 150;
-            const enneagramSelector = d3.select("svg#enneagramSelector");
+            const enneagramSelector = d3.select("svg#enneagramSelector").append('g');
             enneagramSelector.append("circle")
                 .attr("cx", origin)
                 .attr('cy', origin)
@@ -643,7 +664,7 @@
 
             })
 
-            var sim = d3.forceSimulation()
+            var simEnneagram = d3.forceSimulation()
                 .nodes(nodes)
                 .force("links", d3.forceLink()
                     .links(links)
@@ -674,6 +695,18 @@
                 .attr('cy', d => d.y)
                 .attr('id', d => d.nodeID);
             // .attr('transform', d => `rotate(${d.degree},${origin},${origin})`);
+
+            console.log('sdkjfl')
+            console.log(links)
+            let lines = enneagramSelector.selectAll("link").data(links)
+                .append('line')
+                .attr("class", "link")
+                .style("stroke", "black")
+                .attr('stroke-width', 4)
+                .attr("x1", d => d.source.x).attr("x2", d => d.target.x)  
+                .attr("y1", d => d.source.y).attr("y2", d => d.target.y);
+
+
 
             nodeLabels = circles
                 .append('text')
