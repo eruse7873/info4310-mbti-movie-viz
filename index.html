@@ -161,6 +161,7 @@
 
     <svg id="enneagramSelector" height="600" width="600"></svg>
     <svg id="barchart" height="800" width="800" style="margin:50px"></svg>
+    <svg id = "bubbles" height = "600" width = "1000"></svg>
     <script>
 
 
@@ -186,7 +187,7 @@
             nodes.push(dict);
         }
 
-        console.log(nodes);
+        // console.log(nodes);
 
         // var enneagramSelectorAnnotations = enneagramSelector.append('g');
 
@@ -218,7 +219,7 @@
         nodeCircles
             .on('mouseover', function () {
                 let enn = d3.select(this);
-                console.log(enn);
+                // console.log(enn);
                 enn.transition().duration(100)
                     .attr("stroke-width", 4)
                     .style("stroke-opacity", .8)
@@ -227,7 +228,7 @@
             .on('mouseout', function () {
                 // if (clicked != true) {
                 let enn = d3.select(this);
-                console.log(enn);
+                // console.log(enn);
                 enn.transition().duration(200)
                     .attr("stroke-width", 0)
                 // }
@@ -249,9 +250,22 @@
         const chartWidth = width - margin.left - margin.right;
         const chartHeight = height - margin.top - margin.bottom;
 
+        const bubblessvg = d3.select("svg#bubbles");
+        
+
         const getCompatibility = async function () {
-            let data = await d3.csv("mbti_clean.csv");
+            let data = await d3.csv("mbti_clean.csv", d3.autotype);
+            let mbti_counts = await d3.csv("mbti_counts.csv", d3.autotype);
+
+            console.log(mbti_counts)
             console.log(data);
+
+            //make scale for mbti counts
+            const counts = []
+            mbti_counts.forEach((d)=> {
+                counts.push(parseInt(d.count));
+            })
+            console.log(counts);
 
             d3.select(".triangle")
                 .on('click', changeAvatars);
