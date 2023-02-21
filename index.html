@@ -203,7 +203,7 @@
         const bubblesmargin = { top: 10, right: 20, bottom: 10, left: 20 };
         const bubblesWidth = width - bubblesmargin.left - bubblesmargin.right;
         const bubblesHeight = height - bubblesmargin.top - bubblesmargin.bottom;
-
+        let bubbleannotations = bubblessvg.append("g").attr("id", "bubblesannotations");
 
         let bubbleLayer = d3.select("#by-class").append("g");
 
@@ -230,7 +230,6 @@
                 .domain(mbtis)
                 .range(d3.schemeSet1);
 
-
             var bubblenode = bubblessvg.append("g").selectAll("circle")
                 .data(mbti_counts)
                 .join("circle")
@@ -239,19 +238,13 @@
                 .attr("fill", d => bubblecolorScale(d.mbti))
                 .attr("stroke", "black")
                 .style("stroke-width", 1)
-                .attr('r', d => bubbleScale(d.count));
+                .attr('r', d => bubbleScale(d.count))
+                .on("mouseover", function(){console.log(d=>d.mbti)});
+
+            bubblenode.append("g").append("text").text(d=>d.mbti);
 
 
 
-            var text = bubblessvg.append("g").selectAll("text")
-                .data(mbti_counts)
-                .join("text");
-
-            text.append("text")
-                .attr("x", d => d.cx)
-                .attr("y", d => d.cy)
-                .attr("class", "shadow")
-                .text(d => d.mbti);
 
             var simulation = d3.forceSimulation()
                 .force("center", d3.forceCenter().x(bubblesWidth / 2).y(bubblesHeight / 2)) // Attraction to the center of the svg area
@@ -266,6 +259,33 @@
                         .attr("cy", function (d) { return d.y; })
                 });
 
+
+            // let circles = enneagramSelector.selectAll('g.circleNodes').data(nodes)
+            //     .join('g')
+            //     .attr('class', 'circleNode')
+            //     .attr('transform', d => `rotate(${d.degree},${origin},${origin})`)
+
+            // nodeCircles = circles.append('circle')
+            //     // SOURCE: drawing circles around a circle
+            //     // https://spin.atomicobject.com/2015/06/12/objects-around-svg-circle-d3-js/
+            //     .attr('class', 'circle.node')
+            //     .join('circle')
+            //     .attr('r', 25)
+            //     .attr('fill', d => d.color)
+            //     .attr('cx', d => d.x)
+            //     .attr('cy', d => d.y)
+            //     .attr('id', d => d.nodeID);
+            // // .attr('transform', d => `rotate(${d.degree},${origin},${origin})`);
+
+            // nodeLabels = circles
+            //     .append('text')
+            //     .text(d => d.nodeID)
+            //     .attr('text-anchor', 'middle')
+            //     .attr('alignment-baseline', 'middle')
+            //     .style('font-size', '25px')
+            //     .attr('fill', 'white')
+            //     .attr('x', origin + (radius * Math.sin(0)))
+            //     .attr('y', origin - (radius * Math.cos(0)))
             // console.log(counts);
 
             d3.select(".triangle")
@@ -564,11 +584,11 @@
 
             }
 
-            function barChartColor (mbti) {
-                analysts = ["INTJ","INTP","ENTJ","ENTP"]
-                diplomats = ["INFJ","INFP","ENFJ","ENFP"]
-                sentinels = ["ISTJ","ISFJ","ESTJ","ESFJ"]
-                explorers = ["ISTP","ISFP","ESTP","ESFP"]
+            function barChartColor(mbti) {
+                analysts = ["INTJ", "INTP", "ENTJ", "ENTP"]
+                diplomats = ["INFJ", "INFP", "ENFJ", "ENFP"]
+                sentinels = ["ISTJ", "ISFJ", "ESTJ", "ESFJ"]
+                explorers = ["ISTP", "ISFP", "ESTP", "ESFP"]
                 if (analysts.includes(mbti)) {
                     return "rgb(149,98,123)"
                 }
@@ -613,14 +633,14 @@
             // labels = ['Peacemaker','Reformer','Helper','Achiever','Individualist','Investigator','Loyalist','Enthusiast','Challenger','Peacemaker']
 
             for (let i = 0; i < sources.length; i++) {
-                dict = { source: sources[i], target: targets[i]};
+                dict = { source: sources[i], target: targets[i] };
                 links.push(dict);
             }
 
-            console.log('nodes',nodes)
-            console.log('links',links)
+            console.log('nodes', nodes)
+            console.log('links', links)
 
-            nodes.forEach(d=>{
+            nodes.forEach(d => {
                 d.x = origin + (radius * Math.sin(0));
                 d.y = origin - (radius * Math.cos(0));
 
@@ -632,7 +652,7 @@
                     .links(links)
                     .id(d => d['nodeID']))
                 .stop()
-              
+
 
             // var linkGen = d3.linkHorizontal()
             //                 .source(function(d){
@@ -653,8 +673,8 @@
                 .join('circle')
                 .attr('r', 25)
                 .attr('fill', d => d.color)
-                .attr('cx', d=> d.x)
-                .attr('cy', d=>d.y)
+                .attr('cx', d => d.x)
+                .attr('cy', d => d.y)
                 .attr('id', d => d.nodeID);
             // .attr('transform', d => `rotate(${d.degree},${origin},${origin})`);
 
