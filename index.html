@@ -18,6 +18,10 @@
             align-self: center;
         }
 
+        .individual img {
+            cursor: pointer;
+        }
+
         .individual:first-child {
             margin-left: 25;
         }
@@ -29,6 +33,7 @@
         .avatar_selector {
             height: 300px;
             width: 550px;
+            display:flex;
         }
 
 
@@ -40,137 +45,127 @@
             display: none;
         }
 
-    
+        .contains_triangle {
+            align-self: center;
+        }
+
+        .triangle {
+            cursor: pointer;
+        }
     </style>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="active analysts display">
-        <div class="individual">
-            <h6 style="text-align: center">Architect</h6>
-            <img class="analyst avatars" src="avatars/architect.png">
-            <h6 style="text-align: center">INTJ-A/INTJ-T</h6>
-        </div>
-        <div class="individual">
-            <h6 style="text-align: center">Logician</h6>
-            <img class="analyst avatars" src="avatars/logician.png">
-            <h6 style="text-align: center">INTP-A/INTP-T</h6>
-        </div>
-        <div class="individual">
-            <h6 style="text-align: center">Commander</h6>
-            <img class="analyst avatars" src="avatars/commander.png">
-            <h6 style="text-align: center">ENTJ-A/ENTJ-T</h6>
-        </div>
-        <div class="individual">
-            <h6 style="text-align: center">Debater</h6>
-            <img class="analyst avatars" src="avatars/debater.png">
-            <h6 style="text-align: center">ENTP-A/ENTP-T</h6>
-        </div>
-    </div>
+    
 
-    <div class="hidden diplomats display">
-        <div class="individual">
-            <h6 style="text-align: center">Advocate</h6>
+    <div class = "avatar_selector">
+        <!-- <svg id="avatar_display" height="300" width="550"></svg> -->
+
+        <div class="active analysts display">
+            <div class="individual">
+                <h6 style = "text-align: center">Architect</h6>
+                <img class="analyst avatars" src="avatars/architect.png">
+                <h6 style = "text-align: center">INTJ</h6>
+            </div>
+            <div class="individual">
+                <h6 style = "text-align: center">Logician</h6>
+                <img class="analyst avatars" src="avatars/logician.png">
+                <h6 style = "text-align: center">INTP</h6>
+            </div>
+            <div class="individual">
+                <h6 style = "text-align: center">Commander</h6>
+                <img class="analyst avatars" src="avatars/commander.png">
+                <h6 style = "text-align: center">ENTJ</h6>
+            </div>
+            <div class="individual">
+                <h6 style = "text-align: center">Debater</h6>
+                <img class="analyst avatars" src="avatars/debater.png">
+                <h6 style = "text-align: center">ENTP</h6>
+            </div>
+        </div>
+    
+        <div class="hidden diplomats display">
+            <div class="individual">
+            <h6 style = "text-align: center">Advocate</h6>
             <img class="diplomats avatars" src="avatars/advocate.png">
-            <h6 style="text-align: center">INFJ-A/INFJ-T</h6>
-        </div>
-        <div class="individual">
-            <h6 style="text-align: center">Mediator</h6>
+            <h6 style = "text-align: center">INFJ</h6>
+            </div>
+            <div class="individual">
+            <h6 style = "text-align: center">Mediator</h6>
             <img class="diplomats avatars" src="avatars/mediator.png">
-            <h6 style="text-align: center">INFP-A/INFP-T</h6>
-        </div>
-        <div class="individual">
-            <h6 style="text-align: center">Protagonist</h6>
+            <h6 style = "text-align: center">INFP</h6>
+            </div>
+            <div class="individual">
+            <h6 style = "text-align: center">Protagonist</h6>
             <img class="diplomats avatars" src="avatars/protagonist.png">
-            <h6 style="text-align: center">ENFJ-A/ENFJ-T</h6>
-        </div>
-        <div class="individual">
-            <h6 style="text-align: center">Campaigner</h6>
+            <h6 style = "text-align: center">ENFJ</h6>
+            </div>
+            <div class="individual">
+            <h6 style = "text-align: center">Campaigner</h6>
             <img class="diplomats avatars" src="avatars/campaigner.png">
-            <h6 style="text-align: center">ENFP-A/ENFP-T</h6>
+            <h6 style = "text-align: center">ENFP</h6>
+            </div>
         </div>
-    </div>
-
-    <div class="hidden sentinels display">
-        <div class="individual">
-            <h6 style="text-align: center">Logistician</h6>
+    
+        <div class="hidden sentinels display">
+            <div class="individual">
+            <h6 style = "text-align: center">Logistician</h6>
             <img class="sentinels avatars" src="avatars/logistician.png">
-            <h6 style="text-align: center">ENFP-A/ENFP-T</h6>
-        </div>
-        <div class="individual">
-            <h6 style="text-align: center">Defender</h6>
+            <h6 style = "text-align: center">ISTJ</h6>
+            </div>
+            <div class="individual">
+            <h6 style = "text-align: center">Defender</h6>
             <img class="sentinels avatars" src="avatars/defender.png">
-            <h6 style="text-align: center">ISFJ-A/ISFJ-T</h6>
-        </div>
-        <div class="individual">
-            <h6 style="text-align: center">Executive</h6>
+            <h6 style = "text-align: center">ISFJ</h6>
+            </div>
+            <div class="individual">
+            <h6 style = "text-align: center">Executive</h6>
             <img class="sentinels avatars" src="avatars/executive.png">
-            <h6 style="text-align: center">ESTJ-A/ESTJ-T</h6>
-        </div>
-        <div class="individual">
-            <h6 style="text-align: center">Consul</h6>
+            <h6 style = "text-align: center">ESTJ</h6>
+            </div>
+            <div class="individual">
+            <h6 style = "text-align: center">Consul</h6>
             <img class="sentinels avatars" src="avatars/consul.png">
-            <h6 style="text-align: center">ESFJ-A/ESFJ-T</h6>
+            <h6 style = "text-align: center">ESFJ</h6>
+            </div>
         </div>
-    </div>
-
-    <div class="hidden explorers display">
-        <div class="individual">
-            <h6 style="text-align: center">Virtuoso</h6>
+    
+        <div class="hidden explorers display">
+            <div class="individual">
+            <h6 style = "text-align: center">Virtuoso</h6>
             <img class="explorers avatars" src="avatars/virtuoso.png">
-            <h6 style="text-align: center">ISTP-A/ISTP-T</h6>
-        </div>
-        <div class="individual">
-            <h6 style="text-align: center">Adventurer</h6>
+            <h6 style = "text-align: center">ISTP</h6>
+            </div>
+            <div class="individual">
+            <h6 style = "text-align: center">Adventurer</h6>
             <img class="explorers avatars" src="avatars/adventurer.png">
-            <h6 style="text-align: center">ISFP-A/ISFP-T</h6>
-        </div>
-        <div class="individual">
-            <h6 style="text-align: center">Entrepreneur</h6>
+            <h6 style = "text-align: center">ISFP</h6>
+            </div>
+            <div class="individual">
+            <h6 style = "text-align: center">Entrepreneur</h6>
             <img class="explorers avatars" src="avatars/entrepreneur.png">
-            <h6 style="text-align: center">ESTP-A/ESTP-T</h6>
-        </div>
-        <div class="individual">
-            <h6 style="text-align: center">Entrepreneur</h6>
+            <h6 style = "text-align: center">ESTP</h6>
+            </div>
+            <div class="individual">
+            <h6 style = "text-align: center">Entrepreneur</h6>
             <img class="explorers avatars" src="avatars/entertainer.png">
-            <h6 style="text-align: center">ESFP-A/ESFP-T</h6>
+            <h6 style = "text-align: center">ESFP</h6>
+            </div>
+        </div>
+        <div class = 'contains_triangle'>
+            <img class = 'triangle' src="triangle.png" width="32" height="37">
         </div>
     </div>
-
-    <div class="avatar_selector">
-        <svg id="avatar_display" height="300" width="550"></svg>
-    </div>
-    <!-- <svg id="avatar_display" height="300" width="550">
-        <polygon class="right triangle" points="515,135 515,165 540,150" style="fill:lime;stroke:purple;stroke-width:1">
-        </polygon>
-        <polygon class="left triangle" points="10,150 35,135 35,165" style="fill:lime;stroke:purple;stroke-width:1">
-        </polygon>
-    </svg> -->
 
     <svg id="enneagramSelector" height="600" width="600"></svg>
     <svg id="barchart" height="800" width="800" style="margin:50px"></svg>
     <script>
-
-
-        const avatar_displaysvg = d3.select("svg#avatar_display");
-
-        avatar_displaysvg.append("polygon")
-            .attr("class", "right triangle")
-            .attr("points", "515,135 515,165 540,150")
-            .style("fill", "lime")
-            .style("stroke", "purple")
-            .style("stroke-width", 1)
+        
+        d3.select(".triangle")
             .on('click', changeAvatars);
-        // avatar_displaysvg.append("polygon")
-        //                  .attr("class", "left triangle")
-        //                  .attr("points", "10,150 35,135 35,165")
-        //                  .style("fill", "lime")
-        //                  .style("stroke", "purple")
-        //                  .style("stroke-width", 1);
-        //  .on('click', changeAvatars);
-
+        
         function changeAvatars() {
             if (d3.selectAll(".analysts").classed("active")) {
 
@@ -224,18 +219,15 @@
                 d3.selectAll(".analysts")
                     .classed("hidden", false);
             }
-
-
-            //find group with active
-            //remove group with active
-            //add hidden to group
-            //add active to next group
         }
 
-
-
-        // avatar_displaysvg.append("div")
-
+        d3.selectAll(".individual")
+            .on("click", chooseMBTI);
+        
+        function chooseMBTI () {
+            input_MBTI = d3.select(this).selectAll("h6:last-child").text()
+        }
+    
         let origin = 300;
         let radius = 150;
         const enneagramSelector = d3.select("svg#enneagramSelector");
