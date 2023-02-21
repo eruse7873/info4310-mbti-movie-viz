@@ -465,7 +465,10 @@
                 graphNames.push(getRandomCharacter(compat75));
                 graphNames.push(getRandomCharacter(compat100));
 
-                // console.log(graphNames);
+                
+                console.log('graphNames');
+                console.log(graphNames);
+                
 
                 // return graphNames;
 
@@ -520,7 +523,7 @@
             //     .call(bottomAxisG);
 
 
-            function mbtiBars(graphNames) {
+            function mbtiBars(alist) {
 
                 // const characterScale = d3.scaleBand().domain(topRandomCharactersNames).range([chartHeight, 0])
                 //     .padding(0.05);
@@ -536,11 +539,11 @@
                 //     .attr("width", d => rankScale(d[4])-rankScale(0))
                 //     .attr("opacity", 0.9);
 
-                console.log('graphNames');
-                console.log(graphNames);
+                console.log('alist');
+                console.log(alist);
 
                 const values = []
-                graphNames.forEach((d) => {
+                alist.forEach((d) => {
                     values.push(d[1])
                 })
 
@@ -557,7 +560,7 @@
                 bottomAxisG.transition().call(bottomAxis);
 
 
-                chartArea.selectAll('rect.bar').data(graphNames)
+                chartArea.selectAll('rect.bar').data(alist)
                     .join(enter => enter.append('rect')
                         .attr('class', 'bar')
                         .attr("fill", barChartColor(running_mbti))
@@ -582,21 +585,31 @@
                 // card svg has a width of 800, each card should be 140px with 25px margins between each card
                 const card = d3.select("svg#cards");
 
-                var fo = card.append('foreignObject')
-                    .attr("width", 140)
-                    .attr("height", 300)
-                    .attr("x", 0)
-                    .attr("y", 0);
+
+                // loop through randomnames, make a card for each char
+                var i = 0;
+                for (x = 0; x < 5; x++) {
+                    var fo = card.append('foreignObject')
+                        .attr("width", 140)
+                        .attr("height", 300)
+                        .attr("x", 0+i)
+                        .attr("y", 0);
+
+                    var div = fo.append('xhtml:div')
+                        .attr("transform", `translate(${margin.left},${margin.top})`)
+                        .attr("class", "divcard");
+
+                    div.append("img").attr("src", "triangle.png").attr("width", "50%");
+                    div.append("h4").html("Jeff");
+                    div.append("p").html("INFP");
+
+                    console.log(i);
+                    i = i + 140;
+                }
 
 
 
-                var div = fo.append('xhtml:div')
-                .attr("transform", `translate(${margin.left},${margin.top})`)
-                .attr("class", "divcard");
 
-                div.append("img").attr("src", "triangle.png").attr("width", "50%");
-                div.append("h4").html("Jeff");
-                div.append("p").html("INFP");
 
 
 
@@ -703,7 +716,7 @@
                 .attr("class", "link")
                 .style("stroke", "black")
                 .attr('stroke-width', 4)
-                .attr("x1", d => d.source.x).attr("x2", d => d.target.x)  
+                .attr("x1", d => d.source.x).attr("x2", d => d.target.x)
                 .attr("y1", d => d.source.y).attr("y2", d => d.target.y);
 
 
