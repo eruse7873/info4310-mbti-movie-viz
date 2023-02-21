@@ -545,7 +545,7 @@
                 chartArea.selectAll('rect.bar').data(graphNames)
                     .join(enter => enter.append('rect')
                         .attr('class', 'bar')
-                        .attr("fill", "darkseagreen")
+                        .attr("fill", barChartColor(running_mbti))
                         .attr("x", d => histScale(0))
                         .attr("y", d => leftAxisScale(d[0]))
                         .attr("height", leftAxisScale.bandwidth())
@@ -554,13 +554,33 @@
                         .call(enter => enter.transition()
                             .attr('opacity', 1)),
                         update => update.call(update => update.transition()  // Animate resizing and movement
-                            .attr("fill", "darkseagreen")
+                            .attr("fill", barChartColor(running_mbti))
                             .attr("x", d => histScale(0))
                             .attr("y", d => leftAxisScale(d[0]))
                             .attr("height", leftAxisScale.bandwidth())
                             .attr("width", d => histScale(d[1]) - histScale(0))),
                         exit => exit.call(exit => exit.transition().attr('opacity', 0).remove())); // Animate opacity to fade out
 
+
+            }
+
+            function barChartColor (mbti) {
+                analysts = ["INTJ","INTP","ENTJ","ENTP"]
+                diplomats = ["INFJ","INFP","ENFJ","ENFP"]
+                sentinels = ["ISTJ","ISFJ","ESTJ","ESFJ"]
+                explorers = ["ISTP","ISFP","ESTP","ESFP"]
+                if (analysts.includes(mbti)) {
+                    return "rgb(149,98,123)"
+                }
+                if (diplomats.includes(mbti)) {
+                    return "rgb(153,194,108)"
+                }
+                if (sentinels.includes(mbti)) {
+                    return "rgb(139,223,220)"
+                }
+                if (explorers.includes(mbti)) {
+                    return "rgb(228,199,40)"
+                }
 
             }
 
