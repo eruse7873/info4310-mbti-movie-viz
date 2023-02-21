@@ -1,3 +1,18 @@
 html {
     font-family:'Franklin Gothic',  sans-serif;
 }
+h4 {
+    font-size:30px;
+    text-align: center;
+    text-transform: uppercase;
+}
+h5 {
+    font-size:20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+h6 {
+    font-size: 18px;
+    margin:0;
+    margin-top:5;
+ }

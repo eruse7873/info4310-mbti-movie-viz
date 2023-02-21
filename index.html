@@ -16,10 +16,17 @@
 
         .individual {
             align-self: center;
+            padding:3px;
+            border: 2px solid transparent;
         }
 
         .individual img {
             cursor: pointer;
+        }
+        .individual:hover{
+            border: 2px solid rgb(107, 107, 107);
+        
+
         }
 
         .individual:last-child {
@@ -47,6 +54,7 @@
 
         .triangle {
             cursor: pointer;
+            padding-left:50px;
         }
     </style>
 
@@ -382,6 +390,8 @@
                 .on("click", chooseMBTI);
 
             function chooseMBTI() {
+
+                //estelle is trying to change the border on click d3.select(this).node().attr('border','2px solid rgb(107, 107, 107);');
                 input_mbti = d3.select(this).selectAll("h6:last-child").text()
 
                 getCharacterInfo(input_mbti)
