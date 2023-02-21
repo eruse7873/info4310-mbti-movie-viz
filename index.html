@@ -507,18 +507,23 @@
 
                 for (let x = 0; x < compat.length; x++) {
                     if (compat[x]['4'] === 0) {
+                        compat[x].push('0%');
                         compat0.push(compat[x]);
                     }
                     else if (compat[x]['4'] === 1) {
+                        compat[x].push('25%');
                         compat25.push(compat[x]);
                     }
                     else if (compat[x]['4'] === 2) {
+                        compat[x].push('50%');
                         compat50.push(compat[x]);
                     }
                     else if (compat[x]['4'] === 3) {
+                        compat[x].push('75%');
                         compat75.push(compat[x]);
                     }
                     else if (compat[x]['4'] === 4) {
+                        compat[x].push('100%');
                         compat100.push(compat[x]);
                     }
                 }
@@ -550,7 +555,7 @@
 
             // intial left axis and gridlines, leave it to update later
 
-            leftAxisScale = d3.scaleBand().domain(["0%", "25%", "50%", "75%", "100%"]).range([chartHeight, 0]);
+            leftAxisScale = d3.scaleBand().domain(["0%", "25%", "50%", "75%", "100%"]).range([chartHeight, 0]).padding(0.05);
 
 
             let leftAxis = d3.axisLeft(leftAxisScale);
@@ -584,12 +589,14 @@
 
                 console.log(graphNames);
                 chartArea.selectAll('rect.bar').data(graphNames)
+                    .join('rect')
                     .attr('class', 'bar')
                     .attr("fill", "steelblue")
-                    .attr("x", d => rankScale(d[4]))
-                    .attr("y", d => leftAxisScale(d[4]))
-                    .attr("height", d => rankScale(0) - rankScale(d[4]))
-                    .attr("width", leftAxisScale.bandwidth());
+                    .attr("x", d => rankScale(0))
+                    .attr("y", d => leftAxisScale(d[5]))
+                    .attr("height", leftAxisScale.bandwidth())
+                    .attr("width", d => rankScale(d[4])-rankScale(0))
+                    .attr("opacity", 0.9);
 
 
                 // chartArea.selectAll('rect.bar').data(graphNames)
