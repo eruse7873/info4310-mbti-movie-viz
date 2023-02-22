@@ -76,6 +76,7 @@
             font-size: 15px;
             text-align: center;
             text-transform: uppercase;
+            margin: 0%;
         }
 
         foreignObject {
@@ -219,7 +220,7 @@
 
     <div>
         <svg id="barchart" height="800" width="800" style="margin:50px"></svg>
-        <svg id="cards" height="400" width="800" style="margin:50px">
+        <svg id="cards" height="450" width="800" style="margin:50px">
 
         </svg>
     </div>
@@ -642,8 +643,8 @@
 
                 // loop through list of random names, make a card for each character
                 d3.selectAll("foreignObject").remove();
-                var i = 0;
-
+                
+                var i = 10;
                 for (x = 0; x < graphNamesG.length; x++) {
                     var fo = card.append('foreignObject')
                         .attr("width", 140)
