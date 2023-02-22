@@ -91,7 +91,40 @@ h6 {
     cursor: pointer;
     padding-left: 50px;
 }
+<<<<<<< HEAD
+
+foreignObject h4 {
+    font-family: 'Franklin Gothic', sans-serif;
+    font-size: 18px;
+    margin: 0px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+foreignObject h5 {
+    font-family: 'Franklin Gothic', sans-serif;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+foreignObject p {
+    font-family: 'Franklin Gothic', sans-serif;
+    font-size: 15px;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0%;
+}
+
+foreignObject {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+=======
 img.triangle{
     padding-top: 150px;
 }
 
+>>>>>>> fd8d11205806839c37e21e825f087f72bf644743
