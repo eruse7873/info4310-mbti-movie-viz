@@ -4,7 +4,7 @@
     <title>MBTI</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <style>
-                foreignObject h4{
+        foreignObject h4 {
             font-family: 'Franklin Gothic', sans-serif;
             font-size: 18px;
             margin: 0px;
@@ -12,7 +12,7 @@
             text-transform: uppercase;
         }
 
-        foreignObject h5{
+        foreignObject h5 {
             font-family: 'Franklin Gothic', sans-serif;
             font-size: 15px;
             margin-top: 10px;
@@ -22,7 +22,7 @@
         }
 
 
-        foreignObject p{
+        foreignObject p {
             font-family: 'Franklin Gothic', sans-serif;
             font-size: 15px;
             text-align: center;
@@ -31,11 +31,8 @@
         }
 
         foreignObject {
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         }
-
-
-
     </style>
     </style>
     <style>
@@ -99,123 +96,156 @@
 
     <svg id="bubbles" height="600" width="1000"></svg>
 
+
+
     <div class="avatar_selector">
-        <!-- <svg id="avatar_display" height="300" width="550"></svg> -->
-
-        <div class="active analysts display">
-            <!-- <h5>Analysts</h5> -->
-
-            <div class="individual">
-                <img class="analyst avatars" src="avatars/architect.png" width="150" height="150">
-                <h6 style="text-align: center">INTJ</h6>
-                <h6 style="text-align: center">Architect</h6>
-
+        <div class="container">
+            <div class="analystheader">
+                <h5>Analysts</h5>
             </div>
-            <div class="individual">
-                <img class="analyst avatars" src="avatars/logician.png" width="150" height="150">
-                <h6 style="text-align: center">INTP</h6>
-                <h6 style="text-align: center">Logician</h6>
 
-            </div>
-            <div class="individual">
-                <img class="analyst avatars" src="avatars/commander.png" width="150" height="150">
-                <h6 style="text-align: center">ENTJ</h6>
-                <h6 style="text-align: center">Commander</h6>
+            <div class="flex-row2">
+                <div class="active analysts display">
+                    <div class="individual">
+                        <img class="analyst avatars" src="avatars/architect.png" width="150" height="150">
+                        <h6 style="text-align: center">INTJ</h6>
+                        <h6 style="text-align: center">Architect</h6>
 
-            </div>
-            <div class="individual">
-                <img class="analyst avatars" src="avatars/debater.png" width="150" height="150">
-                <h6 style="text-align: center">ENTP</h6>
-                <h6 style="text-align: center">Debater</h6>
+                    </div>
+                    <div class="individual">
+                        <img class="analyst avatars" src="avatars/logician.png" width="150" height="150">
+                        <h6 style="text-align: center">INTP</h6>
+                        <h6 style="text-align: center">Logician</h6>
 
-            </div>
-        </div>
+                    </div>
+                    <div class="individual">
+                        <img class="analyst avatars" src="avatars/commander.png" width="150" height="150">
+                        <h6 style="text-align: center">ENTJ</h6>
+                        <h6 style="text-align: center">Commander</h6>
 
-        <div class="hidden diplomats display">
+                    </div>
+                    <div class="individual">
+                        <img class="analyst avatars" src="avatars/debater.png" width="150" height="150">
+                        <h6 style="text-align: center">ENTP</h6>
+                        <h6 style="text-align: center">Debater</h6>
 
-            <!-- <h5>Diplomats</h5> -->
-            <div class="individual">
-
-                <img class="diplomats avatars" src="avatars/advocate.png" width="150" height="150">
-                <h6 style="text-align: center">INFJ</h6>
-                <h6 style="text-align: center">Advocate</h6>
-
-            </div>
-            <div class="individual">
-                <img class="diplomats avatars" src="avatars/mediator.png" width="150" height="150">
-                <h6 style="text-align: center">INFP</h6>
-                <h6 style="text-align: center">Mediator</h6>
-
-            </div>
-            <div class="individual">
-                <img class="diplomats avatars" src="avatars/protagonist.png" width="150" height="150">
-                <h6 style="text-align: center">ENFJ</h6>
-                <h6 style="text-align: center">Protagonist</h6>
-
-            </div>
-            <div class="individual">
-                <img class="diplomats avatars" src="avatars/campaigner.png" width="150" height="150">
-                <h6 style="text-align: center">ENFP</h6>
-                <h6 style="text-align: center">Campaigner</h6>
-
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="hidden sentinels display">
-            <!-- <h5>Sentinels</h5> -->
-            <div class="individual">
-                <img class="sentinels avatars" src="avatars/logistician.png" width="150" height="150">
-                <h6 style="text-align: center">ISTJ</h6>
-                <h6 style="text-align: center">Logistician</h6>
 
+        <div class="container">
+            <div class="diplomatheader">
+                <h5>Diplomats</h5>
             </div>
-            <div class="individual">
-                <img class="sentinels avatars" src="avatars/defender.png" width="150" height="150">
-                <h6 style="text-align: center">ISFJ</h6>
-                <h6 style="text-align: center">Defender</h6>
+            <div class="flex-row2">
+                <div class="hidden diplomats display">
+                    <div class="individual">
 
+                        <img class="diplomats avatars" src="avatars/advocate.png" width="150" height="150">
+                        <h6 style="text-align: center">INFJ</h6>
+                        <h6 style="text-align: center">Advocate</h6>
+
+                    </div>
+                    <div class="individual">
+                        <img class="diplomats avatars" src="avatars/mediator.png" width="150" height="150">
+                        <h6 style="text-align: center">INFP</h6>
+                        <h6 style="text-align: center">Mediator</h6>
+
+                    </div>
+                    <div class="individual">
+                        <img class="diplomats avatars" src="avatars/protagonist.png" width="150" height="150">
+                        <h6 style="text-align: center">ENFJ</h6>
+                        <h6 style="text-align: center">Protagonist</h6>
+
+                    </div>
+                    <div class="individual">
+                        <img class="diplomats avatars" src="avatars/campaigner.png" width="150" height="150">
+                        <h6 style="text-align: center">ENFP</h6>
+                        <h6 style="text-align: center">Campaigner</h6>
+
+                    </div>
+                </div>
             </div>
-            <div class="individual">
-                <img class="sentinels avatars" src="avatars/executive.png" width="150" height="150">
-                <h6 style="text-align: center">ESTJ</h6>
-                <h6 style="text-align: center">Executive</h6>
+        </div>
 
+
+
+        <div class="container">
+            <div class="sentinelheader">
+                <h5>Sentinels</h5>
             </div>
-            <div class="individual">
-                <img class="sentinels avatars" src="avatars/consul.png" width="150" height="150">
-                <h6 style="text-align: center">ESFJ</h6>
-                <h6 style="text-align: center">Consul</h6>
+            <div class="flex-row2">
+                <div class="hidden sentinels display">
+                    <!-- <h5>Sentinels</h5> -->
+                    <div class="individual">
+                        <img class="sentinels avatars" src="avatars/logistician.png" width="150" height="150">
+                        <h6 style="text-align: center">ISTJ</h6>
+                        <h6 style="text-align: center">Logistician</h6>
 
+                    </div>
+                    <div class="individual">
+                        <img class="sentinels avatars" src="avatars/defender.png" width="150" height="150">
+                        <h6 style="text-align: center">ISFJ</h6>
+                        <h6 style="text-align: center">Defender</h6>
+
+                    </div>
+                    <div class="individual">
+                        <img class="sentinels avatars" src="avatars/executive.png" width="150" height="150">
+                        <h6 style="text-align: center">ESTJ</h6>
+                        <h6 style="text-align: center">Executive</h6>
+
+                    </div>
+                    <div class="individual">
+                        <img class="sentinels avatars" src="avatars/consul.png" width="150" height="150">
+                        <h6 style="text-align: center">ESFJ</h6>
+                        <h6 style="text-align: center">Consul</h6>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="hidden explorers display">
-            <!-- <h5>Explorers</h5> -->
-            <div class="individual">
-                <img class="explorers avatars" src="avatars/virtuoso.png" width="150" height="150">
-                <h6 style="text-align: center">ISTP</h6>
-                <h6 style="text-align: center">Virtuoso</h6>
 
+        <div class="container">
+            <div class="explorerheader">
+                <h5>Explorers</h5>
             </div>
-            <div class="individual">
-                <img class="explorers avatars" src="avatars/adventurer.png" width="150" height="150">
-                <h6 style="text-align: center">ISFP</h6>
-                <h6 style="text-align: center">Adventurer</h6>
+            <div class="flex-row2">
+                <div class="hidden explorers display">
 
-            </div>
-            <div class="individual">
-                <img class="explorers avatars" src="avatars/entrepreneur.png" width="150" height="150">
-                <h6 style="text-align: center">ESTP</h6>
-                <h6 style="text-align: center">Entrepreneur</h6>
+                    <!-- <h5>Explorers</h5> -->
+                    <div class="individual">
+                        <img class="explorers avatars" src="avatars/virtuoso.png" width="150" height="150">
+                        <h6 style="text-align: center">ISTP</h6>
+                        <h6 style="text-align: center">Virtuoso</h6>
 
-            </div>
-            <div class="individual">
-                <img class="explorers avatars" src="avatars/entertainer.png" width="150" height="150">
-                <h6 style="text-align: center">ESFP</h6>
-                <h6 style="text-align: center">Entrepreneur</h6>
+                    </div>
+                    <div class="individual">
+                        <img class="explorers avatars" src="avatars/adventurer.png" width="150" height="150">
+                        <h6 style="text-align: center">ISFP</h6>
+                        <h6 style="text-align: center">Adventurer</h6>
 
+                    </div>
+                    <div class="individual">
+                        <img class="explorers avatars" src="avatars/entrepreneur.png" width="150" height="150">
+                        <h6 style="text-align: center">ESTP</h6>
+                        <h6 style="text-align: center">Entrepreneur</h6>
+
+                    </div>
+                    <div class="individual">
+                        <img class="explorers avatars" src="avatars/entertainer.png" width="150" height="150">
+                        <h6 style="text-align: center">ESFP</h6>
+                        <h6 style="text-align: center">Entertainer</h6>
+
+                    </div>
+
+                </div>
             </div>
+
         </div>
+
+
         <div class='contains_triangle'>
             <img class='triangle' src="triangle.png" width="32" height="37">
         </div>
@@ -292,13 +322,13 @@
 
             packedbubble.append("text")
                 .attr("class", "bubblelabel")
-                .attr("x", d=>d.cx)
-                .attr("y", d=>d.cx)
+                .attr("x", d => d.cx)
+                .attr("y", d => d.cx)
                 .attr('text-anchor', 'middle')
                 .attr('alignment-baseline', 'middle')
                 .style('font-size', '25px')
                 .attr('fill', 'white')
-                .text(d=>d.mbti);
+                .text(d => d.mbti);
             // .attr("cx", 0) // 0 because we have a translate() on the <g> tag for x location
             // .attr("cy", d => ppvScale(d['personpervote']))
 
@@ -351,14 +381,26 @@
                     d3.selectAll(".analysts")
                         .classed("hidden", true);
 
+
+                    d3.select(".analystheader")
+                        .classed("active", false)
+                        .classed("hidden", true);
+
                     d3.selectAll(".diplomats")
                         .classed("active", true);
                     d3.selectAll(".diplomats")
                         .classed("hidden", false);
+
+
                 }
 
 
                 else if (d3.selectAll(".diplomats").classed("active")) {
+
+
+                    d3.select(".diplomatheader")
+                        .classed("active", false)
+                        .classed("hidden", true);
 
                     d3.selectAll(".diplomats")
                         .classed("active", false);
@@ -378,6 +420,10 @@
                     d3.selectAll(".sentinels")
                         .classed("hidden", true);
 
+                        d3.select(".sentinelheader")
+                        .classed("active", false)
+                        .classed("hidden", true);
+
                     d3.selectAll(".explorers")
                         .classed("active", true);
                     d3.selectAll(".explorers")
@@ -386,6 +432,9 @@
 
                 else if (d3.selectAll(".explorers").classed("active")) {
 
+                    d3.select(".explorerheader")
+                        .classed("active", false)
+                        .classed("hidden", true);
                     d3.selectAll(".explorers")
                         .classed("active", false);
                     d3.selectAll(".explorers")
@@ -534,10 +583,10 @@
                     graphNames.push(getRandomCharacter(compat100));
 
 
-                console.log('graphNames');
-                console.log(graphNames);
+                    console.log('graphNames');
+                    console.log(graphNames);
 
-                graphNamesG = graphNames;
+                    graphNamesG = graphNames;
 
 
                     // return graphNames;
@@ -667,7 +716,7 @@
 
                 // loop through list of random names, make a card for each character
                 d3.selectAll("foreignObject").remove();
-                
+
                 var i = 10;
                 for (x = 0; x < graphNamesG.length; x++) {
                     var fo = card.append('foreignObject')
@@ -680,18 +729,18 @@
                         .attr("transform", `translate(${margin.left},${margin.top})`)
                         .attr("class", "divcard");
 
-                   
+
                     console.log('graphNamesG');
                     console.log(graphNamesG);
-                    div.append("img").attr("src", graphNamesG[x]['5']).attr("width", "100%").attr("height", "40%");
+                    div.append("img").attr("src", graphNamesG[x]['5']).attr("width", "100%").attr("height", "40%").style("background-color", "#EEEE");
                     let textDiv = div.append("div")
-                    textDiv.append("h5").html(graphNamesG[x]['6']+ " match");
+                    textDiv.append("h5").html(graphNamesG[x]['6'] + " match");
                     textDiv.append("h4").html(graphNamesG[x]['2'] + ":");
                     textDiv.append("h5").html(graphNamesG[x]['3']);
                     textDiv.append("p").html("MBTI: " + graphNamesG[x]['0']);
                     textDiv.append("p").html("enneagram: " + graphNamesG[x]['1'])
 
-                    i = i + cardWidth/5;
+                    i = i + cardWidth / 5;
                 }
 
             }
