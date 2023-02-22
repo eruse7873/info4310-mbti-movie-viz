@@ -58,7 +58,8 @@
 
         foreignObject h4{
             font-family: 'Franklin Gothic', sans-serif;
-            font-size: 20px;
+            font-size: 18px;
+            margin: 0px;
             text-align: center;
             text-transform: uppercase;
         }
@@ -66,7 +67,8 @@
         foreignObject h5{
             font-family: 'Franklin Gothic', sans-serif;
             font-size: 15px;
-            margin: 5px;
+            margin-top: 10px;
+            margin-bottom: 20px;
             text-align: center;
             text-transform: uppercase;
         }
@@ -661,7 +663,7 @@
                     div.append("img").attr("src", graphNamesG[x]['5']).attr("width", "100%");
                     let textDiv = div.append("div")
                     textDiv.append("h5").html(graphNamesG[x]['6']+ " match");
-                    textDiv.append("h4").html(graphNamesG[x]['2']);
+                    textDiv.append("h4").html(graphNamesG[x]['2'] + ":");
                     textDiv.append("h5").html(graphNamesG[x]['3']);
                     textDiv.append("p").html("MBTI: " + graphNamesG[x]['0']);
                     textDiv.append("p").html("enneagram: " + graphNamesG[x]['1'])
