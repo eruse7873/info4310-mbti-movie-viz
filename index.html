@@ -5,7 +5,6 @@
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <style>
         foreignObject h4 {
-        foreignObject h4 {
             font-family: 'Franklin Gothic', sans-serif;
             font-size: 18px;
             margin: 0px;
@@ -23,7 +22,6 @@
         }
 
 
-        foreignObject p {
         foreignObject p {
             font-family: 'Franklin Gothic', sans-serif;
             font-size: 15px;
@@ -100,7 +98,7 @@
     <svg id="bubbles" height="600" width="100%"></svg>
 
     <div class="avatar_selector">
-        <div class="container">
+        <div class="analystcontainer">
             <div class="analystheader">
                 <h5>Analysts</h5>
             </div>
@@ -136,7 +134,7 @@
         </div>
 
 
-        <div class="container">
+        <div class="diplomatcontainer">
             <div class="diplomatheader">
                 <h5>Diplomats</h5>
             </div>
@@ -171,9 +169,7 @@
             </div>
         </div>
 
-
-
-        <div class="container">
+        <div class="sentinelcontainer">
             <div class="sentinelheader">
                 <h5>Sentinels</h5>
             </div>
@@ -208,7 +204,7 @@
         </div>
 
 
-        <div class="container">
+        <div class="explorercontainer">
             <div class="explorerheader">
                 <h5>Explorers</h5>
             </div>
@@ -303,7 +299,7 @@
                 .range(d3.schemeSet1);
 
             const bubblesselector = d3.select("svg#bubbles").append("g");
-      
+
             packedbubble = bubblesselector.selectAll('g.bubble').data(mbti_counts).join("g").attr("id", "bubble")
 
             var bubblenode = packedbubble.append("circle")
@@ -338,17 +334,17 @@
                     .strength(0.025))
                 .force("ypos", d3.forceY()
                     .strength(0.5))
-                    .on("tick", function (d) {
-                        bubblenode.attr("cx", d => Math.min(bubblesWidth, d.x))
-                            .attr("cy", d => Math.min(bubblesHeight, d.y))
+                .on("tick", function (d) {
+                    bubblenode.attr("cx", d => Math.min(bubblesWidth, d.x))
+                        .attr("cy", d => Math.min(bubblesHeight, d.y))
 
-                        blabels.attr("x", d => Math.min(bubblesWidth, d.x))
-                            .attr("y", d => Math.min(bubblesHeight, d.y))
-                            .attr("width", "20")
-                            .text(d=>d.mbti)
+                    blabels.attr("x", d => Math.min(bubblesWidth, d.x))
+                        .attr("y", d => Math.min(bubblesHeight, d.y))
+                        .attr("width", "20")
+                        .text(d => d.mbti)
 
-                        blabels.raise()
-                    });
+                    blabels.raise()
+                });
             while (bubblesim.alpha() > 0.01) {
                 bubblesim.tick()
             }
@@ -365,9 +361,9 @@
                         .classed("hidden", true);
 
 
-                    d3.select(".analystheader")
-                        .classed("active", false)
-                        .classed("hidden", true);
+                    d3.select(".analystcontainer")
+                        .classed("active", false);
+                       // .classed("hidden", true);
 
                     d3.selectAll(".diplomats")
                         .classed("active", true);
@@ -380,14 +376,14 @@
 
                 else if (d3.selectAll(".diplomats").classed("active")) {
 
-
-                    d3.select(".diplomatheader")
-                        .classed("active", false)
-                        .classed("hidden", true);
-
                     d3.selectAll(".diplomats")
                         .classed("active", false);
                     d3.selectAll(".diplomats")
+                        .classed("hidden", true);
+
+
+                    d3.select(".diplomatcontainer")
+                        .classed("active", false)
                         .classed("hidden", true);
 
                     d3.selectAll(".sentinels")
@@ -403,7 +399,7 @@
                     d3.selectAll(".sentinels")
                         .classed("hidden", true);
 
-                        d3.select(".sentinelheader")
+                    d3.select(".sentinelcontainer")
                         .classed("active", false)
                         .classed("hidden", true);
 
@@ -415,12 +411,13 @@
 
                 else if (d3.selectAll(".explorers").classed("active")) {
 
-                    d3.select(".explorerheader")
-                        .classed("active", false)
-                        .classed("hidden", true);
                     d3.selectAll(".explorers")
                         .classed("active", false);
                     d3.selectAll(".explorers")
+                        .classed("hidden", true);
+
+                    d3.select(".explorercontainer")
+                        .classed("active", false)
                         .classed("hidden", true);
 
                     d3.selectAll(".analysts")
