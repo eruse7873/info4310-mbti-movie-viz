@@ -3,95 +3,39 @@
 <head>
     <title>MBTI</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
-    <style>
-        foreignObject h4 {
-            font-family: 'Franklin Gothic', sans-serif;
-            font-size: 18px;
-            margin: 0px;
-            text-align: center;
-            text-transform: uppercase;
-        }
-
-        foreignObject h5 {
-            font-family: 'Franklin Gothic', sans-serif;
-            font-size: 15px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            text-align: center;
-            text-transform: uppercase;
-        }
-
-
-        foreignObject p {
-            font-family: 'Franklin Gothic', sans-serif;
-            font-size: 15px;
-            text-align: center;
-            text-transform: uppercase;
-            margin: 0%;
-        }
-
-        foreignObject {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        }
-    </style>
-    </style>
-    <style>
-        .display {
-            display: flex;
-            justify-content: space-between;
-            height: 300px;
-            width: 600;
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-
-
-        .individual {
-            align-self: center;
-            padding: 3px;
-            border: 3px solid transparent;
-        }
-
-        .individual:hover {
-            border: 3px solid rgb(190, 190, 190)
-        }
-
-        .individual img {
-            cursor: pointer;
-        }
-
-        .individual:last-child {
-            margin-right: 100;
-        }
-
-        .avatar_selector {
-            height: 300px;
-            width: 550px;
-            display: flex;
-        }
-
-
-        .hidden {
-            display: none;
-        }
-
-        .gridlines .domain {
-            display: none;
-        }
-
-        .contains_triangle {
-            align-self: center;
-        }
-
-        .triangle {
-            cursor: pointer;
-            padding-left: 50px;
-        }
-    </style>
-
     <link rel="stylesheet" href="style.css">
 </head>
+<style>
+    foreignObject h4 {
+    font-family: 'Franklin Gothic', sans-serif;
+    font-size: 18px;
+    margin: 0px;
+    text-align: center;
+    text-transform: uppercase;
+}
 
+foreignObject h5 {
+    font-family: 'Franklin Gothic', sans-serif;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+foreignObject p {
+    font-family: 'Franklin Gothic', sans-serif;
+    font-size: 15px;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0%;
+}
+
+foreignObject {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+</style>
 <body>
 
     <svg id="bubbles" height="600" width="100%"></svg>
