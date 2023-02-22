@@ -3,60 +3,6 @@
 <head>
     <title>MBTI</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
-    <style>
-        .display {
-            display: flex;
-            justify-content: space-between;
-            height: 300px;
-            width: 600;
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-
-
-        .individual {
-            align-self: center;
-            padding: 3px;
-            border: 3px solid transparent;
-        }
-
-        .individual:hover {
-            border: 3px solid rgb(190, 190, 190)
-        }
-
-        .individual img {
-            cursor: pointer;
-        }
-
-        .individual:last-child {
-            margin-right: 100;
-        }
-
-        .avatar_selector {
-            height: 300px;
-            width: 550px;
-            display: flex;
-        }
-
-
-        .hidden {
-            display: none;
-        }
-
-        .gridlines .domain {
-            display: none;
-        }
-
-        .contains_triangle {
-            align-self: center;
-        }
-
-        .triangle {
-            cursor: pointer;
-            padding-left: 50px;
-        }
-    </style>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -212,14 +158,11 @@
         const bubblesHeight = height - bubblesmargin.top - bubblesmargin.bottom;
         let bubbleannotations = bubblessvg.append("g").attr("id", "bubblesannotations");
 
-        let bubbleLayer = d3.select("#by-class").append("g");
-
-
         const getCompatibility = async function () {
             let data = await d3.csv("mbti_clean.csv", d3.autotype);
             let mbti_counts = await d3.csv("mbti_counts.csv", d3.autotype);
 
-            let running_mbti = [];
+            let running_compat = [];
 
             const counts = []
             const mbtis = []
@@ -237,26 +180,64 @@
                 .domain(mbtis)
                 .range(d3.schemeSet1);
 
-            var bubblenode = bubblessvg.append("g").selectAll("circle")
-                .data(mbti_counts)
-                .join("circle")
+            const bubblesselector = d3.select("svg#bubbles").append("g");
+            packedbubble = bubblesselector.selectAll('g.bubble').data(mbti_counts)
+                .join('g')
+                .attr('class', 'bubble');
+
+            var bubblenode = packedbubble.append("circle")
+                .attr("class", "bubbles")
                 .attr('cx', bubblesWidth / 2)
                 .attr('cy', bubblesHeight / 2)
                 .attr("fill", d => bubblecolorScale(d.mbti))
                 .attr("stroke", "black")
                 .style("stroke-width", 1)
                 .attr('r', d => bubbleScale(d.count))
-                .on("mouseover", function(){console.log(d=>d.mbti)});
+                .on("mouseover", function () { console.log(d3.select(this)) });
 
-            bubblenode.append("g").append("text").text(d=>d.mbti);
+            console.log('here')
+
+            console.log(packedbubble);
+
+            packedbubble.append("text")
+                .attr("class", "bubblelabel")
+                .attr("x", d=>d.cx)
+                .attr("y", d=>d.cx)
+                .attr('text-anchor', 'middle')
+                .attr('alignment-baseline', 'middle')
+                .style('font-size', '25px')
+                .attr('fill', 'white')
+                .text(d=>d.mbti);
+            // .attr("cx", 0) // 0 because we have a translate() on the <g> tag for x location
+            // .attr("cy", d => ppvScale(d['personpervote']))
 
 
 
+            // var bubblenode = bubblesselector.selectAll("circle")
+            //     .data(mbti_counts)
+            //     .join("circle")
+            //     .attr('class', 'bubbles')
+            //     .attr('cx', bubblesWidth / 2)
+            //     .attr('cy', bubblesHeight / 2)
+            //     .attr("fill", d => bubblecolorScale(d.mbti))
+            //     .attr("stroke", "black")
+            //     .style("stroke-width", 1)
+            //     .attr('r', d => bubbleScale(d.count))
+            //     .on("mouseover", function () { console.log(d => d.mbti) });
+
+
+            // bubblenode.append("g").append("text")
+            //     .text(d => d.mbti);
+            // console.log(bubblessvg.selectAll(".bubbles"));
+
+            // bubblessvg.selectAll(".bubbles").forEach((i)=> {
+            //     console.log(i);
+            // })
 
             var simulation = d3.forceSimulation()
                 .force("center", d3.forceCenter().x(bubblesWidth / 2).y(bubblesHeight / 2)) // Attraction to the center of the svg area
                 .force("charge", d3.forceManyBody().strength(.1)) // Nodes are attracted one each other of value is > 0
-                .force("collide", d3.forceCollide().strength(.2).radius(function (d) { return (bubbleScale(d.count) + 3) }).iterations(1)) // Force that avoids circle overlapping
+                .force("collide", d3.forceCollide().strength(.2).radius(function (d) { return (bubbleScale(d.count) + 3) }).iterations(1))// Force that avoids circle overlapping
 
             simulation
                 .nodes(mbti_counts)
@@ -267,33 +248,6 @@
                 });
 
 
-            // let circles = enneagramSelector.selectAll('g.circleNodes').data(nodes)
-            //     .join('g')
-            //     .attr('class', 'circleNode')
-            //     .attr('transform', d => `rotate(${d.degree},${origin},${origin})`)
-
-            // nodeCircles = circles.append('circle')
-            //     // SOURCE: drawing circles around a circle
-            //     // https://spin.atomicobject.com/2015/06/12/objects-around-svg-circle-d3-js/
-            //     .attr('class', 'circle.node')
-            //     .join('circle')
-            //     .attr('r', 25)
-            //     .attr('fill', d => d.color)
-            //     .attr('cx', d => d.x)
-            //     .attr('cy', d => d.y)
-            //     .attr('id', d => d.nodeID);
-            // // .attr('transform', d => `rotate(${d.degree},${origin},${origin})`);
-
-            // nodeLabels = circles
-            //     .append('text')
-            //     .text(d => d.nodeID)
-            //     .attr('text-anchor', 'middle')
-            //     .attr('alignment-baseline', 'middle')
-            //     .style('font-size', '25px')
-            //     .attr('fill', 'white')
-            //     .attr('x', origin + (radius * Math.sin(0)))
-            //     .attr('y', origin - (radius * Math.cos(0)))
-            // console.log(counts);
 
             d3.select(".triangle")
                 .on('click', changeAvatars);
@@ -380,11 +334,11 @@
                 let borderClass = border.classed('border', true)
 
 
-                running_mbti = d3.select(this).select(".individual h6").text();
+                input_mbti = d3.select(this).select(".individual h6").text();
 
 
 
-                mbtiBars(getCharacterInfo(running_mbti, false));
+                mbtiBars(getCharacterInfo(input_mbti, false));
             }
 
 
@@ -393,106 +347,118 @@
                 // let input_mbti = input_mbti;
 
 
+                if (enneagramselected === false) {
+                    // new object array compat contains mbti, role, movie and a compat score (0-4) based on mbti similarity
+                    var compat = [];
 
-                // new object array compat contains mbti, role, movie and a compat score (0-4) based on mbti similarity
-                var compat = [];
+                    // loop through each character
+                    for (let x = 0; x < data.length; x++) {
 
-                // loop through each character
-                for (let x = 0; x < data.length; x++) {
+                        // reset compatibility count to 0 for each new character
+                        count = 0;
 
-                    // reset compatibility count to 0 for each new character
-                    count = 0;
+                        // loop through mbti of each character
+                        for (let i = 0; i < 4; i++) {
 
-                    // loop through mbti of each character
-                    for (let i = 0; i < 4; i++) {
+                            // get a count for compatibility
+                            if (input_mbti.charAt(i) === data[x]['mbti'].charAt(i)) {
+                                count += 1;
+                            }
+                        }
 
-                        // get a count for compatibility
-                        if (input_mbti.charAt(i) === data[x]['mbti'].charAt(i)) {
-                            count += 1;
+                        // create array of character name, movie title, and compatibility
+                        // push to object array
+                        let info = [data[x]['mbti'], data[x]['enn_1'], data[x]['role'], data[x]['movie'], count];
+                        compat.push(info);
+                    }
+
+                    running_compat = compat;
+
+
+
+                    // console.log(compat);
+
+                    function getRandomCharacter(arr) {
+                        const randomIndex = Math.floor(Math.random() * arr.length);
+                        let character = arr[randomIndex];
+                        return character;
+                    }
+
+                    // get random characters from each compat score
+
+                    // new arrays for each of the different compat scores
+                    compat0 = [];
+                    compat25 = [];
+                    compat50 = [];
+                    compat75 = [];
+                    compat100 = [];
+
+                    for (let x = 0; x < compat.length; x++) {
+                        if (compat[x]['4'] === 0) {
+                            compat[x].push('0%');
+                            compat0.push(compat[x]);
+                        }
+                        else if (compat[x]['4'] === 1) {
+                            compat[x].push('25%');
+                            compat25.push(compat[x]);
+                        }
+                        else if (compat[x]['4'] === 2) {
+                            compat[x].push('50%');
+                            compat50.push(compat[x]);
+                        }
+                        else if (compat[x]['4'] === 3) {
+                            compat[x].push('75%');
+                            compat75.push(compat[x]);
+                        }
+                        else if (compat[x]['4'] === 4) {
+                            compat[x].push('100%');
+                            compat100.push(compat[x]);
                         }
                     }
 
-                    // create array of character name, movie title, and compatibility
-                    // push to object array
-                    let info = [data[x]['mbti'], data[x]['enneagram'], data[x]['role'], data[x]['movie'], count];
-                    compat.push(info);
+                    console.log('compat');
+                    console.log(compat);
+
+
+                    //console.log(compat100.length);
+
+                    //hist_counts contains counts the number of characters in each compatability bracket. To be used in the histogram.
+                    const hist_counts = []
+
+                    hist_counts.push(['all letters in common', compat100.length]);
+                    hist_counts.push(['3 letters in common', compat75.length]);
+                    hist_counts.push(['2 letters in common', compat50.length]);
+                    hist_counts.push(['1 letter in common', compat25.length]);
+                    hist_counts.push(['no letters in common', compat0.length]);
+
+                    // graphNames contains one random character from each mbti compat
+
+                    var graphNames = [];
+                    graphNames.push(getRandomCharacter(compat0));
+                    graphNames.push(getRandomCharacter(compat25));
+                    graphNames.push(getRandomCharacter(compat50));
+                    graphNames.push(getRandomCharacter(compat75));
+                    graphNames.push(getRandomCharacter(compat100));
+
+
+                    console.log('graphNames');
+                    console.log(graphNames);
+
+
+                    // return graphNames;
+
+                    return hist_counts
+
+
+                }
+
+                else {
+                    //enneagram is the same - add two points
+                    //enneagram is in the relationship - add one point
 
                 }
 
 
-
-                // console.log(compat);
-
-                function getRandomCharacter(arr) {
-                    const randomIndex = Math.floor(Math.random() * arr.length);
-                    let character = arr[randomIndex];
-                    return character;
-                }
-
-                // get random characters from each compat score
-
-                // new arrays for each of the different compat scores
-                compat0 = [];
-                compat25 = [];
-                compat50 = [];
-                compat75 = [];
-                compat100 = [];
-
-                for (let x = 0; x < compat.length; x++) {
-                    if (compat[x]['4'] === 0) {
-                        compat[x].push('0%');
-                        compat0.push(compat[x]);
-                    }
-                    else if (compat[x]['4'] === 1) {
-                        compat[x].push('25%');
-                        compat25.push(compat[x]);
-                    }
-                    else if (compat[x]['4'] === 2) {
-                        compat[x].push('50%');
-                        compat50.push(compat[x]);
-                    }
-                    else if (compat[x]['4'] === 3) {
-                        compat[x].push('75%');
-                        compat75.push(compat[x]);
-                    }
-                    else if (compat[x]['4'] === 4) {
-                        compat[x].push('100%');
-                        compat100.push(compat[x]);
-                    }
-                }
-
-                console.log('compat');
-                console.log(compat);
-
-
-                //console.log(compat100.length);
-
-                //hist_counts contains counts the number of characters in each compatability bracket. To be used in the histogram.
-                const hist_counts = []
-
-                hist_counts.push(['all letters in common', compat100.length]);
-                hist_counts.push(['3 letters in common', compat75.length]);
-                hist_counts.push(['2 letters in common', compat50.length]);
-                hist_counts.push(['1 letter in common', compat25.length]);
-                hist_counts.push(['no letters in common', compat0.length]);
-
-                // graphNames contains one random character from each mbti compat
-
-                var graphNames = [];
-                graphNames.push(getRandomCharacter(compat0));
-                graphNames.push(getRandomCharacter(compat25));
-                graphNames.push(getRandomCharacter(compat50));
-                graphNames.push(getRandomCharacter(compat75));
-                graphNames.push(getRandomCharacter(compat100));
-
-                
-                console.log('graphNames');
-                console.log(graphNames);
-                
-
-                // return graphNames;
-
-                return hist_counts
 
 
             }
@@ -583,7 +549,7 @@
                 chartArea.selectAll('rect.bar').data(alist)
                     .join(enter => enter.append('rect')
                         .attr('class', 'bar')
-                        .attr("fill", barChartColor(running_mbti))
+                        .attr("fill", barChartColor(input_mbti))
                         .attr("x", d => histScale(0))
                         .attr("y", d => leftAxisScale(d[0]))
                         .attr("height", leftAxisScale.bandwidth())
@@ -592,7 +558,7 @@
                         .call(enter => enter.transition()
                             .attr('opacity', 1)),
                         update => update.call(update => update.transition()  // Animate resizing and movement
-                            .attr("fill", barChartColor(running_mbti))
+                            .attr("fill", barChartColor(input_mbti))
                             .attr("x", d => histScale(0))
                             .attr("y", d => leftAxisScale(d[0]))
                             .attr("height", leftAxisScale.bandwidth())
@@ -612,7 +578,7 @@
                     var fo = card.append('foreignObject')
                         .attr("width", 140)
                         .attr("height", 300)
-                        .attr("x", 0+i)
+                        .attr("x", 0 + i)
                         .attr("y", 0);
 
                     var div = fo.append('xhtml:div')
@@ -780,14 +746,14 @@
                     console.log(ennID);
                     enn.attr('stroke', 'black')
 
-                    console.log(running_mbti);
+                    console.log(running_compat);
 
                     enn.classed('outline', true);
 
 
                     //if the second parameter to getCharacterInfo is true, we use running compat in the getcharacterinfo function
-                    // mbti_bars(getCharacterInfo(running_mbti,true))
-                    ;
+                    mbti_bars(getCharacterInfo(0, true))
+                        ;
                 })
 
             // console.log(links);
