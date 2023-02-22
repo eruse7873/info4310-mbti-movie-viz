@@ -71,6 +71,12 @@
             text-transform: uppercase;
         }
 
+        foreignObject {
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        }
+
+
+
     </style>
 
     <link rel="stylesheet" href="style.css">
@@ -624,18 +630,17 @@
 
 
                 // creating the character cards
-
-                // card svg has a width of 800, each card should be 140px with 25px margins between each card
                 const card = d3.select("svg#cards");
+                const cardWidth = card.width;
 
-
-                // loop through randomnames, make a card for each char
+                // loop through list of random names, make a card for each character
+                d3.selectAll("foreignObject").remove();
                 var i = 0;
 
                 for (x = 0; x < graphNamesG.length; x++) {
                     var fo = card.append('foreignObject')
                         .attr("width", 140)
-                        .attr("height", 300)
+                        .attr("height", 350)
                         .attr("x", 0 + i)
                         .attr("y", 0);
 
@@ -644,18 +649,12 @@
                         .attr("class", "divcard");
 
                     div.append("img").attr("src", 'triangle.png').attr("width", "100%");
-                    div.append("h4").html(graphNamesG[x]['2']);
-                    div.append("p").html(graphNamesG[x]['3']);
+                    let textDiv = div.append("div")
+                    textDiv.append("h4").html(graphNamesG[x]['2']);
+                    textDiv.append("p").html(graphNamesG[x]['3']);
 
-                    console.log(i);
-                    i = i + 160;
+                    i = i + cardWidth/5;
                 }
-
-
-
-
-
-
 
             }
 
