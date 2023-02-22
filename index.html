@@ -4,7 +4,7 @@
     <title>MBTI</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <style>
-                foreignObject h4{
+        foreignObject h4 {
             font-family: 'Franklin Gothic', sans-serif;
             font-size: 18px;
             margin: 0px;
@@ -12,7 +12,7 @@
             text-transform: uppercase;
         }
 
-        foreignObject h5{
+        foreignObject h5 {
             font-family: 'Franklin Gothic', sans-serif;
             font-size: 15px;
             margin-top: 10px;
@@ -22,7 +22,7 @@
         }
 
 
-        foreignObject p{
+        foreignObject p {
             font-family: 'Franklin Gothic', sans-serif;
             font-size: 15px;
             text-align: center;
@@ -31,11 +31,8 @@
         }
 
         foreignObject {
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         }
-
-
-
     </style>
     </style>
     <style>
@@ -97,7 +94,7 @@
 
 <body>
 
-    <svg id="bubbles" height="600" width="1000"></svg>
+    <svg id="bubbles" height="600" width="100%"></svg>
 
     <div class="avatar_selector">
         <!-- <svg id="avatar_display" height="300" width="550"></svg> -->
@@ -272,73 +269,55 @@
                 .range(d3.schemeSet1);
 
             const bubblesselector = d3.select("svg#bubbles").append("g");
-            packedbubble = bubblesselector.selectAll('g.bubble').data(mbti_counts)
-                .join('g')
-                .attr('class', 'bubble');
+      
+            packedbubble = bubblesselector.selectAll('g.bubble').data(mbti_counts).join("g").attr("id", "bubble")
 
             var bubblenode = packedbubble.append("circle")
                 .attr("class", "bubbles")
-                .attr('cx', bubblesWidth / 2)
+                .attr('cx', 0)
                 .attr('cy', bubblesHeight / 2)
                 .attr("fill", d => bubblecolorScale(d.mbti))
                 .attr("stroke", "black")
                 .style("stroke-width", 1)
-                .attr('r', d => bubbleScale(d.count))
-                .on("mouseover", function () { console.log(d3.select(this)) });
-
-            console.log('here')
-
-            console.log(packedbubble);
-
-            packedbubble.append("text")
-                .attr("class", "bubblelabel")
-                .attr("x", d=>d.cx)
-                .attr("y", d=>d.cx)
-                .attr('text-anchor', 'middle')
-                .attr('alignment-baseline', 'middle')
-                .style('font-size', '25px')
-                .attr('fill', 'white')
-                .text(d=>d.mbti);
-            // .attr("cx", 0) // 0 because we have a translate() on the <g> tag for x location
-            // .attr("cy", d => ppvScale(d['personpervote']))
+                .attr('r', d => bubbleScale(d.count));
+            // .on("mouseover", function () { console.log(d3.select(this)) });
 
 
+            let blabels = packedbubble.append("text")
+                .attr("id", "blabel")
+                .attr("text-anchor", "middle")
+                .attr("dominant-baseline", "middle")
+                .attr("dy", ".35em")
+                .attr("font-size", "11px")
 
-            // var bubblenode = bubblesselector.selectAll("circle")
-            //     .data(mbti_counts)
-            //     .join("circle")
-            //     .attr('class', 'bubbles')
-            //     .attr('cx', bubblesWidth / 2)
-            //     .attr('cy', bubblesHeight / 2)
-            //     .attr("fill", d => bubblecolorScale(d.mbti))
-            //     .attr("stroke", "black")
-            //     .style("stroke-width", 1)
-            //     .attr('r', d => bubbleScale(d.count))
-            //     .on("mouseover", function () { console.log(d => d.mbti) });
-
-
-            // bubblenode.append("g").append("text")
-            //     .text(d => d.mbti);
-            // console.log(bubblessvg.selectAll(".bubbles"));
-
-            // bubblessvg.selectAll(".bubbles").forEach((i)=> {
-            //     console.log(i);
-            // })
-
-            var simulation = d3.forceSimulation()
-                .force("center", d3.forceCenter().x(bubblesWidth / 2).y(bubblesHeight / 2)) // Attraction to the center of the svg area
-                .force("charge", d3.forceManyBody().strength(.1)) // Nodes are attracted one each other of value is > 0
-                .force("collide", d3.forceCollide().strength(.2).radius(function (d) { return (bubbleScale(d.count) + 3) }).iterations(1))// Force that avoids circle overlapping
-
-            simulation
+            var bubblesim = d3.forceSimulation()
                 .nodes(mbti_counts)
-                .on("tick", function (d) {
-                    bubblenode
-                        .attr("cx", function (d) { return d.x; })
-                        .attr("cy", function (d) { return d.y; })
-                });
+                .force("center", d3.forceCenter()
+                    .x(bubblesWidth / 2)
+                    .y(bubblesHeight / 2))
+                .force("repulse", d3.forceManyBody()
+                    .strength(0.005))
+                .force("collision", d3.forceCollide()
+                    .radius(d => (bubbleScale(d.count) + 3))
+                    .iterations(1))
+                .force("xpos", d3.forceX()
+                    .strength(0.025))
+                .force("ypos", d3.forceY()
+                    .strength(0.5))
+                    .on("tick", function (d) {
+                        bubblenode.attr("cx", d => Math.min(bubblesWidth, d.x))
+                            .attr("cy", d => Math.min(bubblesHeight, d.y))
 
+                        blabels.attr("x", d => Math.min(bubblesWidth, d.x))
+                            .attr("y", d => Math.min(bubblesHeight, d.y))
+                            .attr("width", "20")
+                            .text(d=>d.mbti)
 
+                        blabels.raise()
+                    });
+            while (bubblesim.alpha() > 0.01) {
+                bubblesim.tick()
+            }
 
             d3.select(".triangle")
                 .on('click', changeAvatars);
@@ -534,10 +513,10 @@
                     graphNames.push(getRandomCharacter(compat100));
 
 
-                console.log('graphNames');
-                console.log(graphNames);
+                    console.log('graphNames');
+                    console.log(graphNames);
 
-                graphNamesG = graphNames;
+                    graphNamesG = graphNames;
 
 
                     // return graphNames;
@@ -667,7 +646,7 @@
 
                 // loop through list of random names, make a card for each character
                 d3.selectAll("foreignObject").remove();
-                
+
                 var i = 10;
                 for (x = 0; x < graphNamesG.length; x++) {
                     var fo = card.append('foreignObject')
@@ -680,18 +659,18 @@
                         .attr("transform", `translate(${margin.left},${margin.top})`)
                         .attr("class", "divcard");
 
-                   
+
                     console.log('graphNamesG');
                     console.log(graphNamesG);
                     div.append("img").attr("src", graphNamesG[x]['5']).attr("width", "100%").attr("height", "40%");
                     let textDiv = div.append("div")
-                    textDiv.append("h5").html(graphNamesG[x]['6']+ " match");
+                    textDiv.append("h5").html(graphNamesG[x]['6'] + " match");
                     textDiv.append("h4").html(graphNamesG[x]['2'] + ":");
                     textDiv.append("h5").html(graphNamesG[x]['3']);
                     textDiv.append("p").html("MBTI: " + graphNamesG[x]['0']);
                     textDiv.append("p").html("enneagram: " + graphNamesG[x]['1'])
 
-                    i = i + cardWidth/5;
+                    i = i + cardWidth / 5;
                 }
 
             }
