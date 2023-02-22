@@ -3,6 +3,95 @@
 <head>
     <title>MBTI</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style>
+                foreignObject h4{
+            font-family: 'Franklin Gothic', sans-serif;
+            font-size: 18px;
+            margin: 0px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        foreignObject h5{
+            font-family: 'Franklin Gothic', sans-serif;
+            font-size: 15px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+
+        foreignObject p{
+            font-family: 'Franklin Gothic', sans-serif;
+            font-size: 15px;
+            text-align: center;
+            text-transform: uppercase;
+            margin: 0%;
+        }
+
+        foreignObject {
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        }
+
+
+
+    </style>
+    </style>
+    <style>
+        .display {
+            display: flex;
+            justify-content: space-between;
+            height: 300px;
+            width: 600;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+
+        .individual {
+            align-self: center;
+            padding: 3px;
+            border: 3px solid transparent;
+        }
+
+        .individual:hover {
+            border: 3px solid rgb(190, 190, 190)
+        }
+
+        .individual img {
+            cursor: pointer;
+        }
+
+        .individual:last-child {
+            margin-right: 100;
+        }
+
+        .avatar_selector {
+            height: 300px;
+            width: 550px;
+            display: flex;
+        }
+
+
+        .hidden {
+            display: none;
+        }
+
+        .gridlines .domain {
+            display: none;
+        }
+
+        .contains_triangle {
+            align-self: center;
+        }
+
+        .triangle {
+            cursor: pointer;
+            padding-left: 50px;
+        }
+    </style>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -136,7 +225,7 @@
 
     <div>
         <svg id="barchart" height="800" width="800" style="margin:50px"></svg>
-        <svg id="cards" height="400" width="800" style="margin:50px">
+        <svg id="cards" height="450" width="800" style="margin:50px">
 
         </svg>
     </div>
@@ -160,6 +249,8 @@
 
         const getCompatibility = async function () {
             let data = await d3.csv("mbti_clean.csv", d3.autotype);
+            console.log('data');
+            console.log(data);
             let mbti_counts = await d3.csv("mbti_counts.csv", d3.autotype);
 
             let running_compat = [];
@@ -341,6 +432,8 @@
                 mbtiBars(getCharacterInfo(input_mbti, false));
             }
 
+            let graphNamesG = [];
+
 
             // getCharacterInfo is a function that returns an 
             function getCharacterInfo(input_mbti, enneagramselected) {
@@ -441,8 +534,10 @@
                     graphNames.push(getRandomCharacter(compat100));
 
 
-                    console.log('graphNames');
-                    console.log(graphNames);
+                console.log('graphNames');
+                console.log(graphNames);
+
+                graphNamesG = graphNames;
 
 
                     // return graphNames;
@@ -567,17 +662,17 @@
 
 
                 // creating the character cards
-
-                // card svg has a width of 800, each card should be 140px with 25px margins between each card
                 const card = d3.select("svg#cards");
+                const cardWidth = card.attr("width");
 
-
-                // loop through randomnames, make a card for each char
-                var i = 0;
-                for (x = 0; x < 5; x++) {
+                // loop through list of random names, make a card for each character
+                d3.selectAll("foreignObject").remove();
+                
+                var i = 10;
+                for (x = 0; x < graphNamesG.length; x++) {
                     var fo = card.append('foreignObject')
                         .attr("width", 140)
-                        .attr("height", 300)
+                        .attr("height", 350)
                         .attr("x", 0 + i)
                         .attr("y", 0);
 
@@ -585,19 +680,17 @@
                         .attr("transform", `translate(${margin.left},${margin.top})`)
                         .attr("class", "divcard");
 
-                    div.append("img").attr("src", "triangle.png").attr("width", "50%");
-                    div.append("h4").html("Jeff");
-                    div.append("p").html("INFP");
+                   
+                    div.append("img").attr("src", graphNamesG[x]['5']).attr("width", "100%");
+                    let textDiv = div.append("div")
+                    textDiv.append("h5").html(graphNamesG[x]['6']+ " match");
+                    textDiv.append("h4").html(graphNamesG[x]['2'] + ":");
+                    textDiv.append("h5").html(graphNamesG[x]['3']);
+                    textDiv.append("p").html("MBTI: " + graphNamesG[x]['0']);
+                    textDiv.append("p").html("enneagram: " + graphNamesG[x]['1'])
 
-                    console.log(i);
-                    i = i + 140;
+                    i = i + cardWidth/5;
                 }
-
-
-
-
-
-
 
             }
 
