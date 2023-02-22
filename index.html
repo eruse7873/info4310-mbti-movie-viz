@@ -63,6 +63,13 @@
             text-transform: uppercase;
         }
 
+        foreignObject h5{
+            font-family: 'Franklin Gothic', sans-serif;
+            font-size: 15px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
 
         foreignObject p{
             font-family: 'Franklin Gothic', sans-serif;
@@ -631,7 +638,7 @@
 
                 // creating the character cards
                 const card = d3.select("svg#cards");
-                const cardWidth = card.width;
+                const cardWidth = card.attr("width");
 
                 // loop through list of random names, make a card for each character
                 d3.selectAll("foreignObject").remove();
@@ -648,10 +655,13 @@
                         .attr("transform", `translate(${margin.left},${margin.top})`)
                         .attr("class", "divcard");
 
-                    div.append("img").attr("src", 'triangle.png').attr("width", "100%");
+                   
+                    div.append("img").attr("src", graphNamesG[x]['5']).attr("width", "100%");
                     let textDiv = div.append("div")
                     textDiv.append("h4").html(graphNamesG[x]['2']);
-                    textDiv.append("p").html(graphNamesG[x]['3']);
+                    textDiv.append("h5").html(graphNamesG[x]['3']);
+                    textDiv.append("p").html("MBTI: " + graphNamesG[x]['0']);
+                    textDiv.append("p").html("enneagram: " + graphNamesG[x]['1'])
 
                     i = i + cardWidth/5;
                 }
