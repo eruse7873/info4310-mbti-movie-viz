@@ -7,35 +7,36 @@
 </head>
 <style>
     foreignObject h4 {
-    font-family: 'Franklin Gothic', sans-serif;
-    font-size: 18px;
-    margin: 0px;
-    text-align: center;
-    text-transform: uppercase;
-}
+        font-family: 'Franklin Gothic', sans-serif;
+        font-size: 18px;
+        margin: 0px;
+        text-align: center;
+        text-transform: uppercase;
+    }
 
-foreignObject h5 {
-    font-family: 'Franklin Gothic', sans-serif;
-    font-size: 15px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    text-align: center;
-    text-transform: uppercase;
-}
+    foreignObject h5 {
+        font-family: 'Franklin Gothic', sans-serif;
+        font-size: 15px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+        text-transform: uppercase;
+    }
 
 
-foreignObject p {
-    font-family: 'Franklin Gothic', sans-serif;
-    font-size: 15px;
-    text-align: center;
-    text-transform: uppercase;
-    margin: 0%;
-}
+    foreignObject p {
+        font-family: 'Franklin Gothic', sans-serif;
+        font-size: 15px;
+        text-align: center;
+        text-transform: uppercase;
+        margin: 0%;
+    }
 
-foreignObject {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
+    foreignObject {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
 </style>
+
 <body>
 
     <svg id="bubbles" height="600" width="100%"></svg>
@@ -204,7 +205,7 @@ foreignObject {
             })
 
             const bubbleExtent = d3.extent(counts);
-            const bubbleScale = d3.scaleLinear().domain(bubbleExtent).range([7, 55]);
+            const bubbleScale = d3.scaleLinear().domain(bubbleExtent).range([20, 75]);
 
             const mbtiScale = d3.scalePoint().domain(mbtis).range([50, 300]);
 
@@ -213,7 +214,7 @@ foreignObject {
                 .range(d3.schemeSet1);
 
             const bubblesselector = d3.select("svg#bubbles").append("g");
-      
+
             packedbubble = bubblesselector.selectAll('g.bubble').data(mbti_counts).join("g").attr("id", "bubble")
 
             var bubblenode = packedbubble.append("circle")
@@ -248,17 +249,17 @@ foreignObject {
                     .strength(0.025))
                 .force("ypos", d3.forceY()
                     .strength(0.5))
-                    .on("tick", function (d) {
-                        bubblenode.attr("cx", d => Math.min(bubblesWidth, d.x))
-                            .attr("cy", d => Math.min(bubblesHeight, d.y))
+                .on("tick", function (d) {
+                    bubblenode.attr("cx", d => Math.min(bubblesWidth, d.x))
+                        .attr("cy", d => Math.min(bubblesHeight, d.y))
 
-                        blabels.attr("x", d => Math.min(bubblesWidth, d.x))
-                            .attr("y", d => Math.min(bubblesHeight, d.y))
-                            .attr("width", "20")
-                            .text(d=>d.mbti)
+                    blabels.attr("x", d => Math.min(bubblesWidth, d.x))
+                        .attr("y", d => Math.min(bubblesHeight, d.y))
+                        .attr("width", "20")
+                        .text(d => d.mbti)
 
-                        blabels.raise()
-                    });
+                    blabels.raise()
+                });
             while (bubblesim.alpha() > 0.01) {
                 bubblesim.tick()
             }
