@@ -55,6 +55,22 @@
             cursor: pointer;
             padding-left: 50px;
         }
+
+        foreignObject h4{
+            font-family: 'Franklin Gothic', sans-serif;
+            font-size: 20px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+
+        foreignObject p{
+            font-family: 'Franklin Gothic', sans-serif;
+            font-size: 15px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
     </style>
 
     <link rel="stylesheet" href="style.css">
@@ -217,6 +233,8 @@
 
         const getCompatibility = async function () {
             let data = await d3.csv("mbti_clean.csv", d3.autotype);
+            console.log('data');
+            console.log(data);
             let mbti_counts = await d3.csv("mbti_counts.csv", d3.autotype);
 
             let running_mbti = [];
@@ -246,9 +264,9 @@
                 .attr("stroke", "black")
                 .style("stroke-width", 1)
                 .attr('r', d => bubbleScale(d.count))
-                .on("mouseover", function(){console.log(d=>d.mbti)});
+                .on("mouseover", function () { console.log(d => d.mbti) });
 
-            bubblenode.append("g").append("text").text(d=>d.mbti);
+            bubblenode.append("g").append("text").text(d => d.mbti);
 
 
 
@@ -387,6 +405,8 @@
                 mbtiBars(getCharacterInfo(running_mbti, false));
             }
 
+            let graphNamesG = [];
+
 
             // getCharacterInfo is a function that returns an 
             function getCharacterInfo(input_mbti, enneagramselected) {
@@ -414,7 +434,8 @@
 
                     // create array of character name, movie title, and compatibility
                     // push to object array
-                    let info = [data[x]['mbti'], data[x]['enneagram'], data[x]['role'], data[x]['movie'], count];
+
+                    let info = [data[x]['mbti'], data[x]['enneagram'], data[x]['role'], data[x]['movie'], count, data[x]['img_filepath']];
                     compat.push(info);
 
                 }
@@ -485,10 +506,12 @@
                 graphNames.push(getRandomCharacter(compat75));
                 graphNames.push(getRandomCharacter(compat100));
 
-                
+
                 console.log('graphNames');
                 console.log(graphNames);
-                
+
+                graphNamesG = graphNames;
+
 
                 // return graphNames;
 
@@ -608,23 +631,24 @@
 
                 // loop through randomnames, make a card for each char
                 var i = 0;
-                for (x = 0; x < 5; x++) {
+
+                for (x = 0; x < graphNamesG.length; x++) {
                     var fo = card.append('foreignObject')
                         .attr("width", 140)
                         .attr("height", 300)
-                        .attr("x", 0+i)
+                        .attr("x", 0 + i)
                         .attr("y", 0);
 
                     var div = fo.append('xhtml:div')
                         .attr("transform", `translate(${margin.left},${margin.top})`)
                         .attr("class", "divcard");
 
-                    div.append("img").attr("src", "triangle.png").attr("width", "50%");
-                    div.append("h4").html("Jeff");
-                    div.append("p").html("INFP");
+                    div.append("img").attr("src", 'triangle.png').attr("width", "100%");
+                    div.append("h4").html(graphNamesG[x]['2']);
+                    div.append("p").html(graphNamesG[x]['3']);
 
                     console.log(i);
-                    i = i + 140;
+                    i = i + 160;
                 }
 
 
