@@ -307,7 +307,7 @@
 
                     d3.select(".analystcontainer")
                         .classed("active", false);
-                       // .classed("hidden", true);
+                    // .classed("hidden", true);
 
                     d3.selectAll(".diplomats")
                         .classed("active", true);
@@ -692,30 +692,30 @@
 
             let origin = 300;
             let radius = 150;
-            const enneagramSelector = d3.select("svg#enneagramSelector").append('g');
-            enneagramSelector.append("circle")
-                .attr("cx", origin)
-                .attr('cy', origin)
-                .attr('r', radius)
-                .attr('stroke', 'none')
-                .attr('fill', 'none');
-            // let nodes = {"1":0, "2":40, "3":80, "4":120, "5":160, "6":200, "7":240, "8":280, "9":320}
+            var enneagramSelector = d3.select("svg#enneagramSelector").append('g');
+            // enneagramSelector.append("circle")
+            //     .attr("cx", origin)
+            //     .attr('cy', origin)
+            //     .attr('r', radius)
+            //     .attr('stroke', 'none')
+            //     .attr('fill', 'none');
 
             let nodeIDs = [9, 1, 2, 3, 4, 5, 6, 7, 8];
             let nodeDegree = [0, 40, 80, 120, 160, 200, 240, 280, 320];
             let nodeColor = ['#27749C', '#2FB478', '#6DCD38', '#E6C742', '#FF4C58', '#F856BD', '#D460F1', '#886AEA', '#7399E4', '#7CD4DD']
+            let labels = ['Reformer', 'Helper', 'Achiever', 'Individualist', 'Investigator', 'Loyalist', 'Enthusiast', 'Challenger', 'Peacemaker']
+
             // nodes = nodes.map(x=>{node:x})
             // const nodes = nodeID.map((x, i)=> ({}))
             nodes = []
             for (let i = 0; i < nodeIDs.length; i++) {
-                dict = { nodeID: nodeIDs[i], degree: nodeDegree[i], color: nodeColor[i] };
+                dict = { nodeID: nodeIDs[i], degree: nodeDegree[i], color: nodeColor[i], label: labels[i] };
                 nodes.push(dict);
             }
 
             links = []
             sources = [9, 9, 3, 1, 1, 2, 2, 5, 5]
             targets = [3, 6, 6, 4, 7, 8, 4, 8, 7]
-            // labels = ['Peacemaker','Reformer','Helper','Achiever','Individualist','Investigator','Loyalist','Enthusiast','Challenger','Peacemaker']
 
             for (let i = 0; i < sources.length; i++) {
                 dict = { source: sources[i], target: targets[i] };
@@ -763,27 +763,44 @@
                 .attr('id', d => d.nodeID);
             // .attr('transform', d => `rotate(${d.degree},${origin},${origin})`);
 
-            console.log('sdkjfl')
-            console.log(links)
-            let lines = enneagramSelector.selectAll("link").data(links)
-                .append('line')
+
+            let lines = enneagramSelector.selectAll("g.link").data(links)
+                .join('path')
+                .append('path')
                 .attr("class", "link")
                 .style("stroke", "black")
                 .attr('stroke-width', 4)
-                .attr("x1", d => d.source.x).attr("x2", d => d.target.x)
-                .attr("y1", d => d.source.y).attr("y2", d => d.target.y);
+                .attr("x1", d => d.source.x * d.source.nodeID).attr("x2", d => d.target.x * d.target.nodeID)
+                .attr("y1", d => d.source.y * d.source.nodeID).attr("y2", d => d.target.y * d.target.nodeID)
+            // .attr('transform','translate(100,100)');
 
 
+            console.log('what', lines)
 
             nodeLabels = circles
                 .append('text')
                 .text(d => d.nodeID)
+                .attr('pointer-events', 'none')
                 .attr('text-anchor', 'middle')
                 .attr('alignment-baseline', 'middle')
                 .style('font-size', '25px')
                 .attr('fill', 'white')
                 .attr('x', origin + (radius * Math.sin(0)))
                 .attr('y', origin - (radius * Math.cos(0)))
+
+
+            nodeNames = circles
+                .append('text')
+                .text(d => d.label)
+                .attr('pointer-events', 'none')
+                .attr('text-anchor', 'middle')
+                .attr('alignment-baseline', 'middle')
+                .style('font-size', '14px')
+                .attr('fill', 'black')
+                .attr('x', origin + (radius + 10 * Math.sin(0)))
+                .attr('y', origin - (radius * Math.cos(0)))
+                .attr('transform', `translate(-50,-10)`)
+
 
             nodeCircles
                 .classed('outline', false)
