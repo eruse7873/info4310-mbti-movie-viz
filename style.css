@@ -69,7 +69,7 @@ h6 {
 
 .avatar_selector {
     height: 300px;
-    width: 550px;
+    width: 750;
     display: flex;
 }
 div.avatar_group{
@@ -86,7 +86,7 @@ div.avatar_group{
 
 .contains_triangle {
     align-self: center;
-    padding-top: 50px;
+    /* padding-top: 50px; */
 }
 
 
@@ -121,3 +121,5 @@ div.avatar_group{
 .randomize:hover {
     background-color: rgb(220, 220, 220);
 }
+
+
