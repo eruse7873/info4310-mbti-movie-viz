@@ -85,7 +85,7 @@
                 worth
                 4 points, scores are
                 calculated using a scoring system of 0-8.
-            <p>Example I : You select INFP</p>
+            <p>Example I : You select INFP,</p>
             <ul>
                 <li>Character A is also INFP. A gets 4 points because every letter matches. 4/4 = 100% compatibility.
                 </li>
@@ -544,7 +544,7 @@
 
                 .on("mouseover", function () {
                     let border = d3.select(this)
-                    border.style('border', '3px solid rgb(190, 190, 190)')
+                    border.style('border', '3px solid #ffbae0')
                 })
                 .on("mouseout", function () {
                     let border = d3.select(this)
@@ -562,7 +562,7 @@
 
                 // d3.selectAll(".individual:hover").style('border','rgb(190, 190, 190)');
                 let border = d3.select(this);
-                border.style('border', '3px solid rgb(190, 190, 190)');
+                border.style('border', '3px solid #ffbae0');
                 let borderClass = border.classed('border', true)
 
 
@@ -1162,8 +1162,8 @@
                     // console.log(enn);
                     enn.transition().duration(100)
                         .attr("stroke-width", 7)
-                        .style("stroke-opacity", .6)
-                        .style("stroke", 'black')
+                        .style("stroke-opacity", .8)
+                        .style("stroke", '#d90077')
                 })
                 .on('mouseout', function () {
                     let enn = d3.select(this);
@@ -1178,12 +1178,12 @@
                 .on('click', function () {
                     nodeCircles.attr('stroke-width', 0).classed('outline', false);
                     let enn = d3.select(this);
-                    enn.attr('stroke-width', 7).style('stroke-opacity', .6)
+                    enn.attr('stroke-width', 7).style('stroke-opacity', .8)
                     let ennID = enn.node().id;
 
                     console.log('ennID');
                     console.log(ennID);
-                    enn.attr('stroke', 'black')
+                    enn.attr('stroke', '#d90077')
 
                     console.log('running_compat when clicking on node')
                     console.log(running_compat);

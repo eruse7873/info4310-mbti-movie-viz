@@ -7,6 +7,7 @@ h1{
     text-align: center;
     margin:5px;
     padding-top:50px;
+    color: #ff56b3;
 }
 
 h2{
@@ -14,16 +15,18 @@ h2{
     text-align: center;
     margin:5px;
     margin-bottom:30px;
+    color: #a10159;
 }
 h3 {
     text-align:center;
     font-size:25px;
+    color: #ff56b3;
 }
 h4 {
     font-size:22px;
     text-align: center;
     text-transform: uppercase;
-    margin:10px;
+    margin:15px;
 
 }
 h5 {
@@ -50,6 +53,7 @@ summary {
     font-style: italic;
     font-size:20px;
     text-align: center;
+    color: #a10159;
 }
 
  .citation {
