@@ -41,160 +41,141 @@
 
 <body>
 
-    <svg id="bubbles" height="600" width="100%"></svg>
+    <svg id="bubbles" height="400" width="100%"></svg>
 
     <div class="avatar_selector">
-        <div class="analystcontainer">
-            <div class="analystheader">
-                <h5>Analysts</h5>
+        <!-- <svg id="avatar_display" height="300" width="550"></svg> -->
+
+        <h3>What's your MBTI?</h3>
+        <p>If you don't know your Myers-Briggs Type Indicator, take the test <a
+                href='https://www.16personalities.com/free-personality-test' target="_blank">here!</a></p>
+        <p class = citation>image sources: <a
+            href='https://www.16personalities.com/' target="_blank">https://www.16personalities.com/</a></p>
+        <h4 id="titleMBTI">Analysts</h4>
+        <div class="active analysts display">
+            <!-- <h5>Analysts</h5> -->
+
+            <div class="individual">
+                <img class="analyst avatars" src="avatars/architect.png" width="150" height="150">
+                <h6 style="text-align: center">INTJ</h6>
+                <h6 style="text-align: center">Architect</h6>
+
             </div>
+            <div class="individual">
+                <img class="analyst avatars" src="avatars/logician.png" width="150" height="150">
+                <h6 style="text-align: center">INTP</h6>
+                <h6 style="text-align: center">Logician</h6>
 
-            <div class="flex-row2">
-                <div class="active analysts display">
-                    <div class="individual">
-                        <img class="analyst avatars" src="avatars/architect.png" width="150" height="150">
-                        <h6 style="text-align: center">INTJ</h6>
-                        <h6 style="text-align: center">Architect</h6>
-
-                    </div>
-                    <div class="individual">
-                        <img class="analyst avatars" src="avatars/logician.png" width="150" height="150">
-                        <h6 style="text-align: center">INTP</h6>
-                        <h6 style="text-align: center">Logician</h6>
-
-                    </div>
-                    <div class="individual">
-                        <img class="analyst avatars" src="avatars/commander.png" width="150" height="150">
-                        <h6 style="text-align: center">ENTJ</h6>
-                        <h6 style="text-align: center">Commander</h6>
-
-                    </div>
-                    <div class="individual">
-                        <img class="analyst avatars" src="avatars/debater.png" width="150" height="150">
-                        <h6 style="text-align: center">ENTP</h6>
-                        <h6 style="text-align: center">Debater</h6>
-
-                    </div>
-                </div>
             </div>
-        </div>
+            <div class="individual">
+                <img class="analyst avatars" src="avatars/commander.png" width="150" height="150">
+                <h6 style="text-align: center">ENTJ</h6>
+                <h6 style="text-align: center">Commander</h6>
 
-
-        <div class="diplomatcontainer">
-            <div class="diplomatheader">
-                <h5>Diplomats</h5>
             </div>
-            <div class="flex-row2">
-                <div class="hidden diplomats display">
-                    <div class="individual">
+            <div class="individual">
+                <img class="analyst avatars" src="avatars/debater.png" width="150" height="150">
+                <h6 style="text-align: center">ENTP</h6>
+                <h6 style="text-align: center">Debater</h6>
 
-                        <img class="diplomats avatars" src="avatars/advocate.png" width="150" height="150">
-                        <h6 style="text-align: center">INFJ</h6>
-                        <h6 style="text-align: center">Advocate</h6>
-
-                    </div>
-                    <div class="individual">
-                        <img class="diplomats avatars" src="avatars/mediator.png" width="150" height="150">
-                        <h6 style="text-align: center">INFP</h6>
-                        <h6 style="text-align: center">Mediator</h6>
-
-                    </div>
-                    <div class="individual">
-                        <img class="diplomats avatars" src="avatars/protagonist.png" width="150" height="150">
-                        <h6 style="text-align: center">ENFJ</h6>
-                        <h6 style="text-align: center">Protagonist</h6>
-
-                    </div>
-                    <div class="individual">
-                        <img class="diplomats avatars" src="avatars/campaigner.png" width="150" height="150">
-                        <h6 style="text-align: center">ENFP</h6>
-                        <h6 style="text-align: center">Campaigner</h6>
-
-                    </div>
-                </div>
             </div>
         </div>
 
-        <div class="sentinelcontainer">
-            <div class="sentinelheader">
-                <h5>Sentinels</h5>
+        <div class="hidden diplomats display">
+
+            <!-- <h5>Diplomats</h5> -->
+            <div class="individual">
+
+                <img class="diplomats avatars" src="avatars/advocate.png" width="150" height="150">
+                <h6 style="text-align: center">INFJ</h6>
+                <h6 style="text-align: center">Advocate</h6>
+
             </div>
-            <div class="flex-row2">
-                <div class="hidden sentinels display">
-                    <!-- <h5>Sentinels</h5> -->
-                    <div class="individual">
-                        <img class="sentinels avatars" src="avatars/logistician.png" width="150" height="150">
-                        <h6 style="text-align: center">ISTJ</h6>
-                        <h6 style="text-align: center">Logistician</h6>
+            <div class="individual">
+                <img class="diplomats avatars" src="avatars/mediator.png" width="150" height="150">
+                <h6 style="text-align: center">INFP</h6>
+                <h6 style="text-align: center">Mediator</h6>
 
-                    </div>
-                    <div class="individual">
-                        <img class="sentinels avatars" src="avatars/defender.png" width="150" height="150">
-                        <h6 style="text-align: center">ISFJ</h6>
-                        <h6 style="text-align: center">Defender</h6>
+            </div>
+            <div class="individual">
+                <img class="diplomats avatars" src="avatars/protagonist.png" width="150" height="150">
+                <h6 style="text-align: center">ENFJ</h6>
+                <h6 style="text-align: center">Protagonist</h6>
 
-                    </div>
-                    <div class="individual">
-                        <img class="sentinels avatars" src="avatars/executive.png" width="150" height="150">
-                        <h6 style="text-align: center">ESTJ</h6>
-                        <h6 style="text-align: center">Executive</h6>
+            </div>
+            <div class="individual">
+                <img class="diplomats avatars" src="avatars/campaigner.png" width="150" height="150">
+                <h6 style="text-align: center">ENFP</h6>
+                <h6 style="text-align: center">Campaigner</h6>
 
-                    </div>
-                    <div class="individual">
-                        <img class="sentinels avatars" src="avatars/consul.png" width="150" height="150">
-                        <h6 style="text-align: center">ESFJ</h6>
-                        <h6 style="text-align: center">Consul</h6>
-                    </div>
-                </div>
             </div>
         </div>
 
+        <div class="hidden sentinels display">
+            <!-- <h5>Sentinels</h5> -->
+            <div class="individual">
+                <img class="sentinels avatars" src="avatars/logistician.png" width="150" height="150">
+                <h6 style="text-align: center">ISTJ</h6>
+                <h6 style="text-align: center">Logistician</h6>
 
-        <div class="explorercontainer">
-            <div class="explorerheader">
-                <h5>Explorers</h5>
             </div>
-            <div class="flex-row2">
-                <div class="hidden explorers display">
+            <div class="individual">
+                <img class="sentinels avatars" src="avatars/defender.png" width="150" height="150">
+                <h6 style="text-align: center">ISFJ</h6>
+                <h6 style="text-align: center">Defender</h6>
 
-                    <!-- <h5>Explorers</h5> -->
-                    <div class="individual">
-                        <img class="explorers avatars" src="avatars/virtuoso.png" width="150" height="150">
-                        <h6 style="text-align: center">ISTP</h6>
-                        <h6 style="text-align: center">Virtuoso</h6>
-
-                    </div>
-                    <div class="individual">
-                        <img class="explorers avatars" src="avatars/adventurer.png" width="150" height="150">
-                        <h6 style="text-align: center">ISFP</h6>
-                        <h6 style="text-align: center">Adventurer</h6>
-
-                    </div>
-                    <div class="individual">
-                        <img class="explorers avatars" src="avatars/entrepreneur.png" width="150" height="150">
-                        <h6 style="text-align: center">ESTP</h6>
-                        <h6 style="text-align: center">Entrepreneur</h6>
-
-                    </div>
-                    <div class="individual">
-                        <img class="explorers avatars" src="avatars/entertainer.png" width="150" height="150">
-                        <h6 style="text-align: center">ESFP</h6>
-                        <h6 style="text-align: center">Entertainer</h6>
-
-                    </div>
-
-                </div>
             </div>
+            <div class="individual">
+                <img class="sentinels avatars" src="avatars/executive.png" width="150" height="150">
+                <h6 style="text-align: center">ESTJ</h6>
+                <h6 style="text-align: center">Executive</h6>
 
+            </div>
+            <div class="individual">
+                <img class="sentinels avatars" src="avatars/consul.png" width="150" height="150">
+                <h6 style="text-align: center">ESFJ</h6>
+                <h6 style="text-align: center">Consul</h6>
+
+            </div>
         </div>
 
+        <div class="hidden explorers display">
+            <div class="individual">
+                <img class="explorers avatars" src="avatars/virtuoso.png" width="150" height="150">
+                <h6 style="text-align: center">ISTP</h6>
+                <h6 style="text-align: center">Virtuoso</h6>
 
+            </div>
+            <div class="individual">
+                <img class="explorers avatars" src="avatars/adventurer.png" width="150" height="150">
+                <h6 style="text-align: center">ISFP</h6>
+                <h6 style="text-align: center">Adventurer</h6>
+
+            </div>
+            <div class="individual">
+                <img class="explorers avatars" src="avatars/entrepreneur.png" width="150" height="150">
+                <h6 style="text-align: center">ESTP</h6>
+                <h6 style="text-align: center">Entrepreneur</h6>
+
+            </div>
+            <div class="individual">
+                <img class="explorers avatars" src="avatars/entertainer.png" width="150" height="150">
+                <h6 style="text-align: center">ESFP</h6>
+                <h6 style="text-align: center">Entrepreneur</h6>
+
+            </div>
+        </div>
         <div class='contains_triangle'>
             <img class='triangle' src="triangle.png" width="32" height="37">
         </div>
     </div>
-
-    <svg id="enneagramSelector" height="600" width="600"></svg>
+    
+    <div> 
+        <h3>What's your Enneagram?</h3>
+        <p>If you don't know your enneagram, find out <a href='https://www.truity.com/test/enneagram-personality-test'  target="_blank">here</a></p>
+        <svg id="enneagramSelector" height="600" width="600"></svg>
+    </div>
+   
 
     <div>
         <svg id="barchart" height="800" width="800" style="margin:50px"></svg>
@@ -218,13 +199,14 @@
         const bubblesmargin = { top: 10, right: 20, bottom: 10, left: 20 };
         const bubblesWidth = width - bubblesmargin.left - bubblesmargin.right;
         const bubblesHeight = height - bubblesmargin.top - bubblesmargin.bottom;
-        let bubbleannotations = bubblessvg.append("g").attr("id", "bubblesannotations");
 
         const getCompatibility = async function () {
             let data = await d3.csv("mbti_clean.csv", d3.autotype);
             console.log('data');
             console.log(data);
             let mbti_counts = await d3.csv("mbti_counts.csv", d3.autotype);
+            console.log('mbti_counts')
+            console.log(mbti_counts)
 
             let running_compat = [];
 
@@ -236,7 +218,7 @@
             })
 
             const bubbleExtent = d3.extent(counts);
-            const bubbleScale = d3.scaleLinear().domain(bubbleExtent).range([20, 75]);
+            const bubbleScale = d3.scaleLinear().domain(bubbleExtent).range([30, 65]);
 
             const mbtiScale = d3.scalePoint().domain(mbtis).range([50, 300]);
 
@@ -246,7 +228,20 @@
 
             const bubblesselector = d3.select("svg#bubbles").append("g");
 
-            packedbubble = bubblesselector.selectAll('g.bubble').data(mbti_counts).join("g").attr("id", "bubble")
+            packedbubble = bubblesselector.selectAll('g.bubble')
+                .data(mbti_counts)
+                .join("g")
+                .attr("id", "bubble")
+                .attr("transform", `translate(${((bubblesWidth / 2) + 110)},${-170})`)
+                .on('mouseover', mouseEntersBubble)
+                .on('mouseout', mouseLeavesBubble);
+
+            let blabels = packedbubble.append("text")
+                .attr("id", "blabel")
+                .attr("text-anchor", "middle")
+                .attr("dominant-baseline", "middle")
+                .attr("dy", ".35em")
+                .attr("font-size", "14px")
 
             var bubblenode = packedbubble.append("circle")
                 .attr("class", "bubbles")
@@ -255,16 +250,9 @@
                 .attr("fill", d => bubblecolorScale(d.mbti))
                 .attr("stroke", "black")
                 .style("stroke-width", 1)
-                .attr('r', d => bubbleScale(d.count));
-            // .on("mouseover", function () { console.log(d3.select(this)) });
-
-
-            let blabels = packedbubble.append("text")
-                .attr("id", "blabel")
-                .attr("text-anchor", "middle")
-                .attr("dominant-baseline", "middle")
-                .attr("dy", ".35em")
-                .attr("font-size", "11px")
+                .attr('r', d => bubbleScale(d.count))
+                .on("mouseover", function () { d3.select(this).attr("r", (bubbleScale(d3.select(this).datum().count) + 10)) })
+                .on("mouseout", function () { d3.select(this).attr("r", (bubbleScale(d3.select(this).datum().count) + 3)) });
 
             var bubblesim = d3.forceSimulation()
                 .nodes(mbti_counts)
@@ -295,11 +283,85 @@
                 bubblesim.tick()
             }
 
+            // Referenced 10/7/22 lecture from INFO 3300 - Jeff R.
+            let tooltipWidth = 200;
+            let tooltipHeight = 65;
+
+            let momesh = bubblesselector.append("path")
+                .attr("class", "mouseover outline")
+                .style("stroke", "black")
+                .style("stroke-width", 3)
+                .attr("d", "");
+
+            let tooltip = bubblesselector.append("g")
+                .attr("class", "tooltip")
+                .attr("visibility", "hidden");
+            tooltip.append("rect")
+                .attr("fill", "black")
+                .attr("opacity", 0.9)
+                .attr("x", -tooltipWidth / 2.0)
+                .attr("y", 0)
+                .attr("rx", 20)
+                .attr("ry", 20)
+                .attr("width", tooltipWidth)
+                .attr("height", tooltipHeight)
+            let txt = tooltip.append("text")
+                .attr("fill", "white")
+                .attr("text-anchor", "middle")
+                .attr("alignment-baseline", "hanging")
+                .attr("x", 0)
+                .attr("y", 2);
+            let txt2 = tooltip.append("text")
+                .attr("fill", "white")
+                .attr("text-anchor", "middle")
+                .attr("alignment-baseline", "hanging")
+                .attr("x", 0)
+                .attr("y", 22);
+
+            let txt3 = tooltip.append("text")
+                .attr("fill", "white")
+                .attr("text-anchor", "middle")
+                .attr("alignment-baseline", "hanging")
+                .attr("x", 0)
+                .attr("y", 42);
+
+
+            function mouseEntersBubble() {
+                tooltip.style("visibility", "visible")
+
+                let selectedbubble = d3.select(this);
+
+                console.log(selectedbubble.datum());
+
+                let selectedbubbleMBTI = selectedbubble.datum().mbti;
+                let selectedbubbleCount = selectedbubble.datum().count;
+                let selectedbubblePercent = selectedbubble.datum().percentage;
+
+
+                txt.text(selectedbubbleMBTI);
+                txt2.text('Total Count: ' + selectedbubbleCount);
+                txt3.text('Percent of Characters: ' + selectedbubblePercent);
+
+                let xPos = selectedbubble.datum().x;
+                let yPos = selectedbubble.datum().y;
+
+                tooltip.attr("transform", `translate(${((bubblesWidth / 2) + 110 + xPos)},${-170 + yPos + 20})`);
+
+            }
+
+            function mouseLeavesBubble() {
+                tooltip.style("visibility", "hidden");
+            }
+
+
             d3.select(".triangle")
                 .on('click', changeAvatars);
 
             function changeAvatars() {
+                titleMBTI = d3.select('#titleMBTI').text('')
+
                 if (d3.selectAll(".analysts").classed("active")) {
+
 
                     d3.selectAll(".analysts")
                         .classed("active", false);
@@ -315,6 +377,9 @@
                         .classed("active", true);
                     d3.selectAll(".diplomats")
                         .classed("hidden", false);
+
+                    titleMBTI.text('Diplomats')
+
 
 
                 }
@@ -336,9 +401,12 @@
                         .classed("active", true);
                     d3.selectAll(".sentinels")
                         .classed("hidden", false);
+                    titleMBTI.text('Sentinels')
+
                 }
 
                 else if (d3.selectAll(".sentinels").classed("active")) {
+
 
                     d3.selectAll(".sentinels")
                         .classed("active", false);
@@ -353,6 +421,9 @@
                         .classed("active", true);
                     d3.selectAll(".explorers")
                         .classed("hidden", false);
+
+                    titleMBTI.text('Explorers')
+
                 }
 
                 else if (d3.selectAll(".explorers").classed("active")) {
@@ -370,6 +441,9 @@
                         .classed("active", true);
                     d3.selectAll(".analysts")
                         .classed("hidden", false);
+
+                    titleMBTI.text('Analysts')
+
                 }
             }
 
@@ -421,6 +495,11 @@
             // getCharacterInfo is a function that returns an 
             function getCharacterInfo(input_mbti, enneagramselected) {
                 // let input_mbti = input_mbti;
+                function getRandomCharacter(arr) {
+                    const randomIndex = Math.floor(Math.random() * arr.length);
+                    let character = arr[randomIndex];
+                    return character;
+                }
 
 
                 if (enneagramselected === false) {
@@ -453,12 +532,6 @@
 
 
                     // console.log(compat);
-
-                    function getRandomCharacter(arr) {
-                        const randomIndex = Math.floor(Math.random() * arr.length);
-                        let character = arr[randomIndex];
-                        return character;
-                    }
 
                     // get random characters from each compat score
 
@@ -525,13 +598,172 @@
                     return [hist_counts, graphNames];
 
 
+                } 
+
+                else if (enneagramselected === true) {  
+  
+                    console.log('running_compat')
+                    console.log(running_compat);
+                    // first run through running_compat and find similarities between enneagrams
+                    // add correct number of points to the 4th position
+                    // make arrays for each bin
+                    // start making ehist_counts where we use the lengths of each bin and use percentage labels
+
+                    enneagram_lines = {}
+                    enneagram_lines["1"] = [7, 4]
+                    enneagram_lines["2"] = [8, 4]
+                    enneagram_lines["3"] = [9, 6]
+                    enneagram_lines["4"] = [1, 2]
+                    enneagram_lines["5"] = [7, 8]
+                    enneagram_lines["6"] = [9, 3]
+                    enneagram_lines["7"] = [5, 1]
+                    enneagram_lines["8"] = [5, 2]
+                    enneagram_lines["9"] = [3, 6]
+
+                    const erunning_compat = running_compat;
+
+                    erunning_compat.forEach((d) => {
+                        characters_e = d[1]
+                        //don't take input_mbti to mean what it suggests.... this is actually the input enneagram
+                        input_e = input_mbti
+
+                        if (characters_e == input_e) {
+                            d[4] = d[4] + 4
+                        }
+
+
+                        else if (enneagram_lines[characters_e].includes(input_e)) {
+                            d[4] = d[4] + 2
+                        }
+                        else {
+                            d[4] = d[4] 
+                        }
+
+                    });
+                    ecompat0 = [];
+                    ecompat12_5 = [];
+                    ecompat25 = [];
+                    ecompat37_5 = [];
+                    ecompat50 = [];
+                    ecompat62_5 = [];
+                    ecompat75 = [];
+                    ecompat87_5 = [];
+                    ecompat100 = [];
+
+                    for (let x = 0; x < erunning_compat.length; x++) {
+                        if (erunning_compat[x]['4'] === 0) {
+                            erunning_compat[x].push('0%');
+                            ecompat0.push(erunning_compat[x]);
+                        }
+                        else if (erunning_compat[x]['4'] === 1) {
+                            erunning_compat[x].push('12.5%');
+                            ecompat12_5.push(erunning_compat[x]);
+                        }
+                        else if (erunning_compat[x]['4'] === 2) {
+                            erunning_compat[x].push('25%');
+                            ecompat25.push(erunning_compat[x]);
+                        }
+                        else if (erunning_compat[x]['4'] === 3) {
+                            erunning_compat[x].push('37.5%');
+                            ecompat37_5.push(erunning_compat[x]);
+                        }
+                        else if (erunning_compat[x]['4'] === 4) {
+                            erunning_compat[x].push('50%');
+                            ecompat50.push(erunning_compat[x]);
+                        }
+                        else if (erunning_compat[x]['4'] === 5) {
+                            erunning_compat[x].push('62.5%');
+                            ecompat62_5.push(erunning_compat[x]);
+                        }
+                        else if (erunning_compat[x]['4'] === 6) {
+                            erunning_compat[x].push('75%');
+                            ecompat75.push(erunning_compat[x]);
+                        }
+                        else if (erunning_compat[x]['4'] === 7) {
+                            erunning_compat[x].push('87.5%');
+                            ecompat87_5.push(erunning_compat[x]);
+                        }
+                        else if (erunning_compat[x]['4'] === 8) {
+                            erunning_compat[x].push('100%');
+                            ecompat100.push(erunning_compat[x]);
+                        }
+                    }
+
+
+
+
+                    // const erunning_compat = [];
+
+
+                    // for (let x = 0; x < running_compat.length; x++) {
+                    //     if (running_compat[x]['4'] === 0) {
+                    //         console.log('running_compat[x]')
+                    //         console.log(x)
+                    //         console.log(running_compat[x])
+                    //         erunning_compat.push(d3.merge([running_compat[x], ['0%']]))
+                    //         // erunning_compat[x].push('0%')
+                    //     }
+                    //     else if (running_compat[x]['4'] === 1) {
+                    //         erunning_compat.push(d3.merge([running_compat[x], ['12.5%']]))
+                    //     }
+                    //     else if (running_compat[x]['4'] === 2) {
+                    //         erunning_compat.push(d3.merge([running_compat[x], ['25%']]))
+                    //     }
+                    //     else if (running_compat[x]['4'] === 3) {
+                    //         erunning_compat.push(d3.merge([running_compat[x], ['37.5%']]))
+                    //     }
+                    //     else if (running_compat[x]['4'] === 4) {
+                    //         erunning_compat.push(d3.merge([running_compat[x], ['50%']]))
+                    //     }
+                    //     else if (running_compat[x]['4'] === 5) {
+                    //         erunning_compat.push(d3.merge([running_compat[x], ['62.5%']]))
+                    //     }
+                    //     else if (running_compat[x]['4'] === 6) {
+                    //         erunning_compat.push(d3.merge([running_compat[x], ['75%']]))
+                    //     }
+                    //     else if (running_compat[x]['4'] === 7) {
+                    //         erunning_compat.push(d3.merge([running_compat[x], ['87.5%']]))
+                    //     }
+                    //     else if (running_compat[x]['4'] === 8) {
+                    //         erunning_compat.push(d3.merge([running_compat[x], ['100%']]))
+                    //     }
+                    // }
+
+                    const ehist_counts = []
+
+                    ehist_counts.push(['100%', ecompat100.length]);
+                    ehist_counts.push(['87.5%', ecompat87_5.length]);
+                    ehist_counts.push(['75%', ecompat75.length]);
+                    ehist_counts.push(['62.5%', ecompat62_5.length]);
+                    ehist_counts.push(['50%', ecompat50.length]);
+                    ehist_counts.push(['37.5%', ecompat37_5.length]);
+                    ehist_counts.push(['25%', ecompat25.length]);
+                    ehist_counts.push(['12.5%', ecompat12_5.length]);
+                    ehist_counts.push(['0%', ecompat0.length]);
+
+                    var egraphNames = [];
+                    egraphNames.push(getRandomCharacter(ecompat0));
+                    egraphNames.push(getRandomCharacter(ecompat12_5));
+                    egraphNames.push(getRandomCharacter(ecompat25));
+                    egraphNames.push(getRandomCharacter(ecompat37_5));
+                    egraphNames.push(getRandomCharacter(ecompat50));
+                    egraphNames.push(getRandomCharacter(ecompat62_5));
+                    egraphNames.push(getRandomCharacter(ecompat75));
+                    egraphNames.push(getRandomCharacter(ecompat87_5));
+                    egraphNames.push(getRandomCharacter(ecompat100));
+
+
+                    console.log('egraphNames');
+                    console.log(egraphNames);
+
+                    graphNamesG = egraphNames;
+
+                    return ehist_counts
+
                 }
 
-                else {
-                    //enneagram is the same - add two points
-                    //enneagram is in the relationship - add one point
 
-                }
+
 
             }
 
@@ -542,19 +774,16 @@
                 .attr("transform", `translate(${margin.left},${margin.top})`);
 
 
-            // intial left axis and gridlines, leave it to update later
-
-            leftAxisScale = d3.scaleBand().domain(["no letters in common",
-                "1 letter in common",
-                "2 letters in common",
-                "3 letters in common",
-                "all letters in common"]).range([chartHeight, 0]).padding(0.05);
+            // let leftAxis = d3.axisLeft(leftAxisScale);
+            // annotations.append("g")
+            //     .attr("class", "y axis")
+            //     .call(leftAxis)
+            //     .attr("transform", `translate(${margin.left - 1}, ${margin.top})`);
 
 
-            let leftAxis = d3.axisLeft(leftAxisScale);
-            annotations.append("g")
+            let leftAxis = d3.axisLeft();
+            let leftAxisG = annotations.append("g")
                 .attr("class", "y axis")
-                .call(leftAxis)
                 .attr("transform", `translate(${margin.left - 1}, ${margin.top})`);
 
             // initial bottom axis and gridlines because these don't change           
@@ -608,6 +837,22 @@
                 console.log('values');
                 console.log(values);
 
+
+
+                // intial left axis and gridlines, leave it to update later
+                //make some condition so function can decide between which axis to create
+                if (alist[0][0] === "all letters in common") {
+                    leftAxisScale = d3.scaleBand().domain(["no letters in common",
+                        "1 letter in common",
+                        "2 letters in common",
+                        "3 letters in common",
+                        "all letters in common"]).range([chartHeight, 0]).padding(0.05);
+                }
+                else {
+                    leftAxisScale = d3.scaleBand().domain(["0%", "12.5%", "25%", "37.5%", "50%", "62.5%", "75%", "87.5%", "100%"]).range([chartHeight, 0]).padding(0.05);
+
+
+                }
                 const histExtent = d3.extent(values)
 
                 console.log('hist extent');
@@ -616,6 +861,10 @@
 
                 bottomAxis.scale(histScale)
                 bottomAxisG.transition().call(bottomAxis);
+
+
+                leftAxis.scale(leftAxisScale)
+                leftAxisG.transition().call(leftAxis);
 
 
                 chartArea.selectAll('rect.bar').data(alist)
@@ -664,192 +913,206 @@
                     .attr("class", "divcard");
 
 
-                console.log('graphNamesG');
-                console.log(graphNamesG);
-                div.append("img").attr("src", graphNamesG[x]['5']).attr("width", "100%").attr("height", "40%").style("background-color", "#EEEE");
-                let textDiv = div.append("div")
-                textDiv.append("h5").html(graphNamesG[x]['6'] + " match");
-                textDiv.append("h4").html(graphNamesG[x]['2']).style('text-transform', 'none');
-                textDiv.append("h5").html(graphNamesG[x]['3']).style('font-style', 'italic').style('text-transform', 'none');
-                textDiv.append("p").html("MBTI: " + graphNamesG[x]['0']);
-                textDiv.append("p").html("enneagram: " + graphNamesG[x]['1'])
+                    console.log('graphNamesG');
+                    console.log(graphNamesG);
 
-                i = i + cardWidth / 5;
-            }
+                    div.append("img").attr("src", graphNamesG[x]['5']).attr("width", "100%").attr("height", "40%").style("background-color", "#EEEE");
+                    let textDiv = div.append("div")
+                    if (graphNamesG[0].length > 7) {
+                        textDiv.append("h5").html(graphNamesG[x]['7'] + " match");
+                    }
+                    else {
+                        textDiv.append("h5").html(graphNamesG[x]['6'] + " match");
+                    }
+                    textDiv.append("h4").html(graphNamesG[x]['2']).style('text-transform', 'none');
+                    textDiv.append("h5").html(graphNamesG[x]['3']).style('font-style', 'italic').style('text-transform', 'none');;
+                    textDiv.append("p").html("MBTI: " + graphNamesG[x]['0']);
+                    textDiv.append("p").html("enneagram: " + graphNamesG[x]['1'])
 
-
-        }
-
-        function barChartColor(mbti) {
-            analysts = ["INTJ", "INTP", "ENTJ", "ENTP"]
-            diplomats = ["INFJ", "INFP", "ENFJ", "ENFP"]
-            sentinels = ["ISTJ", "ISFJ", "ESTJ", "ESFJ"]
-            explorers = ["ISTP", "ISFP", "ESTP", "ESFP"]
-            if (analysts.includes(mbti)) {
-                return "rgb(149,98,123)"
-            }
-            if (diplomats.includes(mbti)) {
-                return "rgb(153,194,108)"
-            }
-            if (sentinels.includes(mbti)) {
-                return "rgb(139,223,220)"
-            }
-            if (explorers.includes(mbti)) {
-                return "rgb(228,199,40)"
-            }
-
-        }
-
-        let origin = 300;
-        let radius = 150;
-        var enneagramSelector = d3.select("svg#enneagramSelector").append('g');
-        // enneagramSelector.append("circle")
-        //     .attr("cx", origin)
-        //     .attr('cy', origin)
-        //     .attr('r', radius)
-        //     .attr('stroke', 'none')
-        //     .attr('fill', 'none');
-
-        let nodeIDs = [9, 1, 2, 3, 4, 5, 6, 7, 8];
-        let nodeDegree = [0, 40, 80, 120, 160, 200, 240, 280, 320];
-        let nodeColor = ['#27749C', '#2FB478', '#6DCD38', '#E6C742', '#FF4C58', '#F856BD', '#D460F1', '#886AEA', '#7399E4', '#7CD4DD']
-        let labels = ['Reformer', 'Helper', 'Achiever', 'Individualist', 'Investigator', 'Loyalist', 'Enthusiast', 'Challenger', 'Peacemaker']
-
-        // nodes = nodes.map(x=>{node:x})
-        // const nodes = nodeID.map((x, i)=> ({}))
-        nodes = []
-        for (let i = 0; i < nodeIDs.length; i++) {
-            dict = { nodeID: nodeIDs[i], degree: nodeDegree[i], color: nodeColor[i], label: labels[i] };
-            nodes.push(dict);
-        }
-
-        links = []
-        sources = [9, 9, 3, 1, 1, 2, 2, 5, 5]
-        targets = [3, 6, 6, 4, 7, 8, 4, 8, 7]
-
-        for (let i = 0; i < sources.length; i++) {
-            dict = { source: sources[i], target: targets[i] };
-            links.push(dict);
-        }
-
-        console.log('nodes', nodes)
-        console.log('links', links)
-
-        nodes.forEach(d => {
-            d.x = origin + (radius * Math.sin(0));
-            d.y = origin - (radius * Math.cos(0));
-
-        })
-
-        var simEnneagram = d3.forceSimulation()
-            .nodes(nodes)
-            .force("links", d3.forceLink()
-                .links(links)
-                .id(d => d['nodeID']))
-            .stop()
-
-
-        // var linkGen = d3.linkHorizontal()
-        //                 .source(function(d){
-        //                     return(d.source)
-        //                 })
-
-        // var enneagramSelectorAnnotations = enneagramSelector.append('g');
-
-        let circles = enneagramSelector.selectAll('g.circleNodes').data(nodes)
-            .join('g')
-            .attr('class', 'circleNode')
-            .attr('transform', d => `rotate(${d.degree},${origin},${origin})`)
-
-        nodeCircles = circles.append('circle')
-            // SOURCE: drawing circles around a circle
-            // https://spin.atomicobject.com/2015/06/12/objects-around-svg-circle-d3-js/
-            .attr('class', 'circle.node')
-            .join('circle')
-            .attr('r', 25)
-            .attr('fill', d => d.color)
-            .attr('cx', d => d.x)
-            .attr('cy', d => d.y)
-            .attr('id', d => d.nodeID);
-        // .attr('transform', d => `rotate(${d.degree},${origin},${origin})`);
-
-
-        let lines = enneagramSelector.selectAll("g.link").data(links)
-            .join('path')
-            .append('path')
-            .attr("class", "link")
-            .style("stroke", "black")
-            .attr('stroke-width', 4)
-            .attr("x1", d => d.source.x * d.source.nodeID).attr("x2", d => d.target.x * d.target.nodeID)
-            .attr("y1", d => d.source.y * d.source.nodeID).attr("y2", d => d.target.y * d.target.nodeID)
-        // .attr('transform','translate(100,100)');
-
-
-        console.log('what', lines)
-
-        nodeLabels = circles
-            .append('text')
-            .text(d => d.nodeID)
-            .attr('pointer-events', 'none')
-            .attr('text-anchor', 'middle')
-            .attr('alignment-baseline', 'middle')
-            .style('font-size', '25px')
-            .attr('fill', 'white')
-            .attr('x', origin + (radius * Math.sin(0)))
-            .attr('y', origin - (radius * Math.cos(0)))
-
-
-        nodeNames = circles
-            .append('text')
-            .text(d => d.label)
-            .attr('pointer-events', 'none')
-            .attr('text-anchor', 'middle')
-            .attr('alignment-baseline', 'middle')
-            .style('font-size', '14px')
-            .attr('fill', 'black')
-            .attr('x', origin + (radius + 10 * Math.sin(0)))
-            .attr('y', origin - (radius * Math.cos(0)))
-            .attr('transform', `translate(-50,-10)`)
-
-
-        nodeCircles
-            .classed('outline', false)
-            .on('mouseover', function () {
-                let enn = d3.select(this);
-                // console.log(enn);
-                enn.transition().duration(100)
-                    .attr("stroke-width", 7)
-                    .style("stroke-opacity", .6)
-                    .style("stroke", 'black')
-            })
-            .on('mouseout', function () {
-                let enn = d3.select(this);
-                let ennOutline = enn.classed('outline');
-                if (!ennOutline) {
-                    // console.log(enn);
-                    enn.transition().duration(200)
-                        .attr("stroke-width", 0)
+                    i = i + cardWidth / 9;
                 }
 
+                //button
+                d3.select('div#buttonContainer').append('button').attr('class', 'randomize').text("Show me new matches!")
+                    .on('click', function () {
+                    })
+
+        }
+
+            function barChartColor(mbti) {
+                analysts = ["INTJ", "INTP", "ENTJ", "ENTP"]
+                diplomats = ["INFJ", "INFP", "ENFJ", "ENFP"]
+                sentinels = ["ISTJ", "ISFJ", "ESTJ", "ESFJ"]
+                explorers = ["ISTP", "ISFP", "ESTP", "ESFP"]
+                if (analysts.includes(mbti)) {
+                    return "rgb(149,98,123)"
+                }
+                if (diplomats.includes(mbti)) {
+                    return "rgb(153,194,108)"
+                }
+                if (sentinels.includes(mbti)) {
+                    return "rgb(139,223,220)"
+                }
+                if (explorers.includes(mbti)) {
+                    return "rgb(228,199,40)"
+                }
+
+            }
+
+
+            let origin = 300;
+            let radius = 150;
+            var enneagramSelector = d3.select("svg#enneagramSelector").append('g');
+            // enneagramSelector.append("circle")
+            //     .attr("cx", origin)
+            //     .attr('cy', origin)
+            //     .attr('r', radius)
+            //     .attr('stroke', 'none')
+            //     .attr('fill', 'none');
+
+            let nodeIDs = [9, 1, 2, 3, 4, 5, 6, 7, 8];
+            let nodeDegree = [0, 40, 80, 120, 160, 200, 240, 280, 320];
+            let nodeColor = ['#27749C', '#2FB478', '#6DCD38', '#E6C742', '#FF4C58', '#F856BD', '#D460F1', '#886AEA', '#7399E4', '#7CD4DD']
+            let labels = ['Reformer', 'Helper', 'Achiever', 'Individualist', 'Investigator', 'Loyalist', 'Enthusiast', 'Challenger', 'Peacemaker']
+
+            // nodes = nodes.map(x=>{node:x})
+            // const nodes = nodeID.map((x, i)=> ({}))
+            nodes = []
+            for (let i = 0; i < nodeIDs.length; i++) {
+                dict = { nodeID: nodeIDs[i], degree: nodeDegree[i], color: nodeColor[i], label: labels[i] };
+                nodes.push(dict);
+            }
+
+            links = []
+            sources = [9, 9, 3, 1, 1, 2, 2, 5, 5]
+            targets = [3, 6, 6, 4, 7, 8, 4, 8, 7]
+
+            for (let i = 0; i < sources.length; i++) {
+                dict = { source: sources[i], target: targets[i] };
+                links.push(dict);
+            }
+
+            console.log('nodes', nodes)
+            console.log('links', links)
+
+            nodes.forEach(d => {
+                d.x = origin + (radius * Math.sin(0));
+                d.y = origin - (radius * Math.cos(0));
+
             })
-            .on('click', function () {
-                nodeCircles.attr('stroke-width', 0).classed('outline', false);
-                let enn = d3.select(this);
-                enn.attr('stroke-width', 7).style('stroke-opacity', .6)
-                let ennID = enn.node().id;
 
+            var simEnneagram = d3.forceSimulation()
+                .nodes(nodes)
+                .force("links", d3.forceLink()
+                    .links(links)
+                    .id(d => d['nodeID']))
+                .stop()
+
+
+            // var linkGen = d3.linkHorizontal()
+            //                 .source(function(d){
+            //                     return(d.source)
+            //                 })
+
+            // var enneagramSelectorAnnotations = enneagramSelector.append('g');
+
+            let circles = enneagramSelector.selectAll('g.circleNodes').data(nodes)
+                .join('g')
+                .attr('class', 'circleNode')
+                .attr('transform', d => `rotate(${d.degree},${origin},${origin})`)
+
+            nodeCircles = circles.append('circle')
+                // SOURCE: drawing circles around a circle
+                // https://spin.atomicobject.com/2015/06/12/objects-around-svg-circle-d3-js/
+                .attr('class', 'circle.node')
+                .join('circle')
+                .attr('r', 25)
+                .attr('fill', d => d.color)
+                .attr('cx', d => d.x)
+                .attr('cy', d => d.y)
+                .attr('id', d => d.nodeID);
+            // .attr('transform', d => `rotate(${d.degree},${origin},${origin})`);
+
+
+            let lines = enneagramSelector.selectAll("g.link").data(links)
+                .join('path')
+                .append('path')
+                .attr("class", "link")
+                .style("stroke", "black")
+                .attr('stroke-width', 4)
+                .attr("x1", d => d.source.x * d.source.nodeID).attr("x2", d => d.target.x * d.target.nodeID)
+                .attr("y1", d => d.source.y * d.source.nodeID).attr("y2", d => d.target.y * d.target.nodeID)
+            // .attr('transform','translate(100,100)');
+
+
+            console.log('what', lines)
+
+            nodeLabels = circles
+                .append('text')
+                .text(d => d.nodeID)
+                .attr('pointer-events', 'none')
+                .attr('text-anchor', 'middle')
+                .attr('alignment-baseline', 'middle')
+                .style('font-size', '25px')
+                .attr('fill', 'white')
+                .attr('x', origin + (radius * Math.sin(0)))
+                .attr('y', origin - (radius * Math.cos(0)))
+
+
+            nodeNames = circles
+                .append('text')
+                .text(d => d.label)
+                .attr('pointer-events', 'none')
+                .attr('text-anchor', 'middle')
+                .attr('alignment-baseline', 'middle')
+                .style('font-size', '14px')
+                .attr('fill', 'black')
+                .attr('x', origin + (radius + 10 * Math.sin(0)))
+                .attr('y', origin - (radius * Math.cos(0)))
+                .attr('transform', `translate(-50,-10)`)
+
+
+            nodeCircles
+                .classed('outline', false)
+                .on('mouseover', function () {
+                    let enn = d3.select(this);
+                    // console.log(enn);
+                    enn.transition().duration(100)
+                        .attr("stroke-width", 7)
+                        .style("stroke-opacity", .6)
+                        .style("stroke", 'black')
+                })
+                .on('mouseout', function () {
+                    let enn = d3.select(this);
+                    let ennOutline = enn.classed('outline');
+                    if (!ennOutline) {
+                        // console.log(enn);
+                        enn.transition().duration(200)
+                            .attr("stroke-width", 0)
+                    }
+
+                })
+                .on('click', function () {
+                    nodeCircles.attr('stroke-width', 0).classed('outline', false);
+                    let enn = d3.select(this);
+                    enn.attr('stroke-width', 7).style('stroke-opacity', .6)
+                    let ennID = enn.node().id;
+
+                    console.log('ennID');
                 console.log(ennID);
-                enn.attr('stroke', 'black')
+                    enn.attr('stroke', 'black')
 
+                    console.log('running_compat when clicking on node')
                 console.log(running_compat);
 
-                enn.classed('outline', true);
+                    enn.classed('outline', true);
 
 
-                //if the second parameter to getCharacterInfo is true, we use running compat in the getcharacterinfo function
-                mbti_bars(getCharacterInfo(0, true))
-                    ;
-            })
+                    //if the second parameter to getCharacterInfo is true, we use running compat in the getcharacterinfo function
+                    //IMPORTANT first parameter is just going to be the ennID to get around accessibility issues
+                    mbtiBars(getCharacterInfo(ennID, true))
+                        ;
+                })
 
         // console.log(links);
 
