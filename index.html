@@ -373,9 +373,11 @@
                 }
             }
 
-
+            
             d3.selectAll(".individual").classed('border', false)
                 .on("click", chooseMBTI)
+
+
                 .on("mouseover", function () {
                     let border = d3.select(this)
                     border.style('border', '3px solid rgb(190, 190, 190)')
@@ -387,7 +389,8 @@
                     if (!borderClass) {
                         border.style('border', '3px solid transparent')
                     }
-                })
+                });
+
 
             function chooseMBTI() {
 
@@ -400,15 +403,20 @@
                 let borderClass = border.classed('border', true)
 
 
-                input_mbti = d3.select(this).select(".individual h6").text();
+                input_mbti = d3.select(this).select(".individual h6").text();           
 
+                // console.log('infoList');
 
+                infoList = getCharacterInfo(input_mbti, false);
+                // console.log('infoList');
+                // console.log(infoList[0]);
+                // console.log(infoList[1]);
 
-                mbtiBars(getCharacterInfo(input_mbti, false));
+                mbtiBars(infoList[0]);
+                makeCards(infoList[1]);
+
             }
-
-            let graphNamesG = [];
-
+         
 
             // getCharacterInfo is a function that returns an 
             function getCharacterInfo(input_mbti, enneagramselected) {
@@ -512,12 +520,9 @@
                     console.log('graphNames');
                     console.log(graphNames);
 
-                    graphNamesG = graphNames;
-
-
                     // return graphNames;
 
-                    return hist_counts
+                    return [hist_counts, graphNames];
 
 
                 }
@@ -527,9 +532,6 @@
                     //enneagram is in the relationship - add one point
 
                 }
-
-
-
 
             }
 
@@ -636,46 +638,47 @@
                         exit => exit.call(exit => exit.transition().attr('opacity', 0).remove()));
 
 
-                // creating the character cards
-                const card = d3.select("svg#cards");
-                const cardWidth = card.attr("width");
-
-                // loop through list of random names, make a card for each character
-                d3.selectAll("foreignObject").remove();
-
-                var i = 10;
-                for (x = 0; x < graphNamesG.length; x++) {
-                    var fo = card.append('foreignObject')
-                        .attr("width", 140)
-                        .attr("height", 350)
-                        .attr("x", 0 + i)
-                        .attr("y", 0);
-
-                    var div = fo.append('xhtml:div')
-                        .attr("transform", `translate(${margin.left},${margin.top})`)
-                        .attr("class", "divcard");
-
-
-                    console.log('graphNamesG');
-                    console.log(graphNamesG);
-                    div.append("img").attr("src", graphNamesG[x]['5']).attr("width", "100%").attr("height", "40%").style("background-color", "#EEEE");
-                    let textDiv = div.append("div")
-                    textDiv.append("h5").html(graphNamesG[x]['6'] + " match");
-                    textDiv.append("h4").html(graphNamesG[x]['2']).style('text-transform', 'none');
-                    textDiv.append("h5").html(graphNamesG[x]['3']).style('font-style', 'italic').style('text-transform', 'none');
-                    textDiv.append("p").html("MBTI: " + graphNamesG[x]['0']);
-                    textDiv.append("p").html("enneagram: " + graphNamesG[x]['1'])
-
-                    i = i + cardWidth / 5;
-                }
-
-                //button
-                d3.select('div#buttonContainer').append('button').attr('class', 'randomize').text("Show me new matches!")
-                .on('click', function(){      
-                })
-
 
             }
+        }
+
+        function makeCards(graphNamesG) {
+
+            // creating the character cards
+            const card = d3.select("svg#cards");
+            const cardWidth = card.attr("width");
+
+            // loop through list of random names, make a card for each character
+            d3.selectAll("foreignObject").remove();
+
+            var i = 10;
+            for (x = 0; x < graphNamesG.length; x++) {
+                var fo = card.append('foreignObject')
+                    .attr("width", 140)
+                    .attr("height", 350)
+                    .attr("x", 0 + i)
+                    .attr("y", 0);
+
+                var div = fo.append('xhtml:div')
+                    .attr("transform", `translate(${margin.left},${margin.top})`)
+                    .attr("class", "divcard");
+
+
+                console.log('graphNamesG');
+                console.log(graphNamesG);
+                div.append("img").attr("src", graphNamesG[x]['5']).attr("width", "100%").attr("height", "40%").style("background-color", "#EEEE");
+                let textDiv = div.append("div")
+                textDiv.append("h5").html(graphNamesG[x]['6'] + " match");
+                textDiv.append("h4").html(graphNamesG[x]['2']).style('text-transform', 'none');
+                textDiv.append("h5").html(graphNamesG[x]['3']).style('font-style', 'italic').style('text-transform', 'none');
+                textDiv.append("p").html("MBTI: " + graphNamesG[x]['0']);
+                textDiv.append("p").html("enneagram: " + graphNamesG[x]['1'])
+
+                i = i + cardWidth / 5;
+            }
+
+
+        }
 
         function barChartColor(mbti) {
             analysts = ["INTJ", "INTP", "ENTJ", "ENTP"]
@@ -696,7 +699,6 @@
             }
 
         }
-
 
         let origin = 300;
         let radius = 150;
@@ -849,21 +851,21 @@
                     ;
             })
 
-            // console.log(links);
+        // console.log(links);
 
 
 
-            // const link = d3.linkHorizontal()({
-            //     source: nodes[0],
-            //     target: nodes[1]
-            // });
+        // const link = d3.linkHorizontal()({
+        //     source: nodes[0],
+        //     target: nodes[1]
+        // });
 
 
-            // linksG = enneagramSelector.append('path')
-            //     .attr('d', links[0])
+        // linksG = enneagramSelector.append('path')
+        //     .attr('d', links[0])
 
 
-        }
+
 
 
         getCompatibility();
