@@ -289,9 +289,6 @@
             <div class='card_container'>
                 <svg id="cards" height="800" width="800"></svg>
             </div>
-            <div class="randomButton">
-                <button></button>
-            </div>
 
         </div>
     </div>
@@ -943,12 +940,6 @@
                     
                 }
             }
-
-            d3.selectAll(".randomButton").on("click", function () {
-                infoList = getCharacterInfo(running_mbti, false);
-                makeCards(infoList[1]);
-            });
-
             function barChartColor(mbti) {
                 analysts = ["INTJ", "INTP", "ENTJ", "ENTP"]
                 diplomats = ["INFJ", "INFP", "ENFJ", "ENFP"]
