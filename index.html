@@ -51,14 +51,11 @@
 
     .second_part {
         display: flex;
-        display: flex;
         flex-direction: column;
         width: 650;
         height: 300;
     }
 
-    .questions {
-        display: flex;
     .questions {
         display: flex;
         flex-direction: column;
@@ -130,6 +127,7 @@
     </div>
     <h3>Overall Distribution of MBTI for Movie Characters</h3>
     <svg id="bubbles" height="350" width="100%"></svg>
+<div class = "main">
     <div class="questions">
         <div class="first_part">
             <div class="question">
@@ -297,6 +295,7 @@
 
         </div>
     </div>
+</div>
 
     <script>
 
@@ -887,7 +886,6 @@
 
 
             function makeCards(graphNamesG) {
-            function makeCards(graphNamesG) {
 
                 // creating the character cards
                 const card = d3.select("svg#cards");
@@ -1098,8 +1096,8 @@
                 })
 
 
-
-        }
+            }
+        
         getCompatibility();
 
 
