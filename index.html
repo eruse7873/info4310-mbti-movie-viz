@@ -292,13 +292,17 @@
             console.log('mbti_counts')
             console.log(mbti_counts)
 
-            let running_compat = [];
+            var running_compat = [];
 
             const counts = []
-            const mbtis = []
+            const mbtis = ["ENTJ","ENTP","INTJ","INTP", "INFJ", "INFP", "ENFJ", "ENFP", 
+                            "ISTJ", "ISFJ", "ESTJ", "ESFJ", "ISTP", "ISFP", "ESTP", "ESFP"]
+            const mbtiColors = ["rgb(115,77,95)", "rgb(179,135,157)", "rgb(88, 65, 100)", "rgb(144, 117, 159)",
+                                "rgb(153, 194, 108)", "rgb(90, 117, 60)", "rgb(68, 96, 36)", "rgb(111, 157, 82)",
+                                "rgb(28, 118, 120)", "rgb(54, 147, 149)", "rgb(113, 202, 204)", "rgb(94, 192, 217)",
+                                "rgb(228, 199, 40)", "rgb(190, 143, 0)", "rgb(244, 214, 93)", "rgb(204, 172, 19)"];
             mbti_counts.forEach((d) => {
                 counts.push(parseInt(d.count));
-                mbtis.push(d.mbti);
             })
 
             const bubbleExtent = d3.extent(counts);
@@ -308,7 +312,7 @@
 
             var bubblecolorScale = d3.scaleOrdinal()
                 .domain(mbtis)
-                .range(d3.schemeSet1);
+                .range(mbtiColors);
 
             const bubblesselector = d3.select("svg#bubbles").append("g");
 
@@ -325,18 +329,25 @@
                 .attr("text-anchor", "middle")
                 .attr("dominant-baseline", "middle")
                 .attr("dy", ".35em")
-                .attr("font-size", "14px")
+                .attr("font-size", "16px")
+                .attr("font-weight","bold")
+                .attr("fill", 'white')
+                .attr('pointer-events','none')
 
             var bubblenode = packedbubble.append("circle")
                 .attr("class", "bubbles")
                 .attr('cx', 0)
                 .attr('cy', bubblesHeight / 2)
                 .attr("fill", d => bubblecolorScale(d.mbti))
-                .attr("stroke", "black")
-                .style("stroke-width", 1)
+                .attr("stroke", "none")
+                .style("stroke-width", 0)
                 .attr('r', d => bubbleScale(d.count))
-                .on("mouseover", function () { d3.select(this).attr("r", (bubbleScale(d3.select(this).datum().count) + 10)) })
-                .on("mouseout", function () { d3.select(this).attr("r", (bubbleScale(d3.select(this).datum().count) + 3)) });
+                .on("mouseover", function () { 
+                    thisBubble = d3.select(this);
+                    thisBubble.transition(100).attr("r", (bubbleScale(thisBubble.datum().count) + 10)) })
+                .on("mouseout", function () {
+                    thisBubble = d3.select(this);
+                    thisBubble.transition(100).attr("r", (bubbleScale(thisBubble.datum().count))) });
 
             var bubblesim = d3.forceSimulation()
                 .nodes(mbti_counts)
@@ -368,46 +379,44 @@
             }
 
             // Referenced 10/7/22 lecture from INFO 3300 - Jeff R.
-            let tooltipWidth = 200;
-            let tooltipHeight = 65;
+            let tooltipWidth = 220;
+            let tooltipHeight = 60;
 
-            let momesh = bubblesselector.append("path")
-                .attr("class", "mouseover outline")
-                .style("stroke", "black")
-                .style("stroke-width", 3)
-                .attr("d", "");
 
             let tooltip = bubblesselector.append("g")
                 .attr("class", "tooltip")
                 .attr("visibility", "hidden");
             tooltip.append("rect")
                 .attr("fill", "black")
-                .attr("opacity", 0.9)
+                .attr("opacity", 0.7)
                 .attr("x", -tooltipWidth / 2.0)
                 .attr("y", 0)
                 .attr("rx", 20)
                 .attr("ry", 20)
                 .attr("width", tooltipWidth)
                 .attr("height", tooltipHeight)
+                
             let txt = tooltip.append("text")
                 .attr("fill", "white")
                 .attr("text-anchor", "middle")
                 .attr("alignment-baseline", "hanging")
                 .attr("x", 0)
-                .attr("y", 2);
+                .attr("y", 2)
+                // .attr("padding-top", '5')
+
             let txt2 = tooltip.append("text")
                 .attr("fill", "white")
                 .attr("text-anchor", "middle")
                 .attr("alignment-baseline", "hanging")
                 .attr("x", 0)
-                .attr("y", 22);
+                .attr("y", 22)
 
             let txt3 = tooltip.append("text")
                 .attr("fill", "white")
                 .attr("text-anchor", "middle")
                 .attr("alignment-baseline", "hanging")
                 .attr("x", 0)
-                .attr("y", 42);
+                .attr("y", 42)
 
 
             function mouseEntersBubble() {
@@ -424,7 +433,7 @@
 
                 txt.text(selectedbubbleMBTI);
                 txt2.text('Total Count: ' + selectedbubbleCount);
-                txt3.text('Percent of Characters: ' + selectedbubblePercent);
+                txt3.text('% of Characters: ' + selectedbubblePercent);
 
                 let xPos = selectedbubble.datum().x;
                 let yPos = selectedbubble.datum().y;
@@ -603,10 +612,12 @@
 
                         // create array of character name, movie title, and compatibility
                         // push to object array
+
                         let info = [data[x]['mbti'], data[x]['enn_1'], data[x]['role'], data[x]['movie'], count, data[x]['img_filepath']];
                         compat.push(info);
                     }
 
+                   
                     running_compat = compat;
 
 
