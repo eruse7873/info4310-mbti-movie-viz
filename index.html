@@ -273,7 +273,7 @@
                 .data(mbti_counts)
                 .join("g")
                 .attr("id", "bubble")
-                .attr("transform", `translate(${((bubblesWidth / 2) + 110)},${-170})`)
+                .attr("transform", `translate(${((bubblesWidth / 2) + 110)},${-100})`)
                 .on('mouseover', mouseEntersBubble)
                 .on('mouseout', mouseLeavesBubble);
 
@@ -386,7 +386,7 @@
                 let xPos = selectedbubble.datum().x;
                 let yPos = selectedbubble.datum().y;
 
-                tooltip.attr("transform", `translate(${((bubblesWidth / 2) + 110 + xPos)},${-170 + yPos + 20})`);
+                tooltip.attr("transform", `translate(${((bubblesWidth / 2) + 110 + xPos)},${-100 + yPos + 20})`);
 
             }
 
