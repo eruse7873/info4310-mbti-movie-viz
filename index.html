@@ -906,10 +906,6 @@
                 }
                 else {enneagramcards = graphNamesG;}
 
-
-
-                // loop through list of random names, make a card for each character
-                d3.selectAll("foreignObject").remove();
                 // loop through list of random names, make a card for each character
                 d3.selectAll("foreignObject").remove();
 
@@ -928,13 +924,22 @@
 
                     div.append("img").attr("src", enneagramcards[x]['5']).attr("width", "100%").attr("height", "40%").style("background-color", "#EEEE");
                     let textDiv = div.append("div")
-
+                    if (graphNamesG.length>7){
+                        textDiv.append("h5").html(enneagramcards[x]['7'] + " match");
+                        textDiv.append("h4").html(enneagramcards[x]['2']).style('text-transform', 'none');
+                        textDiv.append("h5").html(enneagramcards[x]['3']).style('font-style', 'italic').style('text-transform', 'none');
+                        textDiv.append("p").html("MBTI: " + enneagramcards[x]['0']);
+                        textDiv.append("p").html("enneagram: " + enneagramcards[x]['1'])
+                        i = i + cardWidth / 5;
+                    }
+                    else {
                         textDiv.append("h5").html(enneagramcards[x]['6'] + " match");
                         textDiv.append("h4").html(enneagramcards[x]['2']).style('text-transform', 'none');
                         textDiv.append("h5").html(enneagramcards[x]['3']).style('font-style', 'italic').style('text-transform', 'none');
                         textDiv.append("p").html("MBTI: " + enneagramcards[x]['0']);
                         textDiv.append("p").html("enneagram: " + enneagramcards[x]['1'])
                         i = i + cardWidth / 5;
+                    }
                     
                 }
             }
