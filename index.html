@@ -635,23 +635,23 @@
 
                     for (let x = 0; x < compat.length; x++) {
                         if (compat[x]['4'] === 0) {
-                            compat[x].push('0%');
+                            compat[x].push('0% Compatible');
                             compat0.push(compat[x]);
                         }
                         else if (compat[x]['4'] === 1) {
-                            compat[x].push('25%');
+                            compat[x].push('25% Compatible');
                             compat25.push(compat[x]);
                         }
                         else if (compat[x]['4'] === 2) {
-                            compat[x].push('50%');
+                            compat[x].push('50% Compatible');
                             compat50.push(compat[x]);
                         }
                         else if (compat[x]['4'] === 3) {
-                            compat[x].push('75%');
+                            compat[x].push('75% Compatible');
                             compat75.push(compat[x]);
                         }
                         else if (compat[x]['4'] === 4) {
-                            compat[x].push('100%');
+                            compat[x].push('100% Compatible');
                             compat100.push(compat[x]);
                         }
                     }
@@ -665,11 +665,11 @@
                     //hist_counts contains counts the number of characters in each compatability bracket. To be used in the histogram.
                     const hist_counts = []
 
-                    hist_counts.push(['all letters in common', compat100.length]);
-                    hist_counts.push(['3 letters in common', compat75.length]);
-                    hist_counts.push(['2 letters in common', compat50.length]);
-                    hist_counts.push(['1 letter in common', compat25.length]);
-                    hist_counts.push(['no letters in common', compat0.length]);
+                    hist_counts.push(['All MBTI Traits', compat100.length]);
+                    hist_counts.push(['3 MBTI Traits', compat75.length]);
+                    hist_counts.push(['2 MBTI Traits', compat50.length]);
+                    hist_counts.push(['1 MBTI Traits', compat25.length]);
+                    hist_counts.push(['No MBTI Traits', compat0.length]);
 
                     // graphNames contains one random character from each mbti compat
 
@@ -822,15 +822,15 @@
 
                     const ehist_counts = []
 
-                    ehist_counts.push(['100%', ecompat100.length]);
-                    ehist_counts.push(['87.5%', ecompat87_5.length]);
-                    ehist_counts.push(['75%', ecompat75.length]);
-                    ehist_counts.push(['62.5%', ecompat62_5.length]);
-                    ehist_counts.push(['50%', ecompat50.length]);
-                    ehist_counts.push(['37.5%', ecompat37_5.length]);
-                    ehist_counts.push(['25%', ecompat25.length]);
-                    ehist_counts.push(['12.5%', ecompat12_5.length]);
-                    ehist_counts.push(['0%', ecompat0.length]);
+                    ehist_counts.push(['100% Compatible', ecompat100.length]);
+                    ehist_counts.push(['87.5% Compatible', ecompat87_5.length]);
+                    ehist_counts.push(['75% Compatible', ecompat75.length]);
+                    ehist_counts.push(['62.5% Compatible', ecompat62_5.length]);
+                    ehist_counts.push(['50% Compatible', ecompat50.length]);
+                    ehist_counts.push(['37.5% Compatible', ecompat37_5.length]);
+                    ehist_counts.push(['25% Compatible', ecompat25.length]);
+                    ehist_counts.push(['12.5% Compatible', ecompat12_5.length]);
+                    ehist_counts.push(['0% Compatible', ecompat0.length]);
 
                     var egraphNames = [];
                     egraphNames.push(getRandomCharacter(ecompat0));
@@ -874,7 +874,7 @@
 
             let leftAxis = d3.axisLeft();
             let leftAxisG = annotations.append("g")
-                .attr("class", "y axis")
+                .attr("class", "y-axis")
                 .attr("transform", `translate(${margin.left - 1}, ${margin.top})`);
 
             // initial bottom axis and gridlines because these don't change           
@@ -886,7 +886,7 @@
 
             let bottomAxis = d3.axisBottom();
             let bottomAxisG = annotations.append("g")
-                .attr("class", "x axis")
+                .attr("class", "x-axis")
                 .attr("transform", `translate(${margin.left - 1},${chartHeight + margin.top})`)
 
 
@@ -932,15 +932,15 @@
 
                 // intial left axis and gridlines, leave it to update later
                 //make some condition so function can decide between which axis to create
-                if (alist[0][0] === "all letters in common") {
-                    leftAxisScale = d3.scaleBand().domain(["no letters in common",
-                        "1 letter in common",
-                        "2 letters in common",
-                        "3 letters in common",
-                        "all letters in common"]).range([chartHeight, 0]).padding(0.05);
+                if (alist[0][0] === "All MBTI Traits") {
+                    leftAxisScale = d3.scaleBand().domain(["No MBTI Traits",
+                        "1 MBTI Trait",
+                        "2 MBTI Traits",
+                        "3 MBTI Traits",
+                        "All MBTI Traits"]).range([chartHeight, 0]).padding(0.05);
                 }
                 else {
-                    leftAxisScale = d3.scaleBand().domain(["0%", "12.5%", "25%", "37.5%", "50%", "62.5%", "75%", "87.5%", "100%"]).range([chartHeight, 0]).padding(0.05);
+                    leftAxisScale = d3.scaleBand().domain(["0% Compatible", "12.5% Compatible", "25% Compatible", "37.5% Compatible", "50% Compatible", "62.5% Compatible", "75% Compatible", "87.5% Compatible", "100% Compatible"]).range([chartHeight, 0]).padding(0.05);
 
 
                 }

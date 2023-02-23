@@ -153,3 +153,13 @@ div.avatar_group{
 .randomize:hover {
     background-color: rgb(220, 220, 220);
 }
+
+.y-axis{
+    font-size: 14px;
+    font-family: 'Franklin Gothic';
+}
+.x-axis{
+    font-size: 12px;
+    font-family: 'Franklin Gothic';
+
+}
