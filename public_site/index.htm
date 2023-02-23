@@ -41,13 +41,14 @@
     .first_part {
         display: flex;
         flex-direction: column;
-        width: 650;
+        width: 700;
         height: 550;
     }
 
     .question {
         text-align: center;
     }
+   
 
     .second_part {
         display: flex;
@@ -65,13 +66,15 @@
     .visualizations {
         display: flex;
         flex-direction: column;
-        width: 600;
+        width: 780;
+        margin-right:0;
     }
 
     .main {
         display: flex;
         flex-direction: row;
         row-gap: 10px;
+        max-width: 100%;
     }
 
     .card_container {
@@ -287,7 +290,7 @@
 
             </div>
             <div class='card_container'>
-                <svg id="cards" height="800" width="800"></svg>
+                <svg id="cards" height="800" width="780"></svg>
             </div>
 
         </div>
@@ -906,11 +909,11 @@
                 // loop through list of random names, make a card for each character
                 d3.selectAll("foreignObject").remove();
 
-                var i = 10;
+                var i = 5;
                 for (x = 0; x < enneagramcards.length; x++) {
 
                     var fo = card.append('foreignObject')
-                        .attr("width", 140)
+                        .attr("width", 130)
                         .attr("height", 350)
                         .attr("x", 0 + i)
                         .attr("y", 0);
