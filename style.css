@@ -26,16 +26,16 @@ h6 {
     margin-right: 10px;
 } */
 
-
+/* 
 .flex-container{
     display:flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 .flex-row1{
     display: flex;
     flex-direction: row;
 
-}
+} */
 .flex-row2{
     display:flex;
     flex-direction: row;
