@@ -59,13 +59,13 @@
     .questions {
         display: flex;
         flex-direction: column;
-        width: 800;
+        width: 750;
     }
 
     .visualizations {
         display: flex;
         flex-direction: column;
-        width: 800;
+        width: 600;
     }
 
     .main {
@@ -283,7 +283,7 @@
         <div class="visualizations">
             <div class="question">
                 <h3>Your Movie Character Matches!</h3>
-                <svg id="barchart" height="600" width="800"></svg>
+                <svg id="barchart" height="600" width="600"></svg>
 
             </div>
             <div class='card_container'>
@@ -346,7 +346,7 @@
                 .data(mbti_counts)
                 .join("g")
                 .attr("id", "bubble")
-                .attr("transform", `translate(${((bubblesWidth / 2) - 100)},${-100})`)
+                .attr("transform", `translate(${((bubblesWidth / 2) + 110)},${-100})`)
                 .on('mouseover', mouseEntersBubble)
                 .on('mouseout', mouseLeavesBubble);
 
@@ -463,7 +463,7 @@
                 let xPos = selectedbubble.datum().x;
                 let yPos = selectedbubble.datum().y;
 
-                tooltip.attr("transform", `translate(${((bubblesWidth / 2) -100 + xPos)},${-100 + yPos + 20})`);
+                tooltip.attr("transform", `translate(${((bubblesWidth / 2) +110 + xPos)},${-100 + yPos + 20})`);
 
             }
 
