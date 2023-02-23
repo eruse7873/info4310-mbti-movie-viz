@@ -222,7 +222,7 @@
 
 
     <div>
-        <svg id="barchart" height="800" width="800" style="margin:50px"></svg>
+        <svg id="barchart" height="600" width="800" style="margin:50px"></svg>
         <div id="buttonContainer"></div>
         <svg id="cards" height="450" width="800" style="margin:50px"></svg>
 
@@ -280,7 +280,7 @@
                 .data(mbti_counts)
                 .join("g")
                 .attr("id", "bubble")
-                .attr("transform", `translate(${((bubblesWidth / 2) + 110)},${-170})`)
+                .attr("transform", `translate(${((bubblesWidth / 2) + 110)},${-100})`)
                 .on('mouseover', mouseEntersBubble)
                 .on('mouseout', mouseLeavesBubble);
 
@@ -398,7 +398,7 @@
                 let xPos = selectedbubble.datum().x;
                 let yPos = selectedbubble.datum().y;
 
-                tooltip.attr("transform", `translate(${((bubblesWidth / 2) + 110 + xPos)},${-170 + yPos + 20})`);
+                tooltip.attr("transform", `translate(${((bubblesWidth / 2) + 110 + xPos)},${-100 + yPos + 20})`);
 
             }
 
@@ -432,9 +432,6 @@
                         .classed("hidden", false);
 
                     titleMBTI.text('Diplomats')
-
-
-
                 }
 
 
@@ -521,7 +518,6 @@
 
             function chooseMBTI() {
 
-                //estelle is trying to change the border on click 
                 d3.selectAll(".individual").style('border', '3px solid transparent').classed('border', false);
 
                 // d3.selectAll(".individual:hover").style('border','rgb(190, 190, 190)');
@@ -941,7 +937,7 @@
                             .attr("width", d => histScale(d[1]) - histScale(0))),
                         exit => exit.call(exit => exit.transition().attr('opacity', 0).remove()));
             }
-        }
+        
 
         function makeCards(graphNamesG) {
 
@@ -1117,7 +1113,8 @@
             .attr('y', origin - (radius * Math.cos(0)))
             .attr('transform', `translate(-50,-10)`)
 
-
+        console.log('running_compat outside of onclick node')
+        console.log(running_compat)
         nodeCircles
             .classed('outline', false)
             .on('mouseover', function () {
@@ -1144,20 +1141,19 @@
                 enn.attr('stroke-width', 7).style('stroke-opacity', .6)
                 let ennID = enn.node().id;
 
-                    console.log('ennID');
-                    console.log(ennID);
-                    enn.attr('stroke', 'black')
+                console.log('ennID');
+                console.log(ennID);
+                enn.attr('stroke', 'black')
 
-                    console.log('running_compat when clicking on node')
-                    console.log(running_compat);
+                console.log('running_compat when clicking on node')
+                console.log(running_compat);
 
                 enn.classed('outline', true);
 
 
                 //if the second parameter to getCharacterInfo is true, we use running compat in the getcharacterinfo function
                 //IMPORTANT first parameter is just going to be the ennID to get around accessibility issues
-                mbtiBars(getCharacterInfo(ennID, true))
-                    ;
+                mbtiBars(getCharacterInfo(ennID, true));
             })
 
         // console.log(links);
@@ -1176,7 +1172,7 @@
 
 
 
-
+        }
         getCompatibility();
 
 
