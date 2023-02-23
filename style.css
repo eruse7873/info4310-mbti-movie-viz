@@ -134,11 +134,6 @@ div.avatar_group{
     pointer-events: none;
 }
 
-#buttonContainer{
-    display:grid;
-    justify-content: center;
-    align-items: center;
-}
 .randomize {
     padding: 15px 35px;
     margin:auto;
