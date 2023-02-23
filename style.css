@@ -2,15 +2,31 @@ html {
     font-family:'Franklin Gothic',  sans-serif;
 }
 
+h1{
+    
+    text-align: center;
+    margin:5px;
+    padding-top:50px;
+    color: #ff56b3;
+}
+
+h2{
+    
+    text-align: center;
+    margin:5px;
+    margin-bottom:30px;
+    color: #a10159;
+}
 h3 {
     text-align:center;
     font-size:25px;
+    color: #ff56b3;
 }
 h4 {
     font-size:22px;
     text-align: center;
     text-transform: uppercase;
-    margin-bottom:0;
+    margin:15px;
 
 }
 h5 {
@@ -24,8 +40,24 @@ h6 {
     margin-top:5;
  }
 
+#intro{
+    font-size: 18px;
+    line-height: 22px;
+}
+#info {
+    margin-left:7%;
+    margin-right:10%;
+    line-height: 20px;
+}
+summary {
+    font-style: italic;
+    font-size:20px;
+    text-align: center;
+    color: #a10159;
+}
+
  .citation {
-    font-size: 10px;
+    font-size: 14px;
     font-style: italic;
     margin:3px;   
 }
@@ -123,3 +155,13 @@ div.avatar_group{
 }
 
 
+
+.y-axis{
+    font-size: 14px;
+    font-family: 'Franklin Gothic';
+}
+.x-axis{
+    font-size: 12px;
+    font-family: 'Franklin Gothic';
+
+}

@@ -51,11 +51,14 @@
 
     .second_part {
         display: flex;
+        display: flex;
         flex-direction: column;
         width: 650;
         height: 300;
     }
 
+    .questions {
+        display: flex;
     .questions {
         display: flex;
         flex-direction: column;
@@ -82,161 +85,202 @@
 </style>
 
 <body>
-
-    <svg id="bubbles" height="400" width="100%"></svg>
-
-    <div class="main">
-        <div class="questions">
-            <div class="first_part">
-                <div class="question">
-                    <h3>What's your MBTI?</h3>
-                    <p>If you don't know your Myers-Briggs Type Indicator, take the test <a
-                            href='https://www.16personalities.com/free-personality-test' target="_blank">here!</a></p>
-                    <p class=citation>image sources: <a href='https://www.16personalities.com/'
-                            target="_blank">https://www.16personalities.com/</a></p>
-                </div>
-                <div>
-                    <h4 id="titleMBTI">Analysts</h4>
-                </div>
-                <div>
-                    <div class="avatar_selector">
-
-                        <!-- <svg id="avatar_display" height="300" width="550"></svg> -->
-                        <div class="active analysts display">
-                            <!-- <h5>Analysts</h5> -->
-
-                            <div class="individual">
-                                <img class="analyst avatars" src="avatars/architect.png" width="150" height="150">
-                                <h6 style="text-align: center">INTJ</h6>
-                                <h6 style="text-align: center">Architect</h6>
-
-                            </div>
-                            <div class="individual">
-                                <img class="analyst avatars" src="avatars/logician.png" width="150" height="150">
-                                <h6 style="text-align: center">INTP</h6>
-                                <h6 style="text-align: center">Logician</h6>
-
-                            </div>
-                            <div class="individual">
-                                <img class="analyst avatars" src="avatars/commander.png" width="150" height="150">
-                                <h6 style="text-align: center">ENTJ</h6>
-                                <h6 style="text-align: center">Commander</h6>
-
-                            </div>
-                            <div class="individual">
-                                <img class="analyst avatars" src="avatars/debater.png" width="150" height="150">
-                                <h6 style="text-align: center">ENTP</h6>
-                                <h6 style="text-align: center">Debater</h6>
-
-                            </div>
-                        </div>
-
-                        <div class="hidden diplomats display">
-
-                            <!-- <h5>Diplomats</h5> -->
-                            <div class="individual">
-
-                                <img class="diplomats avatars" src="avatars/advocate.png" width="150" height="150">
-                                <h6 style="text-align: center">INFJ</h6>
-                                <h6 style="text-align: center">Advocate</h6>
-
-                            </div>
-                            <div class="individual">
-                                <img class="diplomats avatars" src="avatars/mediator.png" width="150" height="150">
-                                <h6 style="text-align: center">INFP</h6>
-                                <h6 style="text-align: center">Mediator</h6>
-
-                            </div>
-                            <div class="individual">
-                                <img class="diplomats avatars" src="avatars/protagonist.png" width="150" height="150">
-                                <h6 style="text-align: center">ENFJ</h6>
-                                <h6 style="text-align: center">Protagonist</h6>
-
-                            </div>
-                            <div class="individual">
-                                <img class="diplomats avatars" src="avatars/campaigner.png" width="150" height="150">
-                                <h6 style="text-align: center">ENFP</h6>
-                                <h6 style="text-align: center">Campaigner</h6>
-
-                            </div>
-                        </div>
-
-                        <div class="hidden sentinels display">
-                            <!-- <h5>Sentinels</h5> -->
-                            <div class="individual">
-                                <img class="sentinels avatars" src="avatars/logistician.png" width="150" height="150">
-                                <h6 style="text-align: center">ISTJ</h6>
-                                <h6 style="text-align: center">Logistician</h6>
-
-                            </div>
-                            <div class="individual">
-                                <img class="sentinels avatars" src="avatars/defender.png" width="150" height="150">
-                                <h6 style="text-align: center">ISFJ</h6>
-                                <h6 style="text-align: center">Defender</h6>
-
-                            </div>
-                            <div class="individual">
-                                <img class="sentinels avatars" src="avatars/executive.png" width="150" height="150">
-                                <h6 style="text-align: center">ESTJ</h6>
-                                <h6 style="text-align: center">Executive</h6>
-
-                            </div>
-                            <div class="individual">
-                                <img class="sentinels avatars" src="avatars/consul.png" width="150" height="150">
-                                <h6 style="text-align: center">ESFJ</h6>
-                                <h6 style="text-align: center">Consul</h6>
-
-                            </div>
-                        </div>
-
-                        <div class="hidden explorers display">
-                            <div class="individual">
-                                <img class="explorers avatars" src="avatars/virtuoso.png" width="150" height="150">
-                                <h6 style="text-align: center">ISTP</h6>
-                                <h6 style="text-align: center">Virtuoso</h6>
-
-                            </div>
-                            <div class="individual">
-                                <img class="explorers avatars" src="avatars/adventurer.png" width="150" height="150">
-                                <h6 style="text-align: center">ISFP</h6>
-                                <h6 style="text-align: center">Adventurer</h6>
-
-                            </div>
-                            <div class="individual">
-                                <img class="explorers avatars" src="avatars/entrepreneur.png" width="150" height="150">
-                                <h6 style="text-align: center">ESTP</h6>
-                                <h6 style="text-align: center">Entrepreneur</h6>
-
-                            </div>
-                            <div class="individual">
-                                <img class="explorers avatars" src="avatars/entertainer.png" width="150" height="150">
-                                <h6 style="text-align: center">ESFP</h6>
-                                <h6 style="text-align: center">Entertainer</h6>
-
-                            </div>
-                        </div>
-
-                        <div class='contains_triangle'>
-                            <img class='triangle' src="triangle.png" width="32" height="37">
-                        </div>
-
-                    </div>
-                </div>
+    <h1>Are You the Main Character?</h1>
+    <h2>Find Your Movie Character Personality Compatibility Matches</h2>
+    <div id=info>
+        <p id =intro>
+            <a href="https://www.personality-database.com/" target="blank">Personality Database</a>
+            is a popular wiki website in which fans vote and guess their favorite fictional characters' personality
+            types.
+            This visualization uses a <a href='https://www.kaggle.com/datasets/subinium/movie-character-mbti-dataset'
+                target="_blank">dataset</a> that contains almost 12,000 movie characters and their voted MBTI and
+            Enneagram
+            types, collected
+            in 2021 by a Kaggle user. Selecting your MBTI and enneagram scores to discover how many movie
+            characters are similar to you and who some of them are!
+        <details>
+            <summary>How are my compatibilites calculated?</summary>
+            <p >
+                Your movie character compatibilities are calculated using a scoring system of 0-4. Each MBTI consists of
+                four letters with binary options corresponding to 1 point. If you also select an enneagram, which is
+                also
+                worth
+                4 points, scores are
+                calculated using a scoring system of 0-8.
+            <p>Example I : You select INFP,</p>
+            <ul>
+                <li>Character A is also INFP. A gets 4 points because every letter matches. 4/4 = 100% compatibility.
+                </li>
+                <li>Character B is ESTJ. B gets 1 point because 1 letters match. 1/4 = 25% compatibility.</li>
+            </ul>
+            And all the characters in the dataset will receive a score corresponding to you!
+            </p>
+            <p>
+                Example II: You also select an enneagram of 9.
+            <ul>
+                <li>Character A is also a 9! A gets 4 more points for a total and max of 8 points. 8/8 = 100%
+                    compatibility.
+                </li>
+                <li>Character B is a 3. Enneagram types are related to others (see the selector below), and 3 is related
+                    to
+                    9! B gets 2 more points for a total of 3/8 = 37.5% compatibliity.</li>
+            </ul>
+            </p>
+        </details>
+    </div>
+    <h3>Overall Distribution of MBTI for Movie Characters</h3>
+    <svg id="bubbles" height="350" width="100%"></svg>
+    <div class="questions">
+        <div class="first_part">
+            <div class="question">
+                <h3>What's your MBTI?</h3>
+                <p>If you don't know your Myers-Briggs Type Indicator, take the test <a
+                        href='https://www.16personalities.com/free-personality-test' target="_blank">here!</a></p>
+                <p class=citation>image sources: <a href='https://www.16personalities.com/'
+                        target="_blank">https://www.16personalities.com/</a></p>
             </div>
+            <div>
+                <h4 id="titleMBTI">Analysts</h4>
+            </div>
+            <div>
+                <div class="avatar_selector">
 
+                    <!-- <svg id="avatar_display" height="300" width="550"></svg> -->
+                    <div class="active analysts display">
+                        <!-- <h5>Analysts</h5> -->
 
+                        <div class="individual">
+                            <img class="analyst avatars" src="avatars/architect.png" width="150" height="150">
+                            <h6 style="text-align: center">INTJ</h6>
+                            <h6 style="text-align: center">Architect</h6>
 
-            <div class='second_part'>
-                <div class="question">
-                    <h3>What's your Enneagram?</h3>
-                    <p>If you don't know your enneagram, find out <a
-                            href='https://www.truity.com/test/enneagram-personality-test' target="_blank">here</a></p>
-                </div>
-                <div>
-                    <svg id="enneagramSelector" height="600" width="600"></svg>
+                        </div>
+                        <div class="individual">
+                            <img class="analyst avatars" src="avatars/logician.png" width="150" height="150">
+                            <h6 style="text-align: center">INTP</h6>
+                            <h6 style="text-align: center">Logician</h6>
+
+                        </div>
+                        <div class="individual">
+                            <img class="analyst avatars" src="avatars/commander.png" width="150" height="150">
+                            <h6 style="text-align: center">ENTJ</h6>
+                            <h6 style="text-align: center">Commander</h6>
+
+                        </div>
+                        <div class="individual">
+                            <img class="analyst avatars" src="avatars/debater.png" width="150" height="150">
+                            <h6 style="text-align: center">ENTP</h6>
+                            <h6 style="text-align: center">Debater</h6>
+
+                        </div>
+                    </div>
+
+                    <div class="hidden diplomats display">
+
+                        <!-- <h5>Diplomats</h5> -->
+                        <div class="individual">
+
+                            <img class="diplomats avatars" src="avatars/advocate.png" width="150" height="150">
+                            <h6 style="text-align: center">INFJ</h6>
+                            <h6 style="text-align: center">Advocate</h6>
+
+                        </div>
+                        <div class="individual">
+                            <img class="diplomats avatars" src="avatars/mediator.png" width="150" height="150">
+                            <h6 style="text-align: center">INFP</h6>
+                            <h6 style="text-align: center">Mediator</h6>
+
+                        </div>
+                        <div class="individual">
+                            <img class="diplomats avatars" src="avatars/protagonist.png" width="150" height="150">
+                            <h6 style="text-align: center">ENFJ</h6>
+                            <h6 style="text-align: center">Protagonist</h6>
+
+                        </div>
+                        <div class="individual">
+                            <img class="diplomats avatars" src="avatars/campaigner.png" width="150" height="150">
+                            <h6 style="text-align: center">ENFP</h6>
+                            <h6 style="text-align: center">Campaigner</h6>
+
+                        </div>
+                    </div>
+
+                    <div class="hidden sentinels display">
+                        <!-- <h5>Sentinels</h5> -->
+                        <div class="individual">
+                            <img class="sentinels avatars" src="avatars/logistician.png" width="150" height="150">
+                            <h6 style="text-align: center">ISTJ</h6>
+                            <h6 style="text-align: center">Logistician</h6>
+
+                        </div>
+                        <div class="individual">
+                            <img class="sentinels avatars" src="avatars/defender.png" width="150" height="150">
+                            <h6 style="text-align: center">ISFJ</h6>
+                            <h6 style="text-align: center">Defender</h6>
+
+                        </div>
+                        <div class="individual">
+                            <img class="sentinels avatars" src="avatars/executive.png" width="150" height="150">
+                            <h6 style="text-align: center">ESTJ</h6>
+                            <h6 style="text-align: center">Executive</h6>
+
+                        </div>
+                        <div class="individual">
+                            <img class="sentinels avatars" src="avatars/consul.png" width="150" height="150">
+                            <h6 style="text-align: center">ESFJ</h6>
+                            <h6 style="text-align: center">Consul</h6>
+
+                        </div>
+                    </div>
+
+                    <div class="hidden explorers display">
+                        <div class="individual">
+                            <img class="explorers avatars" src="avatars/virtuoso.png" width="150" height="150">
+                            <h6 style="text-align: center">ISTP</h6>
+                            <h6 style="text-align: center">Virtuoso</h6>
+
+                        </div>
+                        <div class="individual">
+                            <img class="explorers avatars" src="avatars/adventurer.png" width="150" height="150">
+                            <h6 style="text-align: center">ISFP</h6>
+                            <h6 style="text-align: center">Adventurer</h6>
+
+                        </div>
+                        <div class="individual">
+                            <img class="explorers avatars" src="avatars/entrepreneur.png" width="150" height="150">
+                            <h6 style="text-align: center">ESTP</h6>
+                            <h6 style="text-align: center">Entrepreneur</h6>
+
+                        </div>
+                        <div class="individual">
+                            <img class="explorers avatars" src="avatars/entertainer.png" width="150" height="150">
+                            <h6 style="text-align: center">ESFP</h6>
+                            <h6 style="text-align: center">Entrepreneur</h6>
+
+                        </div>
+                    </div>
+
+                    <div class='contains_triangle'>
+                        <img class='triangle' src="triangle.png" width="32" height="37">
+                    </div>
+
                 </div>
             </div>
         </div>
+
+
+
+        <div class='second_part'>
+            <div class="question">
+                <h3>Optional: What's your Enneagram?</h3>
+                <p>If you don't know your enneagram, take the test <a
+                        href='https://www.truity.com/test/enneagram-personality-test' target="_blank">here!</a></p>
+            </div>
+            <div>
+                <svg id="enneagramSelector" height="600" width="600"></svg>
+            </div>
+        </div>
+    </div>
 
         <div class="visualizations">
             <div class="question">
@@ -281,10 +325,14 @@
             let running_mbti = [];
 
             const counts = []
-            const mbtis = []
+            const mbtis = ["ENTJ","ENTP","INTJ","INTP", "INFJ", "INFP", "ENFJ", "ENFP", 
+                            "ISTJ", "ISFJ", "ESTJ", "ESFJ", "ISTP", "ISFP", "ESTP", "ESFP"]
+            const mbtiColors = ["rgb(115,77,95)", "rgb(179,135,157)", "rgb(88, 65, 100)", "rgb(144, 117, 159)",
+                                "rgb(153, 194, 108)", "rgb(90, 117, 60)", "rgb(68, 96, 36)", "rgb(111, 157, 82)",
+                                "rgb(28, 118, 120)", "rgb(54, 147, 149)", "rgb(113, 202, 204)", "rgb(94, 192, 217)",
+                                "rgb(228, 199, 40)", "rgb(190, 143, 0)", "rgb(244, 214, 93)", "rgb(204, 172, 19)"];
             mbti_counts.forEach((d) => {
                 counts.push(parseInt(d.count));
-                mbtis.push(d.mbti);
             })
 
             const bubbleExtent = d3.extent(counts);
@@ -294,7 +342,7 @@
 
             var bubblecolorScale = d3.scaleOrdinal()
                 .domain(mbtis)
-                .range(d3.schemeSet1);
+                .range(mbtiColors);
 
             const bubblesselector = d3.select("svg#bubbles").append("g");
 
@@ -311,18 +359,25 @@
                 .attr("text-anchor", "middle")
                 .attr("dominant-baseline", "middle")
                 .attr("dy", ".35em")
-                .attr("font-size", "14px")
+                .attr("font-size", "16px")
+                .attr("font-weight","bold")
+                .attr("fill", 'white')
+                .attr('pointer-events','none')
 
             var bubblenode = packedbubble.append("circle")
                 .attr("class", "bubbles")
                 .attr('cx', 0)
                 .attr('cy', bubblesHeight / 2)
                 .attr("fill", d => bubblecolorScale(d.mbti))
-                .attr("stroke", "black")
-                .style("stroke-width", 1)
+                .attr("stroke", "none")
+                .style("stroke-width", 0)
                 .attr('r', d => bubbleScale(d.count))
-                .on("mouseover", function () { d3.select(this).attr("r", (bubbleScale(d3.select(this).datum().count) + 10)) })
-                .on("mouseout", function () { d3.select(this).attr("r", (bubbleScale(d3.select(this).datum().count) + 3)) });
+                .on("mouseover", function () { 
+                    thisBubble = d3.select(this);
+                    thisBubble.transition(100).attr("r", (bubbleScale(thisBubble.datum().count) + 10)) })
+                .on("mouseout", function () {
+                    thisBubble = d3.select(this);
+                    thisBubble.transition(100).attr("r", (bubbleScale(thisBubble.datum().count))) });
 
             var bubblesim = d3.forceSimulation()
                 .nodes(mbti_counts)
@@ -354,46 +409,44 @@
             }
 
             // Referenced 10/7/22 lecture from INFO 3300 - Jeff R.
-            let tooltipWidth = 200;
-            let tooltipHeight = 65;
+            let tooltipWidth = 220;
+            let tooltipHeight = 60;
 
-            let momesh = bubblesselector.append("path")
-                .attr("class", "mouseover outline")
-                .style("stroke", "black")
-                .style("stroke-width", 3)
-                .attr("d", "");
 
             let tooltip = bubblesselector.append("g")
                 .attr("class", "tooltip")
                 .attr("visibility", "hidden");
             tooltip.append("rect")
-                .attr("fill", "black")
-                .attr("opacity", 0.9)
+                .attr("fill", "#a10159")
+                .attr("opacity", 0.7)
                 .attr("x", -tooltipWidth / 2.0)
                 .attr("y", 0)
                 .attr("rx", 20)
                 .attr("ry", 20)
                 .attr("width", tooltipWidth)
                 .attr("height", tooltipHeight)
+                
             let txt = tooltip.append("text")
                 .attr("fill", "white")
                 .attr("text-anchor", "middle")
                 .attr("alignment-baseline", "hanging")
                 .attr("x", 0)
-                .attr("y", 2);
+                .attr("y", 2)
+                // .attr("padding-top", '5')
+
             let txt2 = tooltip.append("text")
                 .attr("fill", "white")
                 .attr("text-anchor", "middle")
                 .attr("alignment-baseline", "hanging")
                 .attr("x", 0)
-                .attr("y", 22);
+                .attr("y", 22)
 
             let txt3 = tooltip.append("text")
                 .attr("fill", "white")
                 .attr("text-anchor", "middle")
                 .attr("alignment-baseline", "hanging")
                 .attr("x", 0)
-                .attr("y", 42);
+                .attr("y", 42)
 
 
             function mouseEntersBubble() {
@@ -409,7 +462,7 @@
 
                 txt.text(selectedbubbleMBTI);
                 txt2.text('Total Count: ' + selectedbubbleCount);
-                txt3.text('Percent of Characters: ' + selectedbubblePercent);
+                txt3.text('% of Characters: ' + selectedbubblePercent);
 
                 let xPos = selectedbubble.datum().x;
                 let yPos = selectedbubble.datum().y;
@@ -520,7 +573,7 @@
 
                 .on("mouseover", function () {
                     let border = d3.select(this)
-                    border.style('border', '3px solid rgb(190, 190, 190)')
+                    border.style('border', '3px solid #ffbae0')
                 })
                 .on("mouseout", function () {
                     let border = d3.select(this)
@@ -536,7 +589,7 @@
 
                 d3.selectAll(".individual").style('border', '3px solid transparent').classed('border', false);
                 let border = d3.select(this);
-                border.style('border', '3px solid rgb(190, 190, 190)');
+                border.style('border', '3px solid #ffbae0');
                 let borderClass = border.classed('border', true)
 
 
@@ -580,6 +633,7 @@
 
                         // create array of character name, movie title, and compatibility
                         // push to object array
+
                         let info = [data[x]['mbti'], data[x]['enn_1'], data[x]['role'], data[x]['movie'], count, data[x]['img_filepath']];
                         compat.push(info);
                     }
@@ -596,23 +650,23 @@
 
                     for (let x = 0; x < compat.length; x++) {
                         if (compat[x]['4'] === 0) {
-                            compat[x].push('0%');
+                            compat[x].push('0% Compatible');
                             compat0.push(compat[x]);
                         }
                         else if (compat[x]['4'] === 1) {
-                            compat[x].push('25%');
+                            compat[x].push('25% Compatible');
                             compat25.push(compat[x]);
                         }
                         else if (compat[x]['4'] === 2) {
-                            compat[x].push('50%');
+                            compat[x].push('50% Compatible');
                             compat50.push(compat[x]);
                         }
                         else if (compat[x]['4'] === 3) {
-                            compat[x].push('75%');
+                            compat[x].push('75% Compatible');
                             compat75.push(compat[x]);
                         }
                         else if (compat[x]['4'] === 4) {
-                            compat[x].push('100%');
+                            compat[x].push('100% Compatible');
                             compat100.push(compat[x]);
                         }
                     }
@@ -620,11 +674,11 @@
                     //hist_counts contains counts the number of characters in each compatability bracket. To be used in the histogram.
                     const hist_counts = []
 
-                    hist_counts.push(['all letters in common', compat100.length]);
-                    hist_counts.push(['3 letters in common', compat75.length]);
-                    hist_counts.push(['2 letters in common', compat50.length]);
-                    hist_counts.push(['1 letter in common', compat25.length]);
-                    hist_counts.push(['no letters in common', compat0.length]);
+                    hist_counts.push(['All MBTI Traits', compat100.length]);
+                    hist_counts.push(['3 MBTI Traits', compat75.length]);
+                    hist_counts.push(['2 MBTI Traits', compat50.length]);
+                    hist_counts.push(['1 MBTI Traits', compat25.length]);
+                    hist_counts.push(['No MBTI Traits', compat0.length]);
 
                     // graphNames contains one random character from each mbti compat
 
@@ -728,15 +782,15 @@
                     }
                     const ehist_counts = []
 
-                    ehist_counts.push(['100%', ecompat100.length]);
-                    ehist_counts.push(['87.5%', ecompat87_5.length]);
-                    ehist_counts.push(['75%', ecompat75.length]);
-                    ehist_counts.push(['62.5%', ecompat62_5.length]);
-                    ehist_counts.push(['50%', ecompat50.length]);
-                    ehist_counts.push(['37.5%', ecompat37_5.length]);
-                    ehist_counts.push(['25%', ecompat25.length]);
-                    ehist_counts.push(['12.5%', ecompat12_5.length]);
-                    ehist_counts.push(['0%', ecompat0.length]);
+                    ehist_counts.push(['100% Compatible', ecompat100.length]);
+                    ehist_counts.push(['87.5% Compatible', ecompat87_5.length]);
+                    ehist_counts.push(['75% Compatible', ecompat75.length]);
+                    ehist_counts.push(['62.5% Compatible', ecompat62_5.length]);
+                    ehist_counts.push(['50% Compatible', ecompat50.length]);
+                    ehist_counts.push(['37.5% Compatible', ecompat37_5.length]);
+                    ehist_counts.push(['25% Compatible', ecompat25.length]);
+                    ehist_counts.push(['12.5% Compatible', ecompat12_5.length]);
+                    ehist_counts.push(['0% Compatible', ecompat0.length]);
 
                     var egraphNames = [];
                     egraphNames.push(getRandomCharacter(ecompat0));
@@ -769,12 +823,12 @@
 
             let leftAxis = d3.axisLeft();
             let leftAxisG = annotations.append("g")
-                .attr("class", "y axis")
+                .attr("class", "y-axis")
                 .attr("transform", `translate(${margin.left - 1}, ${margin.top})`);
 
             let bottomAxis = d3.axisBottom();
             let bottomAxisG = annotations.append("g")
-                .attr("class", "x axis")
+                .attr("class", "x-axis")
                 .attr("transform", `translate(${margin.left - 1},${chartHeight + margin.top})`)
 
 
@@ -783,15 +837,18 @@
                 alist.forEach((d) => {
                     values.push(d[1])
                 })
-                if (alist[0][0] === "all letters in common") {
-                    leftAxisScale = d3.scaleBand().domain(["no letters in common",
-                        "1 letter in common",
-                        "2 letters in common",
-                        "3 letters in common",
-                        "all letters in common"]).range([chartHeight, 0]).padding(0.05);
+
+                // intial left axis and gridlines, leave it to update later
+                //make some condition so function can decide between which axis to create
+                if (alist[0][0] === "All MBTI Traits") {
+                    leftAxisScale = d3.scaleBand().domain(["No MBTI Traits",
+                        "1 MBTI Trait",
+                        "2 MBTI Traits",
+                        "3 MBTI Traits",
+                        "All MBTI Traits"]).range([chartHeight, 0]).padding(0.05);
                 }
                 else {
-                    leftAxisScale = d3.scaleBand().domain(["0%", "12.5%", "25%", "37.5%", "50%", "62.5%", "75%", "87.5%", "100%"]).range([chartHeight, 0]).padding(0.05);
+                    leftAxisScale = d3.scaleBand().domain(["0% Compatible", "12.5% Compatible", "25% Compatible", "37.5% Compatible", "50% Compatible", "62.5% Compatible", "75% Compatible", "87.5% Compatible", "100% Compatible"]).range([chartHeight, 0]).padding(0.05);
 
 
                 }
@@ -828,6 +885,8 @@
             }
 
 
+
+            function makeCards(graphNamesG) {
             function makeCards(graphNamesG) {
 
                 // creating the character cards
@@ -851,6 +910,8 @@
 
 
 
+                // loop through list of random names, make a card for each character
+                d3.selectAll("foreignObject").remove();
                 // loop through list of random names, make a card for each character
                 d3.selectAll("foreignObject").remove();
 
@@ -996,19 +1057,23 @@
                 .attr('y', origin - (radius * Math.cos(0)))
                 .attr('transform', `translate(-50,-10)`)
 
+            console.log('running_compat outside of onclick node')
+            console.log(running_compat)
             nodeCircles
                 .classed('outline', false)
                 .on('mouseover', function () {
                     let enn = d3.select(this);
+                    // console.log(enn);
                     enn.transition().duration(100)
                         .attr("stroke-width", 7)
-                        .style("stroke-opacity", .6)
-                        .style("stroke", 'black')
+                        .style("stroke-opacity", .8)
+                        .style("stroke", '#d90077')
                 })
                 .on('mouseout', function () {
                     let enn = d3.select(this);
                     let ennOutline = enn.classed('outline');
                     if (!ennOutline) {
+                        // console.log(enn);
                         enn.transition().duration(200)
                             .attr("stroke-width", 0)
                     }
@@ -1017,13 +1082,15 @@
                 .on('click', function () {
                     nodeCircles.attr('stroke-width', 0).classed('outline', false);
                     let enn = d3.select(this);
-                    enn.attr('stroke-width', 7).style('stroke-opacity', .6)
+                    enn.attr('stroke-width', 7).style('stroke-opacity', .8)
                     let ennID = enn.node().id;
 
+                    console.log('ennID');
+                    console.log(ennID);
+                    enn.attr('stroke', '#d90077')
 
-                    enn.attr('stroke', 'black')
 
-
+                    enn.classed('outline', true);
                     enn.classed('outline', true);
 
                     mbtiBars(getCharacterInfo(ennID, true));
