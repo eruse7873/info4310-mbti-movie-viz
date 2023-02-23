@@ -84,6 +84,24 @@ div.avatar_group{
     display: none;
 }
 
+.contains_triangle {
+    align-self: center;
+    padding-top: 50px;
+}
+
+
+.triangle {
+    cursor: pointer;
+    padding-left: 50px;
+}
+img.triangle{
+    padding-top: 150px;
+}
+
+.tooltip {
+    pointer-events: none;
+}
+
 #buttonContainer{
     display:grid;
     justify-content: center;
