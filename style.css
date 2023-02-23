@@ -95,3 +95,7 @@ img.triangle{
     padding-top: 150px;
 }
 
+.tooltip {
+    pointer-events: none;
+}
+
